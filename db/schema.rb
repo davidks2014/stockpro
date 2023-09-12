@@ -10,9 +10,95 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_10_101302) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_10_152243) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "equipment", force: :cascade do |t|
+    t.string "category"
+    t.string "name"
+    t.integer "qty"
+    t.bigint "location_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["location_id"], name: "index_equipment_on_location_id"
+  end
+
+  create_table "import_materials", force: :cascade do |t|
+    t.string "category"
+    t.string "name"
+    t.string "cost_code"
+    t.float "unit_price"
+    t.float "qty"
+    t.string "uom"
+    t.bigint "location_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["location_id"], name: "index_import_materials_on_location_id"
+  end
+
+  create_table "item_deliveries", force: :cascade do |t|
+    t.string "status"
+    t.string "qty"
+    t.bigint "item_request_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_request_id"], name: "index_item_deliveries_on_item_request_id"
+  end
+
+  create_table "item_requests", force: :cascade do |t|
+    t.string "item_type"
+    t.bigint "item_id"
+    t.bigint "request_id", null: false
+    t.float "qty"
+    t.string "eng_appr_status"
+    t.string "man_appr_status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_type", "item_id"], name: "index_item_requests_on_item"
+    t.index ["request_id"], name: "index_item_requests_on_request_id"
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string "address"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "material_stockcounts", force: :cascade do |t|
+    t.string "category"
+    t.string "name"
+    t.string "cost_code"
+    t.float "unit_price"
+    t.float "qty"
+    t.string "uom"
+    t.bigint "location_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["location_id"], name: "index_material_stockcounts_on_location_id"
+  end
+
+  create_table "materials", force: :cascade do |t|
+    t.string "category"
+    t.string "name"
+    t.string "cost_code"
+    t.float "unit_price"
+    t.float "qty"
+    t.string "uom"
+    t.bigint "location_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["location_id"], name: "index_materials_on_location_id"
+  end
+
+  create_table "requests", force: :cascade do |t|
+    t.bigint "location_id", null: false
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["location_id"], name: "index_requests_on_location_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -22,8 +108,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_10_101302) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+    t.string "role"
+    t.bigint "location_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["location_id"], name: "index_users_on_location_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "equipment", "locations"
+  add_foreign_key "import_materials", "locations"
+  add_foreign_key "item_deliveries", "item_requests"
+  add_foreign_key "item_requests", "requests"
+  add_foreign_key "material_stockcounts", "locations"
+  add_foreign_key "materials", "locations"
+  add_foreign_key "requests", "locations"
+  add_foreign_key "users", "locations"
 end
