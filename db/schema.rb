@@ -47,14 +47,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_10_152243) do
   end
 
   create_table "item_requests", force: :cascade do |t|
-    t.bigint "material_id"
-    t.bigint "equipment_id"
+    t.string "item_type"
+    t.bigint "item_id"
     t.bigint "request_id", null: false
     t.float "qty"
+    t.string "eng_appr_status"
+    t.string "man_appr_status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["equipment_id"], name: "index_item_requests_on_equipment_id"
-    t.index ["material_id"], name: "index_item_requests_on_material_id"
+    t.index ["item_type", "item_id"], name: "index_item_requests_on_item"
     t.index ["request_id"], name: "index_item_requests_on_request_id"
   end
 
@@ -108,7 +109,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_10_152243) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
-    t.string "type"
+    t.string "role"
     t.bigint "location_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["location_id"], name: "index_users_on_location_id"
@@ -118,8 +119,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_10_152243) do
   add_foreign_key "equipment", "locations"
   add_foreign_key "import_materials", "locations"
   add_foreign_key "item_deliveries", "item_requests"
-  add_foreign_key "item_requests", "equipment"
-  add_foreign_key "item_requests", "materials"
   add_foreign_key "item_requests", "requests"
   add_foreign_key "material_stockcounts", "locations"
   add_foreign_key "materials", "locations"
