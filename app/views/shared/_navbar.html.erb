@@ -1,29 +1,70 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
     <%= link_to "#", class: "navbar-brand" do %>
-      <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" %>
+      <%= image_tag "sp_noBG.png", alt: "Logo" %>
     <% end %>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Item request
+          </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Make new request</a></li>
+              <li><a class="dropdown-item" href="#">See pending approval requests</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Approve monthly reconciliation report</a></li>
+            </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Item Delivery
+          </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Incoming/outgoing pending items</a></li>
+              <li><a class="dropdown-item" href="#">Incoming/outgoing items delivered</a></li>
+            </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Locations
+          </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Warehouse</a></li>
+              <li><a class="dropdown-item" href="#">Project A</a></li>
+              <li><a class="dropdown-item" href="#">Project B</a></li>
+              <li><a class="dropdown-item" href="#">Project C</a></li>
+            </ul>
+        </li>
+
+        <div class="container">
+          </ul>
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Type search item here..." aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+        </div>
+
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
-          <li class="nav-item active">
-            <%= link_to "Home", "#", class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Messages", "#", class: "nav-link" %>
-          </li>
           <li class="nav-item dropdown">
           <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown menu" %>
           </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Action", "#", class: "dropdown-item" %>
-              <%= link_to "Another action", "#", class: "dropdown-item" %>
+              <%= link_to "Create location", "#", class: "dropdown-item" %>
+              <%= link_to "Add new items to warehouse", "#", class: "dropdown-item" %>
+              <%= link_to "Approve monthly reconciliation report", "#", class: "dropdown-item" %>
               <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
             </div>
           </li>
@@ -35,4 +76,5 @@
       </ul>
     </div>
   </div>
+</div>
 </div>
