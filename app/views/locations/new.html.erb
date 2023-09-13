@@ -1,0 +1,9 @@
+<div class="container">
+  <br>
+  <%= simple_form_for(@location) do |f| %>
+    <%= f.input :name %>
+    <%= f.input :address %>
+    <%= f.association :users, collection: User.where(role: "engineer"), label_method: :name, value_method: :id, include_blank: false, multiple: true %>
+    <%= f.button :submit, "Create Location", class: "btn btn-primary"   %>
+  <% end %>
+</div>
