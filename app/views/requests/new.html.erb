@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="d-flex">
+    <h1>Make Request</h1>
+    <div class="btn btn-primary m-2">Choose Location</div>
+  </div>
+  <div>
+    <ul>
+      <% (@materials + @equipment).each do |item| %>
+        <li>
+          <% if item.is_a?(Material) %>
+            <%= "Item_Type: Material, Item name: #{item.name}, Category: #{item.category}" %>
+          <% elsif item.is_a?(Equipment) %>
+            <%= "Item_Type: Equipment, Item name: #{item.name}, Category: #{item.category}" %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
