@@ -38,14 +38,29 @@
             <td><%= item.uom if item.is_a?(Material) %></td>
             <td><%= item.location.name %></td>
             <td>
-              <%= simple_form_for [@item_request], url: "" do |f| %>
-                <%= f.input "request_quantity", :qty %>
-                <%= f.submit "Submit review", class: "btn btn-primary" %>
+              <%= simple_form_for [@item_request] do |f| %>
+                <%= f.input :qty %>
+                <% if item.is_a?(Material) %>
+                  <%= f.hidden_field :item_type, value: "Material" %>
+                  <%= f.hidden_field :item_id, value: item.id %>
+                  <%= f.hidden_field :cost_code, value: item.cost_code %>
+                  <%= f.hidden_field :unit_price, value: item.unit_price %>
+                  <%= f.hidden_field :uom, value: item.uom %>
+                <% elsif item.is_a?(Equipment) %>
+                  <%= f.hidden_field :item_type, value: "Equipment" %>
+                  <%= f.hidden_field :item_id, value: item.id %>
+                <% end %>
+                <%#= f.submit "Submit request", class: "btn btn-primary" %>
               <% end %>
             </td>
           </tr>
         <% end %>
       </tbody>
     </table>
+    <div>
+      <%= simple_form_for @item_request do |f| %>
+        <%= f.submit "create request", class: "btn btn-primary" %>
+      <% end %>
+    </div>
   </div>
 </div>
