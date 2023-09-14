@@ -3,17 +3,49 @@
     <h1>Make Request</h1>
     <div class="btn btn-primary m-2">Choose Location</div>
   </div>
+
   <div>
-    <ul>
-      <% (@materials + @equipment).each do |item| %>
-        <li>
-          <% if item.is_a?(Material) %>
-            <%= "Item_Type: Material, Item name: #{item.name}, Category: #{item.category}" %>
-          <% elsif item.is_a?(Equipment) %>
-            <%= "Item_Type: Equipment, Item name: #{item.name}, Category: #{item.category}" %>
-          <% end %>
-        </li>
-      <% end %>
-    </ul>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Type</th>
+          <th scope="col">Name</th>
+          <th scope="col">Category</th>
+          <th scope="col">Qty</th>
+          <th scope="col">Cost_code</th>
+          <th scope="col">Unit_price</th>
+          <th scope="col">UOM</th>
+          <th scope="col">Location_ID</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% (@materials + @equipment).each_with_index do |item, index| %>
+          <tr>
+            <th scope="row"><%= index + 1 %></th>
+            <td>
+              <% if item.is_a?(Material) %>
+                <%= "Material" %>
+              <% elsif item.is_a?(Equipment) %>
+                <%= "Equipment" %>
+              <% end %>
+            </td>
+            <td><%= item.name %></td>
+            <td><%= item.category %></td>
+            <td><%= item.qty %></td>
+            <td><%= item.cost_code if item.is_a?(Material) %></td>
+            <td><%= item.unit_price if item.is_a?(Material) %></td>
+            <td><%= item.uom if item.is_a?(Material) %></td>
+            <td><%= item.location.name %></td>
+            <td>
+              <%= simple_form_for [@item_request], url: "" do |f| %>
+                <%= f.input "request_quantity", :qty %>
+                <%= f.submit "Submit review", class: "btn btn-primary" %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 </div>
