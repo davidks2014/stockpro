@@ -37,10 +37,10 @@
             Locations
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Warehouse</a></li>
-            <li><a class="dropdown-item" href="#">Project A</a></li>
-            <li><a class="dropdown-item" href="#">Project B</a></li>
-            <li><a class="dropdown-item" href="#">Project C</a></li>
+            <% @locations.each do |location| %>
+              <li><%= link_to "#{location.name}", location_path(location)%></li>
+            <% end %>
+
           </ul>
         </li>
 

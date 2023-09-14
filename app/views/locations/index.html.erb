@@ -2,9 +2,7 @@
   <h1>All Locations</h1>
   <ul>
     <% @locations.each do |location| %>
-      <li><%= location.name %>    <%= link_to "See Details", location_path(location)%></li>
+      <li><%= link_to "#{location.name}", location_path(location)%></li>
     <% end %>
   </ul>
 </div>
-
-
