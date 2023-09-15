@@ -1,0 +1,12 @@
+<h1>Import Materials</h1>
+
+<%# form_for :material, url: material_import_path, html: { multipart: true } do |f| %>
+  <%# f.file_field :file %>
+  <%# f.submit 'Import Material' %>
+<%# end %>
+
+
+<%= form_with(model: Material.new, url: material_import_path, local: true, multipart: true) do |f| %>
+<%= f.file_field :file %>
+<%= f.submit 'Import Material' %>
+<% end %>
