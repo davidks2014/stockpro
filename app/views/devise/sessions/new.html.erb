@@ -2,11 +2,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Include your CSS stylesheets and other head content -->
 </head>
 <body>
   <div class="login-wrapper">
-    <!-- Your HTML/CSS template here -->
     <div class="bg-illustration">
       <div class="burger-btn">
         <span></span>
@@ -18,7 +16,6 @@
       <div class="container">
         <h1>Login to access your account</h1>
         <div class="login-form">
-          <!-- Your Rails form here -->
           <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), data: { turbo: :false }) do |f| %>
             <div class="form-inputs">
               <%= f.input :email,
@@ -36,7 +33,6 @@
               <%= f.button :submit, "LOG-IN" %>
             </div>
           <% end %>
-          <!-- End of Rails form -->
         </div>
       </div>
     </div>
