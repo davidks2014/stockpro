@@ -18,7 +18,7 @@
       <td><%= item.location.name %></td>
       <td><%= text_field_tag :qty, "",
       class: "form-control",
-      placeholder: "Type a keyword", type: "number", id: item.id
+      placeholder: "Type a keyword", type: "number", id: item.class.to_s + "-" + item.id.to_s
   %></td>
     </tr>
   <% end %>

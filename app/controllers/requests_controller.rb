@@ -16,13 +16,35 @@ class RequestsController < ApplicationController
     end
   end
 
+  def show
+    @request = Request.find(params[:id])
+  end
+
+
   def create
-    @request = Request.new(request_params)
+    data = JSON.parse(params[:data]) #this must same with the stimulus body append
+    @request = Request.new(
+      location_id: data["location_id"],
+      status: "pending"
+    )
 
     if @request.save
-      redirect_to root_path
+      item_requests = []
+
+      data["items"].each do |item|
+        item_request = ItemRequest.create(
+          item_type: item["item_type"],
+          item_id: item["item_id"],
+          qty: item["qty"],
+          request: @request
+        )
+
+        item_requests << item_request
+      end
+
+      render json: { item_requests:, request_id: @request.id }, status: :ok
     else
-      render :new, status: :unprocessable_entity
+      render json: { errors: @request.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
