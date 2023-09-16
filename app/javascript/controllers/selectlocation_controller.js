@@ -9,5 +9,6 @@ export default class extends Controller {
 
   select(event) {
     console.log(event, "location had been selected")
+    console.log(event.currentTarget)
   }
 }
