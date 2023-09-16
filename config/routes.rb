@@ -11,4 +11,5 @@ Rails.application.routes.draw do
 
   resources :locations
 
+  resources :requests, only: %i[new create show]
 end

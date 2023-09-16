@@ -1,0 +1,25 @@
+<tbody data-selectlocation-target="items">
+  <% (materials + equipment).each_with_index do |item, index| %>
+    <tr>
+      <th scope="row"><%= index + 1 %></th>
+      <td>
+        <% if item.is_a?(Material) %>
+          <%= "Material" %>
+        <% elsif item.is_a?(Equipment) %>
+          <%= "Equipment" %>
+        <% end %>
+      </td>
+      <td><%= item.name %></td>
+      <td><%= item.category %></td>
+      <td><%= item.qty %></td>
+      <td><%= item.cost_code if item.is_a?(Material) %></td>
+      <td><%= item.unit_price if item.is_a?(Material) %></td>
+      <td><%= item.uom if item.is_a?(Material) %></td>
+      <td><%= item.location.name %></td>
+      <td><%= text_field_tag :qty, "",
+      class: "form-control",
+      placeholder: "Type a keyword", type: "number", id: item.class.to_s + "-" + item.id.to_s
+  %></td>
+    </tr>
+  <% end %>
+</tbody>
