@@ -9,6 +9,7 @@ export default class extends Controller {
 
   select(event) {
     console.log(event, "location had been selected")
-    console.log(event.currentTarget)
+    console.log(event.currentTarget.value)
+    const url
   }
 }
