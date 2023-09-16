@@ -1,19 +1,60 @@
-<div class="container">
+
+<div class="container" data-controller="selectlocation" >
   <div class="d-flex">
     <h1>Make Request</h1>
-    <div class="btn btn-primary m-2">Choose Location</div>
+    <%= form_with url: new_request_path, method: :get, html: {class:
+    "mb-4", data: {selectlocation_target: "form"}} do %>
+      <select class="form-select" aria-label="Default select example" data-action="change->selectlocation#filter">
+        <option selected>Choose Location</option>
+        <% @locations.each do |location| %>
+          <option value=<%= location.id %>><%= location.name %></option>
+        <% end %>
+      </select>
+    <% end %>
   </div>
-  <div>
-    <ul>
-      <% (@materials + @equipment).each do |item| %>
-        <li>
-          <% if item.is_a?(Material) %>
-            <%= "Item_Type: Material, Item name: #{item.name}, Category: #{item.category}" %>
-          <% elsif item.is_a?(Equipment) %>
-            <%= "Item_Type: Equipment, Item name: #{item.name}, Category: #{item.category}" %>
-          <% end %>
-        </li>
-      <% end %>
-    </ul>
+
+  <div data-controller="submitrequest">
+    <%= form_with data: { action: "submit->submitrequest#submit" } do %>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Type</th>
+          <th scope="col">Name</th>
+          <th scope="col">Category</th>
+          <th scope="col">Qty</th>
+          <th scope="col">Cost_code</th>
+          <th scope="col">Unit_price</th>
+          <th scope="col">UOM</th>
+          <th scope="col">Location_ID</th>
+          <th scope="col">Request Qty</th>
+
+        </tr>
+      </thead>
+      <%= render partial: "table", locals: {materials: @materials, equipment: @equipment} %>
+    </table>
+    <div>
+      <%= submit_tag "Submit request", name: "", class: "btn btn-primary" %>
+    </div>
+    <% end %>
   </div>
 </div>
+
+<%#= simple_form_for [@item_request] do |f| %>
+                <%#= f.input :qty %>
+                <%# if item.is_a?(Material) %>
+                  <%#= f.hidden_field :item_type, value: "Material" %>
+                  <%#= f.hidden_field :item_id, value: item.id %>
+                  <%#= f.hidden_field :cost_code, value: item.cost_code %>
+                  <%#= f.hidden_field :unit_price, value: item.unit_price %>
+                  <%#= f.hidden_field :uom, value: item.uom %>
+                <%# elsif item.is_a?(Equipment) %>
+                  <%#= f.hidden_field :item_type, value: "Equipment" %>
+                  <%#= f.hidden_field :item_id, value: item.id %>
+                <%# end %>
+                <%#= f.submit "Submit request", class: "btn btn-primary" %>
+              <%# end %>
+
+  <%#= simple_form_for @item_request do |f| %>
+        <%#= f.submit "create request", class: "btn btn-primary" %>
+      <%# end %>
