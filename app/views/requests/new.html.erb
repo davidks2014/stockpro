@@ -1,7 +1,14 @@
 <div class="container">
   <div class="d-flex">
     <h1>Make Request</h1>
-    <div class="btn btn-primary m-2">Choose Location</div>
+    <div data-controller="selectlocation">
+      <select class="form-select" aria-label="Default select example" data-action="change->selectlocation#select">
+        <option selected>Choose Location</option>
+        <% @locations.each do |location| %>
+          <option value=<%= location.id %>><%= location.name %></option>
+        <% end %>
+      </select>
+    </div>
   </div>
 
   <div>
@@ -17,9 +24,10 @@
           <th scope="col">Unit_price</th>
           <th scope="col">UOM</th>
           <th scope="col">Location_ID</th>
+          <th scope="col">Request Quantity</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody data-selectlocation-target="items">
         <% (@materials + @equipment).each_with_index do |item, index| %>
           <tr>
             <th scope="row"><%= index + 1 %></th>
@@ -38,10 +46,7 @@
             <td><%= item.uom if item.is_a?(Material) %></td>
             <td><%= item.location.name %></td>
             <td>
-              <%= simple_form_for [@item_request], url: "" do |f| %>
-                <%= f.input "request_quantity", :qty %>
-                <%= f.submit "Submit review", class: "btn btn-primary" %>
-              <% end %>
+
             </td>
           </tr>
         <% end %>
