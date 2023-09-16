@@ -1,10 +1,20 @@
-<div class="container">
+
+<div class="container" data-controller="selectlocation" >
   <div class="d-flex">
     <h1>Make Request</h1>
-    <div class="btn btn-primary m-2">Choose Location</div>
+    <%= form_with url: new_request_path, method: :get, html: {class:
+    "mb-4", data: {selectlocation_target: "form"}} do %>
+      <select class="form-select" aria-label="Default select example" data-action="change->selectlocation#filter">
+        <option selected>Choose Location</option>
+        <% @locations.each do |location| %>
+          <option value=<%= location.id %>><%= location.name %></option>
+        <% end %>
+      </select>
+    <% end %>
   </div>
 
-  <div>
+  <div data-controller="submitrequest">
+    <%= form_with data: { action: "submit->submitrequest#submit" } do %>
     <table class="table table-bordered">
       <thead>
         <tr>
@@ -17,50 +27,34 @@
           <th scope="col">Unit_price</th>
           <th scope="col">UOM</th>
           <th scope="col">Location_ID</th>
+          <th scope="col">Request Qty</th>
+
         </tr>
       </thead>
-      <tbody>
-        <% (@materials + @equipment).each_with_index do |item, index| %>
-          <tr>
-            <th scope="row"><%= index + 1 %></th>
-            <td>
-              <% if item.is_a?(Material) %>
-                <%= "Material" %>
-              <% elsif item.is_a?(Equipment) %>
-                <%= "Equipment" %>
-              <% end %>
-            </td>
-            <td><%= item.name %></td>
-            <td><%= item.category %></td>
-            <td><%= item.qty %></td>
-            <td><%= item.cost_code if item.is_a?(Material) %></td>
-            <td><%= item.unit_price if item.is_a?(Material) %></td>
-            <td><%= item.uom if item.is_a?(Material) %></td>
-            <td><%= item.location.name %></td>
-            <td>
-              <%= simple_form_for [@item_request] do |f| %>
-                <%= f.input :qty %>
-                <% if item.is_a?(Material) %>
-                  <%= f.hidden_field :item_type, value: "Material" %>
-                  <%= f.hidden_field :item_id, value: item.id %>
-                  <%= f.hidden_field :cost_code, value: item.cost_code %>
-                  <%= f.hidden_field :unit_price, value: item.unit_price %>
-                  <%= f.hidden_field :uom, value: item.uom %>
-                <% elsif item.is_a?(Equipment) %>
-                  <%= f.hidden_field :item_type, value: "Equipment" %>
-                  <%= f.hidden_field :item_id, value: item.id %>
-                <% end %>
-                <%#= f.submit "Submit request", class: "btn btn-primary" %>
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
+      <%= render partial: "table", locals: {materials: @materials, equipment: @equipment}%>
     </table>
     <div>
-      <%= simple_form_for @item_request do |f| %>
-        <%= f.submit "create request", class: "btn btn-primary" %>
-      <% end %>
+      <%= submit_tag "Submit request", name: "", class: "btn btn-primary" %>
     </div>
+    <% end %>
   </div>
 </div>
+
+<%#= simple_form_for [@item_request] do |f| %>
+                <%#= f.input :qty %>
+                <%# if item.is_a?(Material) %>
+                  <%#= f.hidden_field :item_type, value: "Material" %>
+                  <%#= f.hidden_field :item_id, value: item.id %>
+                  <%#= f.hidden_field :cost_code, value: item.cost_code %>
+                  <%#= f.hidden_field :unit_price, value: item.unit_price %>
+                  <%#= f.hidden_field :uom, value: item.uom %>
+                <%# elsif item.is_a?(Equipment) %>
+                  <%#= f.hidden_field :item_type, value: "Equipment" %>
+                  <%#= f.hidden_field :item_id, value: item.id %>
+                <%# end %>
+                <%#= f.submit "Submit request", class: "btn btn-primary" %>
+              <%# end %>
+
+  <%#= simple_form_for @item_request do |f| %>
+        <%#= f.submit "create request", class: "btn btn-primary" %>
+      <%# end %>
