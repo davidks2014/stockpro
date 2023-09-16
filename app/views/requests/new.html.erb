@@ -2,12 +2,14 @@
   <div class="d-flex">
     <h1>Make Request</h1>
     <div data-controller="selectlocation">
-      <select class="form-select" aria-label="Default select example" data-action="change->selectlocation#select">
-        <option selected>Choose Location</option>
-        <% @locations.each do |location| %>
-          <option value=<%= location.id %>><%= location.name %></option>
-        <% end %>
-      </select>
+      <%= form_with url: new_request_path, method: :get, data: {selectlocation_target: "form"} do %>
+        <select class="form-select" aria-label="Default select example" data-action="change->selectlocation#select">
+          <option selected>Choose Location</option>
+          <% @locations.each do |location| %>
+            <option value=<%= location.id %>><%= location.name %></option>
+          <% end %>
+        </select>
+      <% end %>
     </div>
   </div>
 
@@ -46,7 +48,6 @@
             <td><%= item.uom if item.is_a?(Material) %></td>
             <td><%= item.location.name %></td>
             <td>
-
             </td>
           </tr>
         <% end %>
