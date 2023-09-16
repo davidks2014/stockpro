@@ -1,35 +1,37 @@
 <div class="container">
-  <div class="d-flex">
-    <h1>Make Request</h1>
-    <div data-controller="selectlocation">
-      <%= form_with url: new_request_path, method: :get, data: {selectlocation_target: "form"} do %>
-        <select class="form-select" aria-label="Default select example" data-action="change->selectlocation#select">
-          <option selected>Choose Location</option>
-          <% @locations.each do |location| %>
-            <option value=<%= location.id %>><%= location.name %></option>
-          <% end %>
-        </select>
-      <% end %>
+  <div data-controller="selectlocation">
+    <div class="d-flex">
+      <h1>Make Request</h1>
+      <div>
+        <%= form_with url: new_request_path, method: :get, data: {selectlocation_target: "form"} do %>
+          <select class="form-select" aria-label="Default select example" data-action="change->selectlocation#select">
+            <option selected>Choose Location</option>
+            <% @locations.each do |location| %>
+              <option value=<%= location.id %>><%= location.name %></option>
+            <% end %>
+          </select>
+        <% end %>
+      </div>
     </div>
-  </div>
 
-  <div>
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Type</th>
-          <th scope="col">Name</th>
-          <th scope="col">Category</th>
-          <th scope="col">Qty</th>
-          <th scope="col">Cost_code</th>
-          <th scope="col">Unit_price</th>
-          <th scope="col">UOM</th>
-          <th scope="col">Location_ID</th>
-          <th scope="col">Request Quantity</th>
-        </tr>
-      </thead>
-      <%= render partial: "requests/table", locals: {materials: @materials, equipment: @equipment}, formats: [:html] %>
-    </table>
+    <div>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Type</th>
+            <th scope="col">Name</th>
+            <th scope="col">Category</th>
+            <th scope="col">Qty</th>
+            <th scope="col">Cost_code</th>
+            <th scope="col">Unit_price</th>
+            <th scope="col">UOM</th>
+            <th scope="col">Location_ID</th>
+            <th scope="col">Request Quantity</th>
+          </tr>
+        </thead>
+        <%= render partial: "requests/table", locals: {materials: @materials, equipment: @equipment}, formats: [:html] %>
+      </table>
+    </div>
   </div>
 </div>

@@ -20,8 +20,10 @@ export default class extends Controller {
     fetch(url, {headers: {"Accept": "text/plain"}})
       .then(response => response.text())
       .then((data) => {
-        //console.log(data)
-        console.log(this.itemsTarget)
+        // console.log("data", data)
+        // console.log(this.itemsTarget.outerHTML)
+        //what this line means, what its does
+        this.itemsTarget.outerHTML = data
       })
   }
 }
