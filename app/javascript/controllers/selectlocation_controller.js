@@ -22,8 +22,13 @@ export default class extends Controller {
       .then((data) => {
         // console.log("data", data)
         // console.log(this.itemsTarget.outerHTML)
-        //what this line means, what its does
+        // replaces the existing HTML content of the <tbody> element
+        // with the updated HTML content received from the server.
+        // This effectively updates the table in the browser with the new data.
         this.itemsTarget.outerHTML = data
+        //is assigning the outerHTML property of the itemsTarget to the data that was retrieved from the server using fetch.
+        //In this specific case, the line of code is assigning the data to the outerHTML property of the itemsTarget.
+        //The data is expected to be a string containing the updated HTML content for the <tbody> element.
       })
   }
 }
