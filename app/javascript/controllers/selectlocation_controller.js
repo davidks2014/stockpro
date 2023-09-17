@@ -19,7 +19,7 @@ export default class extends Controller {
     const option = {
       method: "GET",
       headers: {
-        "Accept": "text/plain" ,
+        "Accept": "text/plain",
       },
     }
     fetch(url, option)

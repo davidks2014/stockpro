@@ -13,7 +13,7 @@ class RequestsController < ApplicationController
 
     respond_to do |format|
       format.html #follow back the rails process
-      format.text { render partial: 'requests/table', locals: { materials: @materials, equipment: @equipment} }
+      format.text { render partial: "requests/table", locals: { materials: @materials, equipment: @equipment} }
     end
   end
 end
