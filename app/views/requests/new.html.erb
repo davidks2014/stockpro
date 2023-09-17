@@ -1,11 +1,11 @@
 <div class="container" data-controller="selectlocation">
   <div data-controller="submitrequest">
     <div class="mb-4 d-flex justify-content-between align-items-center">
-      <h1>Make Request</h1>
+      <h1>Make a New Request</h1>
       <%= form_with url: new_request_path, method: :get, html: { class: "form-inline", data: { selectlocation_target: "form" } } do %>
         <div class="input-group">
           <select class="form-select" aria-label="Default select example" data-action="change->selectlocation#filter" data-submitrequest-target="location">
-            <option selected>Choose Location</option>
+            <option selected>Location</option>
             <% @locations.each do |location| %>
               <option value="<%= location.id %>"><%= location.name %></option>
             <% end %>
