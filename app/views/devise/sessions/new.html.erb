@@ -14,7 +14,8 @@
     </div>
     <div class="login">
       <div class="container">
-        <h1>Login to access your account</h1>
+        <h1>Welcome back, buddy!</h1>
+        <p>Please login here</p>
         <div class="login-form">
           <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), data: { turbo: :false }) do |f| %>
             <div class="form-inputs">
@@ -34,9 +35,9 @@
             </div>
           <% end %>
         </div>
+      <%= render "devise/shared/links"  %>
       </div>
     </div>
-    <%= render "devise/shared/links" %>
   </div>
   <!-- Include your JavaScript and other footer content -->
 </body>

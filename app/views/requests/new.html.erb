@@ -1,40 +1,47 @@
-
-<div class="container" data-controller="selectlocation" >
+<div class="container" data-controller="selectlocation">
   <div data-controller="submitrequest">
-    <div class="d-flex">
+    <div class="mb-4 d-flex justify-content-between align-items-center">
       <h1>Make Request</h1>
-      <%= form_with url: new_request_path, method: :get, html: {class:
-      "mb-4", data: {selectlocation_target: "form"}} do %>
-        <select class="form-select" aria-label="Default select example" data-action="change->selectlocation#filter" data-submitrequest-target="location">
-          <option selected>Choose Location</option>
-          <% @locations.each do |location| %>
-            <option value=<%= location.id %>><%= location.name %></option>
-          <% end %>
-        </select>
+      <%= form_with url: new_request_path, method: :get, html: { class: "form-inline", data: { selectlocation_target: "form" } } do %>
+        <div class="input-group">
+          <select class="form-select" aria-label="Default select example" data-action="change->selectlocation#filter" data-submitrequest-target="location">
+            <option selected>Choose Location</option>
+            <% @locations.each do |location| %>
+              <option value="<%= location.id %>"><%= location.name %></option>
+            <% end %>
+          </select>
+          <div class="input-group-append">
+            <%= submit_tag "Select", class: "btn btn-primary" %>
+          </div>
+        </div>
       <% end %>
     </div>
 
     <div>
-      <%= form_with url: requests_path, method: :post, data: {action: "submit->submitrequest#submit"} do %>
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Type</th>
-              <th scope="col">Name</th>
-              <th scope="col">Category</th>
-              <th scope="col">Qty</th>
-              <th scope="col">Cost_code</th>
-              <th scope="col">Unit_price</th>
-              <th scope="col">UOM</th>
-              <th scope="col">Location_ID</th>
-              <th scope="col">Request Qty</th>
-            </tr>
-          </thead>
-          <%= render partial: "table", locals: {materials: @materials, equipment: @equipment} %>
-        </table>
-        <div>
-          <%= submit_tag "Submit request", name: "", class: "btn btn-primary" %>
+      <%= form_with url: requests_path, method: :post, data: { action: "submit->submitrequest#submit" } do %>
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Type</th>
+                <th scope="col">Name</th>
+                <th scope="col">Category</th>
+                <th scope="col">Qty</th>
+                <th scope="col">Cost code</th>
+                <th scope="col">Unit price</th>
+                <th scope="col">UOM</th>
+                <th scope="col">Location ID</th>
+                <th scope="col">Request Qty</th>
+              </tr>
+            </thead>
+            <tbody>
+              <%= render partial: "table", locals: { materials: @materials, equipment: @equipment } %>
+            </tbody>
+          </table>
+        </div>
+        <div class="text-center mt-4">
+          <%= submit_tag "Submit Request", name: "", class: "btn btn-primary" %>
         </div>
       <% end %>
     </div>
