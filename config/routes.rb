@@ -17,5 +17,5 @@ Rails.application.routes.draw do
 
   # resources :materials
 
-  resources :requests, only: %i[new create show]
+  resources :requests, only: %i[index new create show]
 end
