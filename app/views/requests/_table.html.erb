@@ -16,7 +16,12 @@
       <td><%= item.unit_price if item.is_a?(Material) %></td>
       <td><%= item.uom if item.is_a?(Material) %></td>
       <td><%= item.location.name %></td>
-      <td><%= form.text_field :qty, class: "form-control" %></td>
+      <td><%= text_field_tag :qty, "", placeholder: "enter quantity", class:"form-control" %></td>
+      <%#=beware of form.field_text and text_field_tag
+      <%#=The key difference is that text_field_tag is used to create standalone input fields outside of a form object,
+      <%#=while form.text_field is used within a form object to generate input fields specific to that form.
+      <%#=text_field_tag is a helper method in Ruby on Rails that generates an input field element directly.
+      <%#=It is typically used when you want to create a standalone input field outside of a form object <%>
       </td>
     </tr>
   <% end %>
