@@ -8,4 +8,11 @@ Rails.application.routes.draw do
 
   resources :locations
 
+  post 'materials/importnew', to: 'materials#import', as: 'material_import'
+  get 'materials/import', to: 'materials#import', as: 'import'
+  resources :materials, except: [:show]
+
+  # resources :materials
+
+  resources :requests, only: %i[new create show]
 end
