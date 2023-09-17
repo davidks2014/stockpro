@@ -1,8 +1,8 @@
 <div class="container">
   <div class="d-flex">
     <h1>Make Request</h1>
-    <div data-controller="selectlocation">
-      <select class="form-select" aria-label="Default select example" data-action="change->selectlocation#select">
+    <div>
+      <select class="form-select" aria-label="Default select example">
         <option selected>Choose Location</option>
         <% @locations.each do |location| %>
           <option value=<%= location.id %>><%= location.name %></option>
@@ -27,7 +27,7 @@
           <th scope="col">Request Quantity</th>
         </tr>
       </thead>
-      <tbody data-selectlocation-target="items">
+      <tbody>
         <% (@materials + @equipment).each_with_index do |item, index| %>
           <tr>
             <th scope="row"><%= index + 1 %></th>
