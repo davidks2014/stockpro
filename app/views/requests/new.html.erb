@@ -15,23 +15,26 @@
     </div>
 
     <div>
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Type</th>
-            <th scope="col">Name</th>
-            <th scope="col">Category</th>
-            <th scope="col">Qty</th>
-            <th scope="col">Cost_code</th>
-            <th scope="col">Unit_price</th>
-            <th scope="col">UOM</th>
-            <th scope="col">Location_ID</th>
-            <th scope="col">Request Quantity</th>
-          </tr>
-        </thead>
-        <%= render partial: "table", locals: { materials: @materials, equipment: @equipment}%>
-      </table>
+      <%= form_with url: new_request_path do %>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Type</th>
+              <th scope="col">Name</th>
+              <th scope="col">Category</th>
+              <th scope="col">Qty</th>
+              <th scope="col">Cost_code</th>
+              <th scope="col">Unit_price</th>
+              <th scope="col">UOM</th>
+              <th scope="col">Location_ID</th>
+              <th scope="col">Request Quantity</th>
+            </tr>
+          </thead>
+          <%= render partial: "table", locals: { materials: @materials, equipment: @equipment}%>
+        </table>
+        <%= form.submit %>
+      <% end %>
     </div>
   </div>
 </div>

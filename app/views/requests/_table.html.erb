@@ -16,6 +16,7 @@
       <td><%= item.unit_price if item.is_a?(Material) %></td>
       <td><%= item.uom if item.is_a?(Material) %></td>
       <td><%= item.location.name %></td>
+      <td><%= form.text_field :qty %></td>
       <td>
       </td>
     </tr>
