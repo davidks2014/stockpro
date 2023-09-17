@@ -15,6 +15,11 @@ Rails.application.routes.draw do
   get 'materials/import', to: 'materials#import', as: 'import'
   resources :materials, except: [:show]
 
+  resources :item_requests, only: %i[] do
+    post 'approve', to: 'item_requests#approve'
+    post 'decline', to: 'item_requests#decline'
+  end
+
   # resources :materials
 
   resources :requests, only: %i[index new create show]
