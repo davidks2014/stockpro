@@ -62,7 +62,7 @@ img {
   height: 100vh;
   width: 1194px;
 
-  background: image-url('loginpageimage.png') no-repeat center center scroll;
+  background: image-url('loginpageimage-highres.png') no-repeat center center scroll;
   background-size: cover;
   float: left;
   -webkit-animation: bgslide 2.3s forwards;
@@ -264,7 +264,7 @@ img {
   }
   .bg-illustration {
     float: none;
-    background: image-url('loginpageimage.png') no-repeat center center;
+    background: image-url('loginpageimage-lowres.png') no-repeat center center;
     background-size: cover;
     -webkit-animation: slideIn 0.8s ease-in-out forwards;
             animation: slideIn 0.8s ease-in-out forwards;
