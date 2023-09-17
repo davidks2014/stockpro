@@ -8,13 +8,25 @@ export default class extends Controller {
   }
 
   filter(event) {
+    // console.log(event, "this location had been selected")
     console.log(event.currentTarget.value)
-    // This line of code is to fetch the data of specific location follow the location id
+    // console.log("this should be form", this.formTarget)
+    // console.log("this should be items", this.itemsTarget)
+    // console.log("where this form sending information", this.formTarget.action)
+
     const url = `${this.formTarget.action}?location=${event.currentTarget.value}`
-    fetch(url, {headers: {"Accept": "text/plain"}})
+    // console.log(url)
+    const option = {
+      headers: {
+        "Accept": "text/plain",
+      }
+    }
+    fetch(url, option)
       .then(response => response.text())
-      .then((data) => {
-        //console.log(data)
+      .then(data => {
+        console.log("Outer", this.itemsTarget.outerHTML)
+        console.log("Inner", this.itemsTarget.innerHTML)
         this.itemsTarget.outerHTML = data
       })
   }
+}
