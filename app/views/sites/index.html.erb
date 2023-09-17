@@ -2,13 +2,8 @@
 
 <h1>Sites</h1>
 
-<div id="sites">
-  <% @sites.each do |site| %>
-    <%= render site %>
-    <p>
-      <%= link_to "Show this site", site %>
-    </p>
-  <% end %>
+<div data-controller="map"
+  id='map'
+  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
+  style='width: 100%; height: 600px;'>
 </div>
-
-<%= link_to "New site", new_site_path %>

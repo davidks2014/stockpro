@@ -4,6 +4,13 @@ class SitesController < ApplicationController
   # GET /sites
   def index
     @sites = Site.all
+    # The `geocoded` scope filters only sites with coordinates
+    @markers = @sites.geocoded.map do |site|
+      {
+        lat: site.latitude,
+        lng: site.longitude
+      }
+  end
   end
 
   # GET /sites/1
