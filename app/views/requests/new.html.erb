@@ -1,56 +1,37 @@
 <div class="container">
-  <div class="d-flex">
-    <h1>Make Request</h1>
-    <div>
-      <select class="form-select" aria-label="Default select example">
-        <option selected>Choose Location</option>
-        <% @locations.each do |location| %>
-          <option value=<%= location.id %>><%= location.name %></option>
+  <div data-controller="selectlocation">
+    <div class="d-flex">
+      <h1>Make Request</h1>
+      <div>
+        <%= form_with url: new_request_path, method: :get, data: {selectlocation_target: "form"} do %>
+          <select class="form-select" aria-label="Default select example" data-action="change->selectlocation#filter">
+            <option selected>Choose Location</option>
+            <% @locations.each do |location| %>
+              <option value=<%= location.id %>><%= location.name %></option>
+            <% end %>
+          </select>
         <% end %>
-      </select>
+      </div>
     </div>
-  </div>
 
-  <div>
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Type</th>
-          <th scope="col">Name</th>
-          <th scope="col">Category</th>
-          <th scope="col">Qty</th>
-          <th scope="col">Cost_code</th>
-          <th scope="col">Unit_price</th>
-          <th scope="col">UOM</th>
-          <th scope="col">Location_ID</th>
-          <th scope="col">Request Quantity</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% (@materials + @equipment).each_with_index do |item, index| %>
+    <div>
+      <table class="table table-bordered">
+        <thead>
           <tr>
-            <th scope="row"><%= index + 1 %></th>
-            <td>
-              <% if item.is_a?(Material) %>
-                <%= "Material" %>
-              <% elsif item.is_a?(Equipment) %>
-                <%= "Equipment" %>
-              <% end %>
-            </td>
-            <td><%= item.name %></td>
-            <td><%= item.category %></td>
-            <td><%= item.qty %></td>
-            <td><%= item.cost_code if item.is_a?(Material) %></td>
-            <td><%= item.unit_price if item.is_a?(Material) %></td>
-            <td><%= item.uom if item.is_a?(Material) %></td>
-            <td><%= item.location.name %></td>
-            <td>
-
-            </td>
+            <th scope="col">#</th>
+            <th scope="col">Type</th>
+            <th scope="col">Name</th>
+            <th scope="col">Category</th>
+            <th scope="col">Qty</th>
+            <th scope="col">Cost_code</th>
+            <th scope="col">Unit_price</th>
+            <th scope="col">UOM</th>
+            <th scope="col">Location_ID</th>
+            <th scope="col">Request Quantity</th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <%= render partial: 'table', locals: { materials: @materials, equipment: @equipment} %>
+      </table>
+    </div>
   </div>
 </div>
