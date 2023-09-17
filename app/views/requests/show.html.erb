@@ -1,0 +1,13 @@
+<ul>
+  <% @request.item_requests.each do |item_request| %>
+    <li>
+      <%= item_request.id %> <br>
+      <%= item_request.item.id %> <br>
+      <%= item_request.item.class.to_s %> <br>
+      <%= item_request.item.name %> <br>
+      <% if item_request.item.is_a? Material %>
+      $<%= item_request.item.unit_price %>
+      <% end %>
+    </li>
+  <% end  %>
+</ul>
