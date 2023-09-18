@@ -18,13 +18,12 @@ class RequestsController < ApplicationController
   end
 
   def create
-    raise
     @request = Request.new(request_params)
   end
 
   private
 
   def request_params
-    params.require(:request).permit(:location_id, :item_type, :item_id, :qty)
+    params.require(:request).permit(:location_id, :status)
   end
 end
