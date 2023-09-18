@@ -16,7 +16,7 @@
       <td><%= item.unit_price if item.is_a?(Material) %></td>
       <td><%= item.uom if item.is_a?(Material) %></td>
       <td><%= item.location.name %></td>
-      <td><%= text_field_tag :qty, "", placeholder: "enter quantity", class:"form-control" %></td>
+      <td><%= text_field_tag :qty, "", placeholder: "enter quantity", class:"form-control", id: "#{item.class}-#{item.id}" %></td>
       <%#=beware of form.field_text and text_field_tag
       <%#=The key difference is that text_field_tag is used to create standalone input fields outside of a form object,
       <%#=while form.text_field is used within a form object to generate input fields specific to that form.
