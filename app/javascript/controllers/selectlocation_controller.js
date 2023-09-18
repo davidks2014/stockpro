@@ -9,7 +9,7 @@ export default class extends Controller {
 
   filter(event) {
     // console.log(event, "this location had been selected")
-    console.log(event.currentTarget.value)
+    // console.log(event.currentTarget.value)
     // console.log("this should be form", this.formTarget)
     // console.log("this should be items", this.itemsTarget)
     // console.log("where this form sending information", this.formTarget.action)
@@ -24,8 +24,8 @@ export default class extends Controller {
     fetch(url, option)
       .then(response => response.text())
       .then(data => {
-        console.log("Outer", this.itemsTarget.outerHTML)
-        console.log("Inner", this.itemsTarget.innerHTML)
+        // console.log("Outer", this.itemsTarget.outerHTML)
+        // console.log("Inner", this.itemsTarget.innerHTML)
         this.itemsTarget.outerHTML = data
       })
   }
