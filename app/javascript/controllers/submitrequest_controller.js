@@ -32,12 +32,25 @@ export default class extends Controller {
       }
     })
 
-    const formData = new FormData(form).append("requestBody", JSON.stringify(request))
+    const formData = new FormData(form)
+    formData.append("request", JSON.stringify(request))
 
     fetch(form.action, {
       method: "POST",
+      headers: { "Accept": "application/json",},
       body: formData
-    })
+    }).then (response => {
+        return response.json()
+      }).then (data => {
+       if (data.success){
+        window.location.href = "/"
+       }
+
+      })
+
+
+    //if we console.log fetch, we will get promise object, we will not get the actual response
+    //promise is a result that havent been resolved yet
   }
 }
 // Request.new (location_id)

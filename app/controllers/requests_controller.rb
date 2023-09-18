@@ -20,7 +20,15 @@ class RequestsController < ApplicationController
   def create
     pp 'zonghan'
     pp params
-    @request = Request.new(request_params)
+    data =  JSON.parse(params[:request])
+    request["location_id"]
+    @request = Request.create(location_id: data["location_id"], status: "pending")
+    pp data["items"]
+    item_requests = data["items"].map do |item|
+      ItemRequest.create(item_type: item["item_type"], item_id: item["item_id"], qty: item["qty"], request_id: @request.id)
+    end
+
+    render json: {item_requests: item_requests, success: true}
   end
 
   private
