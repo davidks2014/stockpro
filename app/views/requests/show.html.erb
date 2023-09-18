@@ -1,13 +1,15 @@
 <div class="container">
+  <h1>Item request made</h1>
   <table class="table table-bordered">
     <thead>
       <tr>
         <th>Request ID</th>
         <th>Request to</th>
         <th>Request from</th>
-
         <th>Type and ID</th>
         <th>Name</th>
+        <th>Qty</th>
+        <th>UOM</th>
         <th>Unit Price</th>
       </tr>
     </thead>
@@ -17,15 +19,19 @@
           <td><%= @request.id %></td>
           <td><%= @request.location.name %></td>
           <td><%= Location.find(@request.original_location_id).name %></td>
-
-
           <td><%= "#{item_request.item.class.to_s} #{item_request.item.id}" %></td>
           <td><%= item_request.item.name %></td>
-          <% if item_request.item.is_a? Material %>
-            <td>$<%= item_request.item.unit_price %></td>
-          <% else %>
-            <td>N/A</td>
-          <% end %>
+          <td><%= item_request.item.qty %></td>
+            <% if item_request.item.is_a? Material %>
+              <td><%= item_request.item.uom %></td>
+            <% else %>
+              <td>N/A</td>
+            <% end %>
+            <% if item_request.item.is_a? Material %>
+              <td>$<%= item_request.item.unit_price %></td>
+            <% else %>
+              <td>N/A</td>
+            <% end %>
         </tr>
       <% end %>
     </tbody>

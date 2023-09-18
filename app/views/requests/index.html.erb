@@ -14,6 +14,8 @@
             <th>Item Request ID</th>
             <th>Type and ID</th>
             <th>Name</th>
+            <th>Qty</th>
+            <th>UOM</th>
             <th>Unit Price</th>
             <th>Engineer Approval</th>
             <th>Manager Approval</th>
@@ -28,6 +30,12 @@
             <td><%= item_request.id %></td>
             <td><%= "#{item_request.item.class.to_s} #{item_request.item.id}" %></td>
             <td><%= item_request.item.name %></td>
+            <td><%= item_request.item.qty %></td>
+            <% if item_request.item.is_a? Material %>
+              <td><%= item_request.item.uom %></td>
+            <% else %>
+              <td>N/A</td>
+            <% end %>
             <% if item_request.item.is_a? Material %>
               <td>$<%= item_request.item.unit_price %></td>
             <% else %>
@@ -53,7 +61,7 @@
 
 <div class="container">
 <h2>Sent requests</h2>
-  
+
   <% @requests.each do |request| %>
     <% if current_user.location == Location.find(request.original_location_id) %>
       <table class="table table-bordered">
@@ -65,7 +73,10 @@
             <th>Item Request ID</th>
             <th>Type and ID</th>
             <th>Name</th>
+            <th>Qty</th>
+            <th>UOM</th>
             <th>Unit Price</th>
+            <th>Deliver Approval Status</th>
           </tr>
         </thead>
         <tbody>
@@ -77,11 +88,18 @@
             <td><%= item_request.id %></td>
             <td><%= "#{item_request.item.class.to_s} #{item_request.item.id}" %></td>
             <td><%= item_request.item.name %></td>
+            <td><%= item_request.item.qty %></td>
+            <% if item_request.item.is_a? Material %>
+              <td><%= item_request.item.uom %></td>
+            <% else %>
+              <td>N/A</td>
+            <% end %>
             <% if item_request.item.is_a? Material %>
               <td>$<%= item_request.item.unit_price %></td>
             <% else %>
               <td>N/A</td>
             <% end %>
+            <td><%= item_request.del_approv_status %></td>
             </tr>
           <% end %>
         </tbody>
