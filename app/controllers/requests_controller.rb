@@ -42,7 +42,8 @@ class RequestsController < ApplicationController
           item_type: item["item_type"],
           item_id: item["item_id"],
           qty: item["qty"],
-          request: @request
+          request: @request,
+          del_approv_status: "delivery approval status pending"
         )
 
         item_requests << item_request

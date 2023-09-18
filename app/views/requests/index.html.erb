@@ -54,7 +54,7 @@
 <div class="container">
 <h2>Sent requests</h2>
   <% @requests.each do |request| %>
-    <% if current_user.location == User.find(request.user_id).location %>
+    <% if current_user.location == Location.find(request.original_location_id).name %>
       <table class="table table-bordered">
         <thead>
           <tr>
