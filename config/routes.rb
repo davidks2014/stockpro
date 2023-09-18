@@ -16,8 +16,10 @@ Rails.application.routes.draw do
   resources :materials, except: [:show]
 
   resources :item_requests, only: %i[] do
-    post 'approve', to: 'item_requests#approve'
-    post 'decline', to: 'item_requests#decline'
+    post 'eng_approve', to: 'item_requests#eng_approve'
+    post 'eng_decline', to: 'item_requests#eng_decline'
+    post 'man_approve', to: 'item_requests#man_approve'
+    post 'man_decline', to: 'item_requests#man_decline'
   end
 
   # resources :materials

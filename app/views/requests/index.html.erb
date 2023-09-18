@@ -35,13 +35,13 @@
             <% end %>
 
             <td>
-            <%= link_to "Approve", item_request_approve_path(item_request), method: :post, data: {turbo_method: :post}, class: "btn btn-success" %>
-            <%= link_to "Decline", item_request_decline_path(item_request), method: :post, data: {turbo_method: :post}, class: "btn btn-danger" %>
+            <%= link_to "Approve", item_request_eng_approve_path(item_request), method: :post, data: {turbo_method: :post}, class: "btn btn-success" %>
+            <%= link_to "Decline", item_request_eng_decline_path(item_request), method: :post, data: {turbo_method: :post}, class: "btn btn-danger" %>
             </td>
 
             <td>
-            <%= link_to "Approve", item_request_approve_path(item_request), method: :post, data: {turbo_method: :post}, class: "btn btn-success" %>
-            <%= link_to "Decline", item_request_decline_path(item_request), method: :post, data: {turbo_method: :post}, class: "btn btn-danger" %>
+            <%= link_to "Approve", item_request_man_approve_path(item_request), method: :post, data: {turbo_method: :post}, class: "btn btn-success" %>
+            <%= link_to "Decline", item_request_man_decline_path(item_request), method: :post, data: {turbo_method: :post}, class: "btn btn-danger" %>
             </td>
             </tr>
           <% end %>
