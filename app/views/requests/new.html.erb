@@ -34,7 +34,7 @@
             </thead>
             <%= render partial: "table", locals: { materials: @materials, equipment: @equipment}%>
           </table>
-          <%= submit_tag "submit request", name:"" %>
+          <%= submit_tag "submit request", name:"" , data: {action: "submit->submitrequest#submit"}%>
         <% end %>
       </div>
     </div>
