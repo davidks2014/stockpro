@@ -2,9 +2,9 @@
 <%# only show those items others are requesting from user%>
 
 <div class="container">
-<h2>Received requests</h2>
+  <h2>Received requests</h2>
   <% @requests.each do |request| %>
-    <% if current_user.location == request.location %>
+    <% if current_user.location == request.location >
       <table class="table table-bordered">
         <thead>
           <tr>
@@ -43,19 +43,29 @@
             <% end %>
 
             <td>
-            <%= link_to "Approve", item_request_eng_approve_path(item_request), method: :post, data: {turbo_method: :post}, class: "btn btn-success" %>
-            <%= link_to "Decline", item_request_eng_decline_path(item_request), method: :post, data: {turbo_method: :post}, class: "btn btn-danger" %>
-            </td>
+
+              <%= link_to "Approve", item_request_eng_approve_path(item_request), method: :post, data: {turbo_method: :post}, class: "btn btn-success" %>
+              <%= link_to "Decline", item_request_eng_decline_path(item_request), method: :post, data: {turbo_method: :post}, class: "btn btn-danger" %>
+              </td>
+
+
 
             <td>
-            <%= link_to "Approve", item_request_man_approve_path(item_request), method: :post, data: {turbo_method: :post}, class: "btn btn-success" %>
-            <%= link_to "Decline", item_request_man_decline_path(item_request), method: :post, data: {turbo_method: :post}, class: "btn btn-danger" %>
+              <% if current_user.role !="manager" %>
+                <%= link_to "Approve", item_request_man_approve_path(item_request), method: :post, data: {turbo_method: :post}, class: "btn btn-success tooltip_man" %>
+                <%= link_to "Decline", item_request_man_decline_path(item_request), method: :post, data: {turbo_method: :post}, class: "btn btn-danger tooltip_man" %>
+              <% else %>
+                <%= link_to "Approve", item_request_man_approve_path(item_request), method: :post, data: {turbo_method: :post}, class: "btn btn-success" %>
+                <%= link_to "Decline", item_request_man_decline_path(item_request), method: :post, data: {turbo_method: :post}, class: "btn btn-danger" %>
+              <% end %>
             </td>
+
             </tr>
           <% end %>
         </tbody>
       </table>
     <% end %>
+
   <% end %>
 </div>
 

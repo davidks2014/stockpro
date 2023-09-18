@@ -1,0 +1,29 @@
+.tooltip_man {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip_man::after {
+  content: "only for manager";
+  position: absolute;
+  background-color: #000;
+  color: #fff;
+  padding: 5px;
+  border-radius: 4px;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.tooltip_man:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+  .tooltip_man.unclickable {
+    pointer-events: none;
+}
