@@ -1,5 +1,9 @@
 class RequestsController < ApplicationController
 
+  def index
+    @requests = Request.all
+  end
+
   def new
     @materials = []
     @equipment = []
@@ -25,7 +29,9 @@ class RequestsController < ApplicationController
     data = JSON.parse(params[:data]) #this must same with the stimulus body append
     @request = Request.new(
       location_id: data["location_id"],
-      status: "pending"
+      status: "pending",
+      user_id: current_user.id,
+      original_location_id: current_user.location_id
     )
 
     if @request.save
@@ -36,7 +42,8 @@ class RequestsController < ApplicationController
           item_type: item["item_type"],
           item_id: item["item_id"],
           qty: item["qty"],
-          request: @request
+          request: @request,
+          del_approv_status: "delivery approval status pending"
         )
 
         item_requests << item_request
