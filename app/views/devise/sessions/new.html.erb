@@ -31,11 +31,11 @@
               <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
             </div>
             <div class="form-actions">
-              <%= f.button :submit, "LOG-IN" %>
+              <%= f.button :submit, "LOG-IN" %> <br><br> <br><br>
             </div>
           <% end %>
         </div>
-      <%= render "devise/shared/links"  %>
+        <%= render "devise/shared/links" %>
       </div>
     </div>
   </div>
