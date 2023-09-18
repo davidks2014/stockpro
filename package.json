@@ -4,6 +4,7 @@
   "dependencies": {
     "@hotwired/stimulus": "^3.2.2",
     "@hotwired/turbo-rails": "^7.3.0",
+    "@mapbox/mapbox-gl-geocoder": "^5.0.1",
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.1",
     "webpack": "^5.88.2",
