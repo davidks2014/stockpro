@@ -1,20 +1,24 @@
-
-<%# only show those items others are requesting from user%>
-
 <div class="container">
-  <h2>Received requests</h2>
+  <% if current_user.role != "manager" %>
+    <h2>Received requests to <%= current_user.location.name  %></h2>
+  <% elsif current_user.role == "manager" %>
+    <h2>Requests made between locations</h2>
+  <% end  %>
   <% @requests.each do |request| %>
-    <% if current_user.location == request.location >
+    <% if current_user.location == request.location || current_user.role == "manager" %>
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th>Request to</th>
             <th>Request from</th>
+            <% if current_user.role == "manager"  %>
+              <th>Request to</th>
+            <% end %>
             <th>Request ID</th>
             <th>Item Request ID</th>
             <th>Type and ID</th>
             <th>Name</th>
-            <th>Qty</th>
+            <th>Available Qty</th>
+            <th>Request Qty</th>
             <th>UOM</th>
             <th>Unit Price</th>
             <th>Engineer Approval</th>
@@ -24,13 +28,16 @@
         <tbody>
           <% request.item_requests.each do |item_request| %>
             <tr>
-            <td><%= request.location.name %></td>
             <td><%= Location.find(request.original_location_id).name %></td>
+            <% if current_user.role == "manager"  %>
+              <td><%= request.location.name %></td>
+            <% end %>
             <td><%= request.id %></td>
             <td><%= item_request.id %></td>
             <td><%= "#{item_request.item.class.to_s} #{item_request.item.id}" %></td>
             <td><%= item_request.item.name %></td>
             <td><%= item_request.item.qty %></td>
+            <td><%= item_request.qty %></td>
             <% if item_request.item.is_a? Material %>
               <td><%= item_request.item.uom %></td>
             <% else %>
@@ -43,47 +50,36 @@
             <% end %>
 
             <td>
-
-              <%= link_to "Approve", item_request_eng_approve_path(item_request), method: :post, data: {turbo_method: :post}, class: "btn btn-success" %>
-              <%= link_to "Decline", item_request_eng_decline_path(item_request), method: :post, data: {turbo_method: :post}, class: "btn btn-danger" %>
-              </td>
-
-
-
-            <td>
-              <% if current_user.role !="manager" %>
-                <%= link_to "Approve", item_request_man_approve_path(item_request), method: :post, data: {turbo_method: :post}, class: "btn btn-success tooltip_man" %>
-                <%= link_to "Decline", item_request_man_decline_path(item_request), method: :post, data: {turbo_method: :post}, class: "btn btn-danger tooltip_man" %>
-              <% else %>
-                <%= link_to "Approve", item_request_man_approve_path(item_request), method: :post, data: {turbo_method: :post}, class: "btn btn-success" %>
-                <%= link_to "Decline", item_request_man_decline_path(item_request), method: :post, data: {turbo_method: :post}, class: "btn btn-danger" %>
-              <% end %>
+            <%= link_to "Approve", item_request_eng_approve_path(item_request), method: :post, data: {turbo_method: :post}, class: "btn btn-success" %>
+            <%= link_to "Decline", item_request_eng_decline_path(item_request), method: :post, data: {turbo_method: :post}, class: "btn btn-danger" %>
             </td>
 
+            <td>
+            <%= link_to "Approve", item_request_man_approve_path(item_request), method: :post, data: {turbo_method: :post}, class: "btn btn-success" %>
+            <%= link_to "Decline", item_request_man_decline_path(item_request), method: :post, data: {turbo_method: :post}, class: "btn btn-danger" %>
+            </td>
             </tr>
           <% end %>
         </tbody>
       </table>
     <% end %>
-
   <% end %>
 </div>
 
 <div class="container">
-<h2>Sent requests</h2>
 
+  <h2>Sent requests from <%= current_user.location.name %> </h2>
   <% @requests.each do |request| %>
     <% if current_user.location == Location.find(request.original_location_id) %>
       <table class="table table-bordered">
         <thead>
           <tr>
             <th>Request to</th>
-            <th>Request from</th>
             <th>Request ID</th>
             <th>Item Request ID</th>
             <th>Type and ID</th>
             <th>Name</th>
-            <th>Qty</th>
+            <th>Request Qty</th>
             <th>UOM</th>
             <th>Unit Price</th>
             <th>Deliver Approval Status</th>
@@ -93,12 +89,11 @@
           <% request.item_requests.each do |item_request| %>
             <tr>
             <td><%= request.location.name %></td>
-            <td><%= User.find(request.user_id).location.name %></td>
             <td><%= request.id %></td>
             <td><%= item_request.id %></td>
             <td><%= "#{item_request.item.class.to_s} #{item_request.item.id}" %></td>
             <td><%= item_request.item.name %></td>
-            <td><%= item_request.item.qty %></td>
+            <td><%= item_request.qty %></td>
             <% if item_request.item.is_a? Material %>
               <td><%= item_request.item.uom %></td>
             <% else %>
