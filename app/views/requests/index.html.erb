@@ -1,5 +1,5 @@
 <div class="container">
-  <% if @requests.none? { |request| request.location == current_user.location } %>
+  <% if @requests.none? { |request| request.location == current_user.location  } && current_user.role != "manager" %>
     <h2>No request is made to <%= current_user.location.name %></h2>
   <% elsif current_user.role != "manager" %>
     <h2>Received requests to <%= current_user.location.name  %></h2>
@@ -69,9 +69,9 @@
 </div>
 
 <div class="container">
-  <% if @requests.none? { |request| current_user.location == Location.find(request.original_location_id) } %>
+  <% if @requests.none? { |request| current_user.location == Location.find(request.original_location_id) } && current_user.role != "manager" %>
     <h2>No request is sent from <%= current_user.location.name %></h2>
-  <% else %>
+  <% elsif current_user.role != "manager" %>
     <h2>Sent requests from <%= current_user.location.name %> </h2>
   <% end %>
   <% @requests.each do |request| %>
