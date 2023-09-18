@@ -8,7 +8,9 @@ export default class extends Controller {
   }
 
   submit(event) {
-    event.preventDefault
-    console.log(event)
+    event.preventDefault()
+    console.log(event.currentTarget, "request submitted")
+    //this is location id
+    console.log(this.locationTarget.value, "this is location_id")
   }
 }

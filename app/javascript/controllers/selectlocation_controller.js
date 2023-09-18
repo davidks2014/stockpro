@@ -9,7 +9,7 @@ export default class extends Controller {
 
   filter(event) {
     // console.log(event, "this location had been selected")
-    // console.log(event.currentTarget.value)
+    //console.log(event.currentTarget.value)
     // console.log("this should be form", this.formTarget)
     // console.log("this should be items", this.itemsTarget)
     // console.log("where this form sending information", this.formTarget.action)

@@ -16,7 +16,7 @@
       </div>
 
       <div>
-        <%= form_with url: requests_path, method: :post do %>
+        <%= form_with url: requests_path, method: :post, data: {action: "submit->submitrequest#submit"} do %>
           <table class="table table-bordered">
             <thead>
               <tr>
@@ -34,7 +34,7 @@
             </thead>
             <%= render partial: "table", locals: { materials: @materials, equipment: @equipment}%>
           </table>
-          <%= submit_tag "submit request", name:"" , data: {action: "submit->submitrequest#submit"}%>
+          <%= submit_tag "submit request", name:"" %>
         <% end %>
       </div>
     </div>
