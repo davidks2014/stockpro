@@ -16,4 +16,8 @@ class RequestsController < ApplicationController
       format.text { render partial: "requests/table", locals: { materials: @materials, equipment: @equipment}, formats: [:html]}
     end
   end
+
+  def create
+    raise
+  end
 end
