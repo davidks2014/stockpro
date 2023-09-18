@@ -20,9 +20,14 @@ Rails.application.routes.draw do
     post 'eng_decline', to: 'item_requests#eng_decline'
     post 'man_approve', to: 'item_requests#man_approve'
     post 'man_decline', to: 'item_requests#man_decline'
+    collection do
+      get 'status/:del_appr_status', to: 'item_requests#del_appr_status'
+    end
   end
 
   # resources :materials
 
   resources :requests, only: %i[index new create show]
+
+
 end

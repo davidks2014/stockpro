@@ -24,5 +24,9 @@ class ItemRequestsController < ApplicationController
     redirect_to requests_path, notice: "Manager declined item for delivery"
   end
 
+  def del_appr_status
+    @item_requests = ItemRequest.where(del_appr_status: params[:del_appr_status])
+  end
+
 
 end
