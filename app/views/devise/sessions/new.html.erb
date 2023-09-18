@@ -2,11 +2,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Include your CSS stylesheets and other head content -->
 </head>
 <body>
   <div class="login-wrapper">
-    <!-- Your HTML/CSS template here -->
     <div class="bg-illustration">
       <div class="burger-btn">
         <span></span>
@@ -16,9 +14,9 @@
     </div>
     <div class="login">
       <div class="container">
-        <h1>Login to access your account</h1>
+        <h1>Welcome back, buddy!</h1>
+        <p>Please login here</p>
         <div class="login-form">
-          <!-- Your Rails form here -->
           <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), data: { turbo: :false }) do |f| %>
             <div class="form-inputs">
               <%= f.input :email,
@@ -33,10 +31,9 @@
               <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
             </div>
             <div class="form-actions">
-              <%= f.button :submit, "LOG-IN" %> <br><br>
+              <%= f.button :submit, "LOG-IN" %> <br><br> <br><br>
             </div>
           <% end %>
-          <!-- End of Rails form -->
         </div>
         <%= render "devise/shared/links" %>
       </div>

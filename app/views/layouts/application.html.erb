@@ -10,13 +10,22 @@
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js"></script>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+
+    <style>
+      body {
+        background-color: #EEEEEE;
+      }
+    </style>
   </head>
 
   <body>
-  <%= render "shared/navbar" %>
+
+  <% if user_signed_in? %>
+    <%= render "shared/navbar" %>
+  <% end %>
+
   <%= render "shared/flashes" %>
 
     <%= yield %>
-
   </body>
 </html>

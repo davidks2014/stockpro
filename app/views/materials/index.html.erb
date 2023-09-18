@@ -1,0 +1,8 @@
+<div class="container">
+  <h1>All Materials</h1>
+  <ol>
+    <% @materials.each do |material| %>
+      <li><%= link_to "#{material.name}", material_path(material)%></li>
+    <% end %>
+  </ol>
+</div>

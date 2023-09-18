@@ -5,22 +5,20 @@
 // 3. You can override them below!
 
 // General style
-$font-family-sans-serif: $body-font;
-$headings-font-family:   $headers-font;
-$body-bg:                $light-gray;
-$font-size-base:         1rem;
-
+$font-family-sans-serif: “Montserrat”, sans-serif;
+$headings-font-family: “Montserrat”, sans-serif;
+$body-bg: $light-gray;
+$font-size-base: 1rem;
 // Colors
 $body-color: $gray;
-$primary:    $blue;
-$success:    $green;
-$info:       $yellow;
-$danger:     $red;
-$warning:    $orange;
-
-// Buttons & inputs' radius
-$border-radius:    2px;
-$border-radius-lg: 2px;
-$border-radius-sm: 2px;
+$primary: $blue;
+$success: $green;
+$info: $yellow;
+$danger: $red;
+$warning: $orange;
+// Buttons & inputs’ radius
+$border-radius: 8px;
+$border-radius-lg: 12px;
+$border-radius-sm: 4px;
 
 // Override other variables below!
