@@ -18,6 +18,8 @@ class RequestsController < ApplicationController
   end
 
   def create
+    pp 'zonghan'
+    pp params
     @request = Request.new(request_params)
   end
 
