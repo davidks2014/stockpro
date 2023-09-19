@@ -18,7 +18,7 @@
         <tr>
           <td><%= @request.id %></td>
           <td><%= @request.location.name %></td>
-          <td><%= "The Request from this places ###" %></td>
+          <td><%= Location.find(@request.original_location_id).name %></td>
           <td><%= "#{item_request.item.class.to_s} #{item_request.item.id}" %></td>
           <td><%= item_request.item.name %></td>
           <td><%= item_request.item.qty %></td>
