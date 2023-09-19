@@ -10,7 +10,10 @@ export default class extends Controller {
   submit(event) {
     //console.log("checkbox", this.checkboxTarget)
     event.preventDefault()
+    const selectedItems = this.checkboxTargets.filter((checkbox) => checkbox.checked);
     console.log("this delivery had been submitted", event.currentTarget)
-    console.log(this.checkboxTarget.action)
+    console.log(selectedItems) // item_requests need to send to create delivery_order
+    console.log(event.currentTarget.action) //this is the url weneed to send info to
+
   }
 }

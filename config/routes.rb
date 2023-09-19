@@ -26,6 +26,6 @@ Rails.application.routes.draw do
 
   resources :requests, only: %i[index new create show]
 
-  resources :delivery_orders, only: %i[index]
+  resources :delivery_orders, only: %i[index create]
 
 end
