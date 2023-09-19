@@ -1,10 +1,10 @@
 <div class="container">
   <h1>Arrange Delivery</h1>
-    <div data-controller="confirmdelivery">
+    <div>
     <% if current_user.location == @item_requests.first.request.location %>
       <% @item_requests.group_by { |item_request| Location.find(item_request.request.original_location_id).name }.each do |location_name, item_requests| %>
         <div>
-          <%= simple_form_for @delivery_order, url: delivery_orders_path, method: :post, data: {action: "submit->confirmdelivery#submit"} do %>
+          <%= simple_form_for @delivery_order, url: delivery_orders_path do |f|%>
             <h2><%= location_name %></h2>
             <table class="table table-bordered">
               <thead>
@@ -36,14 +36,14 @@
                       <td><%= item_request.qty %></td>
                       <td>
                       <%#if u want to select all, use checked in input %>
-                        <input type="checkbox" name="<%= location_name %>checkbox" id=<%= item_request.id %> value="" data-confirmdelivery-target="checkbox">
+                        <input type="checkbox" name="selected_item_request_ids[]" value="<%= item_request.id %>">
                       </td>
                     </tr>
                   <% end %>
                 <% end %>
               </tbody>
             </table>
-            <%= submit_tag "confirm delivery" %>
+            <%= f.submit "confirm delivery" %>
           <% end %>
         </div>
       <% end %>

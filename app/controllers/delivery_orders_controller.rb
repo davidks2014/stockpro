@@ -1,31 +1,56 @@
 class DeliveryOrdersController < ApplicationController
   def index
-
+    @delivery_orders = DeliveryOrder.all
   end
-
   def create
-    raise
-    # First, retrieve the location_id and item_request_ids from the form params
-    location_id = params[:delivery_order][:location_id]
-    item_request_ids = params[:delivery_order][:item_request_ids]
+    selected_item_request_ids = params[:selected_item_request_ids]
 
-    # You can then use these parameters to create a new delivery order
-    delivery_order = DeliveryOrder.new(location_id: location_id)
-
-    # Assuming you have a DeliveryOrderItem model to associate items with the delivery order
-    item_request_ids.each do |item_request_id|
-      item_request = ItemRequest.find(item_request_id)
-      delivery_order.delivery_order_items.build(item_request: item_request)
+    if selected_item_request_ids.empty?
+      redirect_to del_approv_status_path, alert: "No item requests selected for delivery"
+      return
     end
 
-    if delivery_order.save
-      # Handle successful creation (e.g., redirect to a success page)
-      flash[:notice] = "Delivery order created successfully."
-      redirect_to delivery_order_path(delivery_order)
-    else
-      # Handle validation errors or other failures (e.g., render the form again with errors)
-      flash[:alert] = "Failed to create a delivery order."
-      render :del_approv_status # Assuming you have a new.html.erb template for creating delivery orders
+    location_id = nil
+    item_requests = []
+    delivery_order.item_requests = item_requests
+
+    ActiveRecord::Base.transaction do
+      selected_item_request_ids.each do |item_request_id|
+        item_request = ItemRequest.find(item_request_id)
+        item_requests << item_request
+        location = Location.find(item_request.request.original_location_id)
+
+        # Check if location is valid before assigning it to location_id
+        if location.present?
+          location_id = location.id
+          # You can perform additional logic here if needed
+        else
+          # Handle the case where a location is not found (e.g., log an error or provide user feedback)
+        end
+      end
+
+      if location_id.present?
+        delivery_order = DeliveryOrder.new(
+          delivery_status: "Delivering",
+          location_id: location_id,
+          # Add other attributes as needed
+        )
+
+        if delivery_order.save
+          item_requests.each do |item_request|
+            item_request.update(delivery_order_id: delivery_order.id)
+          end
+
+          redirect_to delivery_orders_path, notice: "Delivery order created"
+        else
+          render :del_approv_status, status: :unprocessable_entity
+          # You may want to render a different view, depending on your application
+        end
+      else
+        # Handle the case where no valid location is found for any selected item requests
+        # You can log an error or provide user feedback
+        redirect_to requests_path, alert: "No valid location found for selected item requests"
+      end
     end
   end
 end
