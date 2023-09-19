@@ -34,6 +34,7 @@ class RequestsController < ApplicationController
 
     if @request.save
       item_requests = []
+      # change something
 
       data["items"].each do |item|
         item_request = ItemRequest.create(
