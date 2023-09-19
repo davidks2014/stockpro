@@ -29,7 +29,7 @@ class RequestsController < ApplicationController
     data = JSON.parse(params[:data]) #this must same with the stimulus body append
     @request = Request.new(
       location_id: data["location_id"],
-      status: "pending"
+      status: "pending",
       user_id: current_user.id,
       original_location_id: current_user.location_id
     )
