@@ -15,8 +15,8 @@
             </tr>
           </thead>
           <tbody>
-            <% @item_requests.each do |item_request| %>
-              <tr>
+            <% sorted_item_requests = @item_requests.sort_by { |item_request| Location.find(item_request.request.original_location_id).name } %>
+            <% sorted_item_requests.each do |item_request| %>
                 <td><%= item_request.request.location.name %></td>
                 <td><%= Location.find(item_request.request.original_location_id).name %></td>
                 <td><%= item_request.id %></td>
