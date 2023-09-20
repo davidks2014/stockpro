@@ -3,8 +3,8 @@
     <div>
     <% if current_user.location == @item_requests.first.request.location %>
       <% @item_requests.group_by { |item_request| Location.find(item_request.request.original_location_id).name }.each do |location_name, item_requests| %>
-        <div data-controller="changetable">
-          <%= simple_form_for @delivery_order, url: delivery_orders_path, data: {action: "submit->changetable#hiderow"} do |f|%>
+        <div>
+          <%= simple_form_for @delivery_order, url: delivery_orders_path do |f|%>
             <h2><%= location_name %></h2>
             <table class="table table-bordered">
               <thead>
@@ -21,8 +21,8 @@
               </thead>
               <tbody>
                 <% @item_requests.each do |item_request| %>
-                  <% if Location.find(item_request.request.original_location_id).name == location_name %>
-                    <tr class="tablerow" data-changetable-target="tablerow" id=<%= item_request.id %>>
+                  <% if Location.find(item_request.request.original_location_id).name == location_name && item_request.delivery_order == nil %>
+                    <tr class="tablerow" id=<%= item_request.id %>>
                       <td value="<%= Location.find(item_request.request.original_location_id).name %>"><%= Location.find(item_request.request.original_location_id).name %></td>
                       <td><%= item_request.request.id %></td>
                       <td><%= item_request.id %></td>

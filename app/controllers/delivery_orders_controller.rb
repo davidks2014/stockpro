@@ -22,7 +22,7 @@ class DeliveryOrdersController < ApplicationController
       item_request.update(delivery_order_id: delivery_order.id)
     end
 
-    if delivery_order.persisted?
+    if delivery_order.save
       redirect_to delivery_orders_path, notice: "Delivery order created"
     else
       render :del_approv_status, status: :unprocessable_entity
