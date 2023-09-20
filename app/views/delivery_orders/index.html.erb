@@ -1,33 +1,40 @@
 <div class="container">
-  <h1>Outgoing Material</h1>
+    <% @delivery_orders.each do |delivery_order| %>
+      <% if current_user.location == delivery_order.item_requests.last.request.location || current_user.role == "manager" %>
+        <div>
+          <h1>Outgoing Material</h1>
+          <h2>Deliver To: <%= delivery_order.location.name %></h2>
+          <% delivery_order.item_requests.each do |item_request| %>
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Request ID</th>
+                  <th>Item Request ID</th>
+                  <th>Item Name</th>
+                  <th>Category</th>
+                  <th>Qty</th>
+                  <th>Status</th>
 
-  <% @delivery_orders.each do |delivery_order| %>
-    <h2>Deliver To: <%= delivery_order.location.name %></h2>
-    <% delivery_order.item_requests.each do |item_request| %>
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>Request ID</th>
-            <th>Item Request ID</th>
-            <th>Item Name</th>
-            <th>Category</th>
-            <th>Qty</th>
-            <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><%= item_request.request.id %></td>
+                  <td><%= item_request.id %></td>
+                  <td><%= item_request.item.name %></td>
+                  <td><%= item_request.item.category %></td>
+                  <td><%= item_request.qty %></td>
+                  <td><%= item_request.delivery_order.delivery_status %></td>
 
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><%= item_request.request.id %></td>
-            <td><%= item_request.id %></td>
-            <td><%= item_request.item.name %></td>
-            <td><%= item_request.item.category %></td>
-            <td><%= item_request.qty %></td>
-            <td><%= item_request.delivery_order.delivery_status %></td>
-
-          </tr>
-        </tbody>
-      </table>
+                </tr>
+              </tbody>
+            </table>
+          <% end %>
+        </div>
+      <% else %>
+        <div>
+          <h1>What you want to show to receiver, type here</h1>
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
 </div>
