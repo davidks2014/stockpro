@@ -13,6 +13,20 @@ locations.each do |attributes|
   location = Location.create!(attributes)
   puts "Created #{location.name}"
 
+puts "Creating sites for geomap..."
+warehse = {name: "Warehouse", address: "15 Science Centre Rd, Singapore 609081"}
+projA = {name: "Project A", address: "10 Bayfront Ave, Singapore 018956"}
+projB = {name: "Project B", address: "33 Sengkang West Ave, Singapore 797653"}
+projC = {name: "Project C", address: "4 Tampines Central 5, Singapore 529510"}
+company = {name: "Company", address: "9 Bishan Pl, Singapore 579837"}
+
+sites = [warehse, projA, projB, projC, company]
+
+sites.each do |attributes|
+  site = site.create!(attributes)
+  puts "Created #{site.name}"
+
+
   puts " #{location.name} Creating materials..."
 
   rose = Material.create({category: "flower", name: "rose", cost_code: "MFR", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(2), uom: "no.", location: location})
