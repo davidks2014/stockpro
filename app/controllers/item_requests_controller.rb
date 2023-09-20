@@ -38,6 +38,7 @@ class ItemRequestsController < ApplicationController
 
   def del_approv_status
     @item_requests = ItemRequest.where(del_approv_status: params[:del_approv_status])
+    @delivery_order = DeliveryOrder.new
   end
 
 
