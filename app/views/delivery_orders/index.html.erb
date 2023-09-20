@@ -31,7 +31,7 @@
             </table>
           <% end %>
         </div>
-      <% else %>
+      <% elsif current_user.location == delivery_order.location %>
         <div>
           <h1>What you want to show to receiver, type here</h1>
         </div>
