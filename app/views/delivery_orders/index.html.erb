@@ -1,5 +1,6 @@
 <h1>This will show all delivery</h1>
-
-<%= @delivery_orders.each do |delivery_order| %>
-  <%= delivery_order %>
-<% end %>
+<div class="container">
+  <% @delivery_orders.each do |delivery_order| %>
+    <%= delivery_order.item_requests.first.item.name %>
+  <% end %>
+</div>

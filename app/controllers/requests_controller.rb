@@ -61,6 +61,6 @@ class RequestsController < ApplicationController
     params.require(:request).permit(:location_id, :status)
   end
   def item_request_params
-    params.require(:item_request).permit(:item_type, :item_id, :qty)
+    params.require(:item_request).permit(:item_type, :item_id, :qty, :request_id, :del_approv_status, :delivery_order_id)
   end
 end
