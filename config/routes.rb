@@ -28,5 +28,4 @@ Rails.application.routes.draw do
 
   resources :sites, only: %i[index show new create]
 
-
 end
