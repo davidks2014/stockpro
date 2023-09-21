@@ -1,5 +1,5 @@
 <div class="container">
-  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
       <button class="nav-link active" id="receive-tab" data-bs-toggle="tab" data-bs-target="#receive-tab-pane" type="button" role="tab" aria-controls="receive-tab-pane" aria-selected="true">Receive requests</button>
     </li>
@@ -7,6 +7,7 @@
       <button class="nav-link" id="sent-tab" data-bs-toggle="tab" data-bs-target="#sent-tab-pane" type="button" role="tab" aria-controls="sent-tab-pane" aria-selected="false">Sent requests</button>
     </li>
   </ul>
+  <br>
 
   <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="receive-tab-pane" role="tabpanel" aria-labelledby="receive-tab" tabindex="0">
@@ -101,7 +102,7 @@
                     <th>Request Qty</th>
                     <th>UOM</th>
                     <th>Unit Price</th>
-                    <th>Deliver Approval Status</th>
+                    <th>Delivery Approval Status</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -123,7 +124,15 @@
                       <% else %>
                         <td>N/A</td>
                       <% end %>
-                      <td><%= item_request.del_approv_status %></td>
+                      <td style="<% if item_request.del_approv_status == 'Approved' %>
+                        background-color: green;
+                        color: white;
+                      <% elsif item_request.del_approv_status == 'Declined' %>
+                        background-color: red;
+                        color: white;
+                      <% end %>">
+                      <%= item_request.del_approv_status %>
+                      </td>
                     </tr>
                   <% end %>
                 </tbody>
