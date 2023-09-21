@@ -9,133 +9,128 @@
   </ul>
 
   <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active" id="receive-tab-pane" role="tabpanel" aria-labelledby="receive-tab" tabindex="0">...</div>
-    <div class="tab-pane fade" id="sent-tab-pane" role="tabpanel" aria-labelledby="sent-tab" tabindex="0">...</div>
+    <div class="tab-pane fade show active" id="receive-tab-pane" role="tabpanel" aria-labelledby="receive-tab" tabindex="0">
+      <% if @requests.none? { |request| request.location == current_user.location  } && current_user.role != "manager" %>
+        <h2>No request is made to <%= current_user.location.name %></h2>
+      <% elsif current_user.role != "manager" %>
+        <h2>Received requests to <%= current_user.location.name  %></h2>
+      <% elsif current_user.role == "manager" %>
+        <h2>Requests made between locations</h2>
+      <% end  %>
+      <% @requests.each do |request| %>
+        <% if current_user.location == request.location || current_user.role == "manager" %>
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Request from</th>
+                  <% if current_user.role == "manager"  %>
+                    <th>Request to</th>
+                  <% end %>
+                  <th>Request ID</th>
+                  <th>Item Request ID</th>
+                  <th>Type and ID</th>
+                  <th>Name</th>
+                  <th>Available Qty</th>
+                  <th>Request Qty</th>
+                  <th>UOM</th>
+                  <th>Unit Price</th>
+                  <th>Engineer's Approval</th>
+                  <th>Manager's Approval</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% request.item_requests.each do |item_request| %>
+                  <tr>
+                    <td><%= Location.find(request.original_location_id).name %></td>
+                    <% if current_user.role == "manager"  %>
+                      <td><%= request.location.name %></td>
+                    <% end %>
+                    <td><%= request.id %></td>
+                    <td><%= item_request.id %></td>
+                    <td><%= "#{item_request.item.class.to_s} #{item_request.item.id}" %></td>
+                    <td><%= item_request.item.name %></td>
+                    <td><%= item_request.item.qty %></td>
+                    <td><%= item_request.qty %></td>
+                    <% if item_request.item.is_a? Material %>
+                      <td><%= item_request.item.uom %></td>
+                    <% else %>
+                      <td>N/A</td>
+                    <% end %>
+                    <% if item_request.item.is_a? Material %>
+                      <td>$<%= item_request.item.unit_price %></td>
+                    <% else %>
+                      <td>N/A</td>
+                    <% end %>
+
+                    <td>
+                      <%= link_to "Approve", item_request_eng_approve_path(item_request), method: :post, data: { turbo_method: :post }, class: "btn btn-success" %>
+                      <%= link_to "Decline", item_request_eng_decline_path(item_request), method: :post, data: { turbo_method: :post }, class: "btn btn-danger" %>
+                    </td>
+
+                    <td>
+                      <%= link_to "Approve", item_request_man_approve_path(item_request), method: :post, data: { turbo_method: :post }, class: "btn btn-success" %>
+                      <%= link_to "Decline", item_request_man_decline_path(item_request), method: :post, data: { turbo_method: :post }, class: "btn btn-danger" %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="tab-pane fade" id="sent-tab-pane" role="tabpanel" aria-labelledby="sent-tab" tabindex="0">
+      <% if @requests.none? { |request| current_user.location == Location.find(request.original_location_id) } && current_user.role != "manager" %>
+        <h2>No request is sent from <%= current_user.location.name %></h2>
+      <% elsif current_user.role != "manager" %>
+        <h2>Sent requests from <%= current_user.location.name %> </h2>
+      <% end %>
+      <% @requests.each do |request| %>
+          <% if current_user.location == Location.find(request.original_location_id) %>
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Request to</th>
+                    <th>Request ID</th>
+                    <th>Item Request ID</th>
+                    <th>Type and ID</th>
+                    <th>Name</th>
+                    <th>Request Qty</th>
+                    <th>UOM</th>
+                    <th>Unit Price</th>
+                    <th>Deliver Approval Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% request.item_requests.each do |item_request| %>
+                    <tr>
+                      <td><%= request.location.name %></td>
+                      <td><%= request.id %></td>
+                      <td><%= item_request.id %></td>
+                      <td><%= "#{item_request.item.class.to_s} #{item_request.item.id}" %></td>
+                      <td><%= item_request.item.name %></td>
+                      <td><%= item_request.qty %></td>
+                      <% if item_request.item.is_a? Material %>
+                        <td><%= item_request.item.uom %></td>
+                      <% else %>
+                        <td>N/A</td>
+                      <% end %>
+                      <% if item_request.item.is_a? Material %>
+                        <td>$<%= item_request.item.unit_price %></td>
+                      <% else %>
+                        <td>N/A</td>
+                      <% end %>
+                      <td><%= item_request.del_approv_status %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          <% end %>
+      <% end %>
+    </div>
   </div>
-</div>
-
-
-
-<div class="container">
-  <% if @requests.none? { |request| request.location == current_user.location  } && current_user.role != "manager" %>
-    <h2>No request is made to <%= current_user.location.name %></h2>
-  <% elsif current_user.role != "manager" %>
-    <h2>Received requests to <%= current_user.location.name  %></h2>
-  <% elsif current_user.role == "manager" %>
-    <h2>Requests made between locations</h2>
-  <% end  %>
-  <% @requests.each do |request| %>
-    <% if current_user.location == request.location || current_user.role == "manager" %>
-      <div class="table-responsive">
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>Request from</th>
-              <% if current_user.role == "manager"  %>
-                <th>Request to</th>
-              <% end %>
-              <th>Request ID</th>
-              <th>Item Request ID</th>
-              <th>Type and ID</th>
-              <th>Name</th>
-              <th>Available Qty</th>
-              <th>Request Qty</th>
-              <th>UOM</th>
-              <th>Unit Price</th>
-              <th>Engineer's Approval</th>
-              <th>Manager's Approval</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% request.item_requests.each do |item_request| %>
-              <tr>
-                <td><%= Location.find(request.original_location_id).name %></td>
-                <% if current_user.role == "manager"  %>
-                  <td><%= request.location.name %></td>
-                <% end %>
-                <td><%= request.id %></td>
-                <td><%= item_request.id %></td>
-                <td><%= "#{item_request.item.class.to_s} #{item_request.item.id}" %></td>
-                <td><%= item_request.item.name %></td>
-                <td><%= item_request.item.qty %></td>
-                <td><%= item_request.qty %></td>
-                <% if item_request.item.is_a? Material %>
-                  <td><%= item_request.item.uom %></td>
-                <% else %>
-                  <td>N/A</td>
-                <% end %>
-                <% if item_request.item.is_a? Material %>
-                  <td>$<%= item_request.item.unit_price %></td>
-                <% else %>
-                  <td>N/A</td>
-                <% end %>
-
-                <td>
-                  <%= link_to "Approve", item_request_eng_approve_path(item_request), method: :post, data: { turbo_method: :post }, class: "btn btn-success" %>
-                  <%= link_to "Decline", item_request_eng_decline_path(item_request), method: :post, data: { turbo_method: :post }, class: "btn btn-danger" %>
-                </td>
-
-                <td>
-                  <%= link_to "Approve", item_request_man_approve_path(item_request), method: :post, data: { turbo_method: :post }, class: "btn btn-success" %>
-                  <%= link_to "Decline", item_request_man_decline_path(item_request), method: :post, data: { turbo_method: :post }, class: "btn btn-danger" %>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-    <% end %>
-  <% end %>
-</div>
-
-<div class="container">
-  <% if @requests.none? { |request| current_user.location == Location.find(request.original_location_id) } && current_user.role != "manager" %>
-    <h2>No request is sent from <%= current_user.location.name %></h2>
-  <% elsif current_user.role != "manager" %>
-    <h2>Sent requests from <%= current_user.location.name %> </h2>
-  <% end %>
-  <% @requests.each do |request| %>
-    <% if current_user.location == Location.find(request.original_location_id) %>
-      <div class="table-responsive">
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>Request to</th>
-              <th>Request ID</th>
-              <th>Item Request ID</th>
-              <th>Type and ID</th>
-              <th>Name</th>
-              <th>Request Qty</th>
-              <th>UOM</th>
-              <th>Unit Price</th>
-              <th>Deliver Approval Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% request.item_requests.each do |item_request| %>
-              <tr>
-                <td><%= request.location.name %></td>
-                <td><%= request.id %></td>
-                <td><%= item_request.id %></td>
-                <td><%= "#{item_request.item.class.to_s} #{item_request.item.id}" %></td>
-                <td><%= item_request.item.name %></td>
-                <td><%= item_request.qty %></td>
-                <% if item_request.item.is_a? Material %>
-                  <td><%= item_request.item.uom %></td>
-                <% else %>
-                  <td>N/A</td>
-                <% end %>
-                <% if item_request.item.is_a? Material %>
-                  <td>$<%= item_request.item.unit_price %></td>
-                <% else %>
-                  <td>N/A</td>
-                <% end %>
-                <td><%= item_request.del_approv_status %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-    <% end %>
-  <% end %>
 </div>
