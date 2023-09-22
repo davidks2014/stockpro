@@ -19,7 +19,7 @@
         <h2>Requests made between locations</h2>
       <% end  %>
       <% @requests.each do |request| %>
-        <% if (current_user.location == request.location || current_user.role == "manager") && request.item_requests.all?{|x| x.del_approv_status != "Declined" && x.del_approv_status != "Approved"} %>
+        <% if (current_user.location == request.location || current_user.role == "manager") && request.item_requests.any?{|x| x.del_approv_status != "Pending"} %>
           <div class="table-responsive">
             <table class="table table-bordered">
               <thead>
@@ -69,12 +69,21 @@
 
                       <% if item_request.eng_appr_status == "approved" %>
                         <td>
-                          <button type="button" class="btn btn-success">Approved</button>
+                          <% if current_user.role == "manager" %>
+                            <button type="button" class="btn btn-success disabled">Approved</button>
+                          <% else %>
+                            <button type="button" class="btn btn-success">Approved</button>
+                          <% end %>
                         </td>
                       <% else %>
                         <td>
-                          <%= link_to "Approve", item_request_eng_approve_path(item_request), method: :post, data: { turbo_method: :post, turbo_confirm: "Are you sure?"}, class: "btn btn-primary" %>
-                          <%= link_to "Decline", item_request_eng_decline_path(item_request), method: :post, data: { turbo_method: :post, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" %>
+                          <% if current_user.role == "manager" %>
+                            <%= link_to "Approve", item_request_eng_approve_path(item_request), method: :post, data: { turbo_method: :post, turbo_confirm: "Are you sure?"}, class: "btn btn-primary disabled" %>
+                            <%= link_to "Decline", item_request_eng_decline_path(item_request), method: :post, data: { turbo_method: :post, turbo_confirm: "Are you sure?"}, class: "btn btn-danger disabled" %>
+                          <% else %>
+                            <%= link_to "Approve", item_request_eng_approve_path(item_request), method: :post, data: { turbo_method: :post, turbo_confirm: "Are you sure?"}, class: "btn btn-primary" %>
+                            <%= link_to "Decline", item_request_eng_decline_path(item_request), method: :post, data: { turbo_method: :post, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" %>
+                          <% end %>
                         </td>
                       <% end %>
 

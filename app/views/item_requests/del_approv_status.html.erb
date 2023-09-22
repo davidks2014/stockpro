@@ -1,11 +1,12 @@
 <div class="container">
-  <% if @item_requests.first.del_approv_status == "Declined" %>
-    <h1>Declined Item requests</h1>
-  <% else %>
-    <h1>Arrange Delivery</h1>
-  <% end %>
+  <% if @item_requests.any? %>
+    <% if @item_requests.first.del_approv_status == "Declined" %>
+      <h1>Declined Item requests</h1>
+     <% else %>
+      <h1>Arrange Delivery</h1>
+    <% end %>
     <div>
-    <%# raise %>
+      <%# raise %>
       <% if @item_requests.any? %>
         <% filtered_item_requests = @item_requests.select do |x| %>
           <% x.request.location == current_user.location %>
@@ -70,4 +71,8 @@
         <% end %>
       <% end %>
     </div>
+  <% else %>
+    <h1> You have no items pending delivery </h1>
+  <% end %>
+
 </div>
