@@ -19,7 +19,8 @@
         <h2>Requests made between locations</h2>
       <% end  %>
       <% @requests.each do |request| %>
-        <% if (current_user.location == request.location || current_user.role == "manager") && request.item_requests.any?{|x| x.del_approv_status != "Pending"} %>
+        <% if (current_user.location == request.location || current_user.role == "manager") && request.item_requests.any?{|x| x.del_approv_status == "Pending"} %>
+        <%# raise %>
           <div class="table-responsive">
             <table class="table table-bordered">
               <thead>
@@ -90,10 +91,10 @@
                       <% if item_request.eng_appr_status == "approved" %>
                         <td>
                           <% if current_user.role == "manager" %>
-                            <%= link_to "Approve", item_request_man_approve_path(item_request), method: :post, data: { turbo_method: :post, turbo_confirm: "Are you sure?"}, class: "btn btn-success" %>
+                            <%= link_to "Approve", item_request_man_approve_path(item_request), method: :post, data: { turbo_method: :post, turbo_confirm: "Are you sure?"}, class: "btn btn-primary" %>
                             <%= link_to "Decline", item_request_man_decline_path(item_request), method: :post, data: { turbo_method: :post, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" %>
                           <% else %>
-                            <%= link_to "Approve", item_request_man_approve_path(item_request), method: :post, data: { turbo_method: :post }, class: "btn btn-success disabled" %>
+                            <%= link_to "Approve", item_request_man_approve_path(item_request), method: :post, data: { turbo_method: :post }, class: "btn btn-primary disabled" %>
                             <%= link_to "Decline", item_request_man_decline_path(item_request), method: :post, data: { turbo_method: :post }, class: "btn btn-danger disabled" %>
                           <% end %>
                         </td>

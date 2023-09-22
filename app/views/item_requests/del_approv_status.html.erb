@@ -4,6 +4,7 @@
       <h1>Declined Item requests</h1>
      <% else %>
       <h1>Arrange Delivery</h1>
+      <br>
     <% end %>
     <div>
       <%# raise %>
@@ -15,14 +16,13 @@
           <% filtered_item_requests.group_by { |item_request| Location.find(item_request.request.original_location_id).name }.each do |loc, item_requests| %>
             <div>
               <%= simple_form_for @delivery_order, url: delivery_orders_path do |f|%>
-                <h2><%= loc %></h2>
+                <h2>Deliver to <%= loc %></h2>
                 <table class="table table-bordered">
                   <thead>
                     <tr>
-                      <th>Deliver To</th>
                       <th>Request ID</th>
                       <th>Item Request ID</th>
-                      <th>Type and ID</th>
+                      <th>Item Type</th>
                       <th>Name</th>
                       <th>Unit Price</th>
                       <th>Qty</th>
@@ -37,10 +37,10 @@
                     <% filtered_item_requests.each do |item_request| %>
                       <% if Location.find(item_request.request.original_location_id).name == loc && item_request.delivery_order == nil %>
                         <tr class="tablerow" id=<%= item_request.id %>>
-                          <td value="<%= Location.find(item_request.request.original_location_id).name %>"><%= Location.find(item_request.request.original_location_id).name %></td>
+
                           <td><%= item_request.request.id %></td>
                           <td><%= item_request.id %></td>
-                          <td><%= "#{item_request.item.class.to_s} #{item_request.item.id}" %></td>
+                          <td><%= "#{item_request.item.class.to_s}" %></td>
                           <td><%= item_request.item.name %></td>
                           <% if item_request.item.is_a? Material %>
                             <td>$<%= item_request.item.unit_price %></td>
@@ -65,10 +65,11 @@
                 <% else %>
                   <%= f.submit "confirm delivery" %>
                 <% end %>
+
               <% end %>
             </div>
-
-        <% end %>
+            <br>
+          <% end %>
       <% end %>
     </div>
   <% else %>
