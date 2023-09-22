@@ -19,7 +19,7 @@
         <h2>Requests made between locations</h2>
       <% end  %>
       <% @requests.each do |request| %>
-        <% if current_user.location == request.location || current_user.role == "manager" %>
+        <% if (current_user.location == request.location || current_user.role == "manager") && request.item_requests.all?{|x| x.del_approv_status != "Declined" && x.del_approv_status != "Approved"} %>
           <div class="table-responsive">
             <table class="table table-bordered">
               <thead>
@@ -90,6 +90,8 @@
                         </td>
                       <% else %>
                         <td>
+                          <%= link_to "Approve", item_request_man_approve_path(item_request), method: :post, data: { turbo_method: :post }, class: "btn btn-success disabled" %>
+                          <%= link_to "Decline", item_request_man_decline_path(item_request), method: :post, data: { turbo_method: :post }, class: "btn btn-danger disabled" %>
                         </td>
                       <% end %>
                     </tr>
