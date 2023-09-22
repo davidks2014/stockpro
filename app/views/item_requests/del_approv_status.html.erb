@@ -1,5 +1,9 @@
 <div class="container">
-  <h1>Arrange Delivery</h1>
+  <% if @item_requests.first.del_approv_status == "Declined" %>
+    <h1>Declined Item requests</h1>
+  <% else %>
+    <h1>Arrange Delivery</h1>
+  <% end %>
     <div>
     <%# raise %>
       <% if @item_requests.any? %>
@@ -21,7 +25,11 @@
                       <th>Name</th>
                       <th>Unit Price</th>
                       <th>Qty</th>
-                      <th>Group for delivery</th>
+                      <% if item_requests.first.del_approv_status == "Declined" %>
+
+                      <% else %>
+                        <th>Group for delivery</th>
+                      <% end %>
                     </tr>
                   </thead>
                   <tbody>
@@ -39,16 +47,23 @@
                             <td>N/A</td>
                           <% end %>
                           <td><%= item_request.qty %></td>
+                          <% if item_requests.first.del_approv_status == "Declined" %>
+                          <% else %>
                           <td>
                           <%#if u want to select all, use checked in input %>
                             <input type="checkbox" name="selected_item_request_ids[]" value="<%= item_request.id %>">
                           </td>
+                          <% end %>
                         </tr>
                       <% end %>
                     <% end %>
                   </tbody>
                 </table>
-                <%= f.submit "confirm delivery" %>
+                <% if item_requests.first.del_approv_status == "Declined" %>
+
+                <% else %>
+                  <%= f.submit "confirm delivery" %>
+                <% end %>
               <% end %>
             </div>
 

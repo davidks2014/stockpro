@@ -40,8 +40,10 @@
                     color: white;
                     <% end %>">
                       <% if delivery_order.delivery_status == "Received" %>
-                      Delivered
-                    <% end %>
+                        Delivered
+                      <% else %>
+                        Delivering
+                      <% end %>
                     </td>
                   </tr>
                 <% end %>

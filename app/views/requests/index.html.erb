@@ -42,38 +42,58 @@
               </thead>
               <tbody>
                 <% request.item_requests.each do |item_request| %>
-                  <tr>
-                    <td><%= Location.find(request.original_location_id).name %></td>
-                    <% if current_user.role == "manager"  %>
-                      <td><%= request.location.name %></td>
-                    <% end %>
-                    <td><%= request.id %></td>
-                    <td><%= item_request.id %></td>
-                    <td><%= "#{item_request.item.class.to_s} #{item_request.item.id}" %></td>
-                    <td><%= item_request.item.name %></td>
-                    <td><%= item_request.item.qty %></td>
-                    <td><%= item_request.qty %></td>
-                    <% if item_request.item.is_a? Material %>
-                      <td><%= item_request.item.uom %></td>
-                    <% else %>
-                      <td>N/A</td>
-                    <% end %>
-                    <% if item_request.item.is_a? Material %>
-                      <td>$<%= item_request.item.unit_price %></td>
-                    <% else %>
-                      <td>N/A</td>
-                    <% end %>
+                  <% if item_request.man_appr_status == "approved" || item_request.man_appr_status == "declined" || item_request.eng_appr_status == "declined" %>
 
-                    <td>
-                      <%= link_to "Approve", item_request_eng_approve_path(item_request), method: :post, data: { turbo_method: :post }, class: "btn btn-success" %>
-                      <%= link_to "Decline", item_request_eng_decline_path(item_request), method: :post, data: { turbo_method: :post }, class: "btn btn-danger" %>
-                    </td>
+                  <% else %>
+                    <tr>
+                      <td><%= Location.find(request.original_location_id).name %></td>
+                      <% if current_user.role == "manager"  %>
+                        <td><%= request.location.name %></td>
+                      <% end %>
+                      <td><%= request.id %></td>
+                      <td><%= item_request.id %></td>
+                      <td><%= "#{item_request.item.class.to_s} #{item_request.item.id}" %></td>
+                      <td><%= item_request.item.name %></td>
+                      <td><%= item_request.item.qty %></td>
+                      <td><%= item_request.qty %></td>
+                      <% if item_request.item.is_a? Material %>
+                        <td><%= item_request.item.uom %></td>
+                      <% else %>
+                        <td>N/A</td>
+                      <% end %>
+                      <% if item_request.item.is_a? Material %>
+                        <td>$<%= item_request.item.unit_price %></td>
+                      <% else %>
+                        <td>N/A</td>
+                      <% end %>
 
-                    <td>
-                      <%= link_to "Approve", item_request_man_approve_path(item_request), method: :post, data: { turbo_method: :post }, class: "btn btn-success" %>
-                      <%= link_to "Decline", item_request_man_decline_path(item_request), method: :post, data: { turbo_method: :post }, class: "btn btn-danger" %>
-                    </td>
-                  </tr>
+                      <% if item_request.eng_appr_status == "approved" %>
+                        <td>
+                          <button type="button" class="btn btn-success">Approved</button>
+                        </td>
+                      <% else %>
+                        <td>
+                          <%= link_to "Approve", item_request_eng_approve_path(item_request), method: :post, data: { turbo_method: :post, turbo_confirm: "Are you sure?"}, class: "btn btn-primary" %>
+                          <%= link_to "Decline", item_request_eng_decline_path(item_request), method: :post, data: { turbo_method: :post, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" %>
+                        </td>
+                      <% end %>
+
+                      <% if item_request.eng_appr_status == "approved" %>
+                        <td>
+                          <% if current_user.role == "manager" %>
+                            <%= link_to "Approve", item_request_man_approve_path(item_request), method: :post, data: { turbo_method: :post, turbo_confirm: "Are you sure?"}, class: "btn btn-success" %>
+                            <%= link_to "Decline", item_request_man_decline_path(item_request), method: :post, data: { turbo_method: :post, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" %>
+                          <% else %>
+                            <%= link_to "Approve", item_request_man_approve_path(item_request), method: :post, data: { turbo_method: :post }, class: "btn btn-success disabled" %>
+                            <%= link_to "Decline", item_request_man_decline_path(item_request), method: :post, data: { turbo_method: :post }, class: "btn btn-danger disabled" %>
+                          <% end %>
+                        </td>
+                      <% else %>
+                        <td>
+                        </td>
+                      <% end %>
+                    </tr>
+                  <% end %>
                 <% end %>
               </tbody>
             </table>
