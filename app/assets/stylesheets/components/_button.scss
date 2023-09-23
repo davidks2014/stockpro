@@ -1,32 +1,28 @@
 
 #view-request-btn {
   justify-content: center;
-  align-items: center;
-  width: 180px;
-  border: 1px solid black;
+  width: auto;
   box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.2);
   color: white;
+
 }
 
 #transit-delivery-btn {
-  width: 180px;
-  border: 1px solid black;
+  width: auto;
   box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.2);
   color: white;
 }
 
 #stock-alert-btn{
-  width: 180px;
+  width: auto;
   color: whitesmoke;
-  border: 1px solid black;
   box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.2);
   color: white;
 }
 
 #total-cost-btn {
-  width: 190px;
+  width: auto;
   color: btn-primary;
-  border: 1px solid black;
   box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.2);
   color: white;
 }
