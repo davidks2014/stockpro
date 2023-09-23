@@ -1,33 +1,106 @@
 <div class="container">
-  <h1>Outgoing Material</h1>
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="out-tab" data-bs-toggle="tab" data-bs-target="#out-tab-pane" type="button" role="tab" aria-controls="out-tab-pane" aria-selected="true">Outgoing items</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="in-tab" data-bs-toggle="tab" data-bs-target="#in-tab-pane" type="button" role="tab" aria-controls="in-tab-pane" aria-selected="false">Incoming items</button>
+    </li>
 
-  <% @delivery_orders.each do |delivery_order| %>
-    <h2>Deliver To: <%= delivery_order.location.name %></h2>
-    <% delivery_order.item_requests.each do |item_request| %>
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>Request ID</th>
-            <th>Item Request ID</th>
-            <th>Item Name</th>
-            <th>Category</th>
-            <th>Qty</th>
-            <th>Status</th>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="out-tab-pane" role="tabpanel" aria-labelledby="out-tab" tabindex="0">
+      <% @delivery_orders.each do |delivery_order| %>
+        <% if current_user.location == delivery_order.item_requests.last.request.location || current_user.role == "manager" %>
+          <div>
+          <h1>Outgoing Material</h1>
+          <h2>Deliver To: <%= delivery_order.location.name %> (DO: <%= delivery_order.id %>)</h2>
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Request ID</th>
+                  <th>Item Request ID</th>
+                  <th>Item Name</th>
+                  <th>Category</th>
+                  <th>Qty</th>
+                  <th>Status</th>
 
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><%= item_request.request.id %></td>
-            <td><%= item_request.id %></td>
-            <td><%= item_request.item.name %></td>
-            <td><%= item_request.item.category %></td>
-            <td><%= item_request.qty %></td>
-            <td><%= item_request.delivery_order.delivery_status %></td>
+                </tr>
+              </thead>
+              <tbody>
+                <% delivery_order.item_requests.each do |item_request| %>
+                  <tr>
+                    <td><%= item_request.request.id %></td>
+                    <td><%= item_request.id %></td>
+                    <td><%= item_request.item.name %></td>
+                    <td><%= item_request.item.category %></td>
+                    <td><%= item_request.qty %></td>
+                    <td style="<% if delivery_order.delivery_status == 'Received' %>
+                    background-color: green;
+                    color: white;
+                    <% end %>">
+                      <% if delivery_order.delivery_status == "Received" %>
+                        Delivered
+                      <% else %>
+                        Delivering
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
 
-          </tr>
-        </tbody>
-      </table>
-    <% end %>
-  <% end %>
+
+
+    <div class="tab-pane fade" id="in-tab-pane" role="tabpanel" aria-labelledby="in-tab" tabindex="0">
+      <% @delivery_orders.each do |delivery_order| %>
+        <% if current_user.location == delivery_order.location %>
+          <div>
+            <h1>Incoming Material</h1>
+            <h2>Deliver from: <%= delivery_order.item_requests.last.request.location.name %> (DO: <%= delivery_order.id %>)</h2>
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Request ID</th>
+                  <th>Item Request ID</th>
+                  <th>Delivery from </th>
+                  <th>Item Name</th>
+                  <th>Category</th>
+                  <th>Qty</th>
+                  <th>Status</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <% delivery_order.item_requests.each do |item_request| %>
+                  <tr>
+                    <td><%= item_request.request.id %></td>
+                    <td><%= item_request.id %></td>
+                    <td><%= delivery_order.item_requests.last.request.location.name %></td>
+                    <td><%= item_request.item.name %></td>
+                    <td><%= item_request.item.category %></td>
+                    <td><%= item_request.qty %></td>
+                    <td style="<% if delivery_order.delivery_status == 'Received' %>
+                    background-color: green;
+                    color: white;
+                    <% end %>">
+                    <%= item_request.delivery_order.delivery_status %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+            <% if delivery_order.delivery_status != "Received" %>
+              <%= link_to "Confirm receive", delivery_order_receive_path(delivery_order), method: :post, data: { turbo_method: :post }, class: "btn btn-success" %>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+  </div>
 </div>

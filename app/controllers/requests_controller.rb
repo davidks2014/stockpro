@@ -37,6 +37,7 @@ class RequestsController < ApplicationController
     if @request.save
       item_requests = []
       # change something
+      # more changes
 
       data["items"].each do |item|
         item_request = ItemRequest.create(
@@ -44,7 +45,7 @@ class RequestsController < ApplicationController
           item_id: item["item_id"],
           qty: item["qty"],
           request: @request,
-          del_approv_status: "delivery approval status pending"
+          del_approv_status: "Pending"
         )
 
         item_requests << item_request

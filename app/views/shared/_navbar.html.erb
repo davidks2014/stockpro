@@ -1,9 +1,8 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-logo">
   <div class="container-fluid">
-    <%# link_to "#", class: "navbar-brand" do %>
-      <%= link_to root_path, class: "navbar-brand" do %>
-        <%= image_tag "sp_noBG.png", alt: "Logo" %>
-      <% end %>
+    <%= link_to root_path, class: "navbar-brand" do %>
+      <%= image_tag "sp_noBG.png", alt: "Logo" %>
+    <% end %>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -13,30 +12,29 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Item request
+            <strong>Item request</strong>
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="/requests/new">Make new request</a></li>
             <li><a class="dropdown-item" href="/requests/">See pending approval requests</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="/item_requests/status/delivery%20approval%20status%20declined">Items declined for delivery</a></li>
+            <li><a class="dropdown-item" href="/item_requests/status/Declined">Items declined for delivery</a></li>
           </ul>
         </li>
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Item Delivery
+            <strong>Item Delivery</strong>
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/item_requests/status/delivery%20approval%20status%20approved">Group items for delivery</a></li>
-            <li><a class="dropdown-item" href="#">Incoming/outgoing pending items</a></li>
-            <li><a class="dropdown-item" href="#">Incoming/outgoing items delivered</a></li>
+            <li><a class="dropdown-item" href="/item_requests/status/Approved">Group items for delivery</a></li>
+            <li><a class="dropdown-item" href="/delivery_orders">Delivery Order Status</a></li>
           </ul>
         </li>
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Locations
+            <strong>Locations</strong>
           </a>
           <ul class="dropdown-menu">
             <% @locations.each do |location| %>
