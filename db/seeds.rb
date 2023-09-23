@@ -12,18 +12,18 @@ locations = [warehouse, projectA, projectB, projectC]
 locations.each do |attributes|
   location = Location.create!(attributes)
   puts "Created #{location.name}"
-  rose = Material.create({category: "flower", name: "rose", cost_code: "MFR", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(2), uom: "no.", location: location})
-  hibiscus = Material.create({category: "flower", name: "hibiscus", cost_code: "MFH", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(2), uom: "no.", location: location})
-  lily = Material.create({category: "flower", name: "lily", cost_code: "MFL", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(2), uom: "no.", location: location})
-  brocoli = Material.create({category: "vegetable", name: "brocoli", cost_code: "MVB", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(2), uom: "kg", location: location})
-  spinach = Material.create({category: "vegetable", name: "spinach", cost_code: "MVS", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(2), uom: "kg", location: location})
-  cabbage = Material.create({category: "vegetable", name: "cabbage", cost_code: "MVC", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(2), uom: "kg", location: location})
-  orange = Material.create({category: "fruit", name: "orange", cost_code: "MFO", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(2), uom: "kg", location: location})
-  apple = Material.create({category: "fruit", name: "apple", cost_code: "MFA", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(2), uom: "kg", location: location})
-  mango = Material.create({category: "fruit", name: "mango", cost_code: "MFM", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(2), uom: "kg", location: location})
-  oak = Material.create({category: "tree", name: "oak", cost_code: "MTO", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(2), uom: "no.", location: location})
-  maple = Material.create({category: "tree", name: "maple", cost_code: "MTM", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(2), uom: "no.", location: location})
-  banyan = Material.create({category: "tree", name: "banyan", cost_code: "MTB", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(2), uom: "no.", location: location})
+  rose = Material.create({category: "flower", name: "rose", cost_code: "MFR", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(0), uom: "no.", location: location})
+  hibiscus = Material.create({category: "flower", name: "hibiscus", cost_code: "MFH", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(0), uom: "no.", location: location})
+  lily = Material.create({category: "flower", name: "lily", cost_code: "MFL", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(0), uom: "no.", location: location})
+  brocoli = Material.create({category: "vegetable", name: "brocoli", cost_code: "MVB", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(0), uom: "kg", location: location})
+  spinach = Material.create({category: "vegetable", name: "spinach", cost_code: "MVS", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(0), uom: "kg", location: location})
+  cabbage = Material.create({category: "vegetable", name: "cabbage", cost_code: "MVC", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(0), uom: "kg", location: location})
+  orange = Material.create({category: "fruit", name: "orange", cost_code: "MFO", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(0), uom: "kg", location: location})
+  apple = Material.create({category: "fruit", name: "apple", cost_code: "MFA", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(0), uom: "kg", location: location})
+  mango = Material.create({category: "fruit", name: "mango", cost_code: "MFM", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(0), uom: "kg", location: location})
+  oak = Material.create({category: "tree", name: "oak", cost_code: "MTO", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(0), uom: "no.", location: location})
+  maple = Material.create({category: "tree", name: "maple", cost_code: "MTM", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(0), uom: "no.", location: location})
+  banyan = Material.create({category: "tree", name: "banyan", cost_code: "MTB", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(0), uom: "no.", location: location})
   puts " #{location.name} Creating equipment..."
 
   location.materials.each  do |material|
