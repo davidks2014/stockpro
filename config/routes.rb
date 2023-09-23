@@ -31,4 +31,6 @@ Rails.application.routes.draw do
 
   resources :sites, only: %i[index show new create]
 
+  resources :update_materials
+
 end

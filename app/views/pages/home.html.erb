@@ -1,7 +1,10 @@
 <%# Welcome page after successful login %>
 <div class="container">
-  <h1>Welcome to your projects</h1>
+  <h1>Welcome to StockPro</h1>
+  <% if current_user.role == "manager" %>
+  <% else %>
   <h2>Location: <%= current_user.location.name %></h2>
+  <% end %>
 </div>
 
 <%# Quickview on #project locations, stock alert and requests pending approval %>
