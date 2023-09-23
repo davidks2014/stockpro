@@ -1,6 +1,6 @@
 <%# Welcome page after successful login %>
 <div class="container">
-  <h1>Welcome to your projects</h1>
+  <h1>Projects Overview</h1>
   <h3>Location: <%= current_user.location.name %></h3>
 </div>
 
@@ -8,7 +8,7 @@
 <div class="container">
   <div class="border-container">
     <div class="grid-header2">
-      <h5># project locations: <%= Site.count - 1%></h5>
+      <h5>Total Locations: <%= Site.count - 1%></h5>
     </div>
     <div class="grid-header2">
       <h5>Low Stock Alert</h5>
@@ -25,17 +25,17 @@
   <div class="wrapper-container">
     <div class="grid-container">
       <div class="card">
-        <h4>Pending Requests
-          <i class="fa-solid fa-list-check" style="color: #3898b9;"></i>
-        </h4>
-        <p>Here</p>
+        <h3>Pending Requests <i class="fa-solid fa-list-check" style="color: #3898b9;"></i></h3>
+        <p>code in requests</p>
         <%= link_to "Pending requests", requests_path, class: "btn btn-primary", id: "view-request-btn" %>
       </div>
       <div class="card">
         <h4>Delivery In Transit
          <i class="fa-solid fa-truck-fast" style="color: #3a98b9;"></i>
         </h4>
-        <p>lorem ipsum 2</p><br>
+        <p>lorem ipsum 2
+        hello
+        hello</p><br>
         <%= link_to "Tracking", "#", class: "btn btn-info", id: "transit-delivery-btn" %>
       </div>
       <div class="card">
