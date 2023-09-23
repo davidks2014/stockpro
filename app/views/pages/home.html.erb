@@ -1,6 +1,6 @@
 <%# Welcome page after successful login %>
 <div class="container">
-  <h1>Welcome to StockPro</h1>
+  <h1>Welcome to your projects</h1>
   <h2>Location: <%= current_user.location.name %></h2>
 </div>
 
@@ -27,7 +27,7 @@
       <div class="card">
         <h4>Requests pending approval</h4>
         <i class="fa-solid fa-list-check" style="color: #3898b9;"></i>
-        <p>lorem ipsum 1</p>
+        <p>Here</p>
         <%= link_to "Pending requests", requests_path, class: "btn btn-primary", id: "view-request-btn" %>
       </div>
       <div class="card">
