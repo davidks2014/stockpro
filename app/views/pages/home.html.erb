@@ -1,9 +1,9 @@
 <%# Welcome page after successful login %>
 <div class="container">
-  <h1>Welcome to StockPro</h1>
+  <h1>Project Overview</h1>
   <% if current_user.role == "manager" %>
   <% else %>
-  <h2>Location: <%= current_user.location.name %></h2>
+    <h2>Location: <%= current_user.location.name %></h2>
   <% end %>
 </div>
 
