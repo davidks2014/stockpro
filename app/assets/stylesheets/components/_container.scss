@@ -1,13 +1,13 @@
 // styling for div containers
 
 .container {
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 
 .wrapper-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  margin: 10px;
+  margin: 20px;
   gap: 2rem;
 }
 
@@ -20,13 +20,14 @@
 
 .border-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 46%;
-  justify-content: space-between;
+  grid-template-columns: 1fr 1fr 1fr;
+  // justify-content: space-between;
   background-color: #3a98b9;
   border-radius: 30px;
   border: 2px solid black;
-  // margin: 10px;
-  gap: 8px;
+  align-items: center;
+  text-align: center;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
 }
 
 .card {
@@ -55,13 +56,13 @@
 .grid-header2 {
   // text-justify: center;
   align-items: center;
-  margin: 10px;
+  margin: 20px;
   background-color: #e8d5c4;
   border: 2px solid white;
   border-radius: 40px;
-  padding: 20px;
-  width: 380px;
-  height: 70px;
+  padding: 12px;
+  width: 360px;
+  height: 60px;
   box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
