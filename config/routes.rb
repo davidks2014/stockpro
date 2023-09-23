@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
-  resources :locations
+  resources :locations do
+    post "update_materials", to: "update_materials#update"
+  end
 
   post 'materials/importnew', to: 'materials#import', as: 'material_import'
   get 'materials/import', to: 'materials#import', as: 'import'
@@ -32,5 +34,6 @@ Rails.application.routes.draw do
   resources :sites, only: %i[index show new create]
 
   resources :update_materials
+
 
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_23_034042) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_23_125050) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -138,7 +138,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_23_034042) do
 
   create_table "update_materials", force: :cascade do |t|
     t.float "unit_rate"
-    t.date "update_date"
+    t.datetime "update_date"
     t.bigint "location_id", null: false
     t.bigint "material_id", null: false
     t.datetime "created_at", null: false
