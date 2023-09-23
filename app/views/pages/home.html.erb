@@ -1,46 +1,41 @@
 <%# Welcome page after successful login %>
 <div class="container">
-  <h1>Welcome to StockPro</h1>
-  <h2>Location: <%= current_user.location.name %></h2>
+  <h1>Project Overview</h1>
+  <% if current_user.role == "manager" %>
+  <% else %>
+    <h2>Location: <%= current_user.location.name %></h2>
+  <% end %>
 </div>
 
 <%# Quickview on #project locations, stock alert and requests pending approval %>
-<div class="container">
-  <div class="border-container">
-    <div class="grid-header2">
-      <h4># project locations: <%= Site.count - 1%></h4>
-    </div>
-    <div class="grid-header2">
-      <h4>Low Stock Alert</h4>
-    </div>
-    <div class="grid-header2">
-      <h4># Requests pending approval</h4>
-    </div>
-  </div>
-</div>
-
 <%# 4 dashboard cards with links to action %>
 <%# using grid to contain cards in 2 rows x 2 columns, occupying 1fr, 1fr %>
 <div class="container">
   <div class="wrapper-container">
     <div class="grid-container">
-      <div class="card">
-        <h2>Requests pending approval</h2>
-        <p>lorem ipsum 1</p>
+      <div class="card py-4">
+        <h4>Pending Requests <i class="fa-solid fa-list-check" style="color: #3898b9;"></i></h4>
+        <p>code in requests</p>
+        <br>
         <%= link_to "Pending requests", requests_path, class: "btn btn-primary", id: "view-request-btn" %>
       </div>
-      <div class="card">
-        <h2>Delivery In Transit</h2>
-        <p>lorem ipsum 2</p><br>
-        <%= link_to "Transit delivery", "#", class: "btn btn-info", id: "transit-delivery-btn" %>
+      <div class="card py-4">
+        <h4>Delivery In Transit  <i class="fa-solid fa-truck-fast" style="color: #3a98b9;"></i>
+        </h4>
+        <p>lorem ipsum 2 hello hello</p>
+        <br>
+        <%= link_to "Tracking", "#", class: "btn btn-info", id: "transit-delivery-btn" %>
       </div>
-      <div class="card">
-        <h2>Low Stock Alert</h2>
+      <div class="card py-4">
+        <h4>Low Stock Alert  <i class="fa-solid fa-bell" style="color: #3a98b9;"></i>
+        </h4>
         <p>lorem ipsum 3</p><br>
         <%= link_to "Stock Alert", "#", class: "btn btn-danger", id: "stock-alert-btn" %>
       </div>
-      <div class="card">
-        <h2>Project costs todate</h2>
+      <div class="card py-4">
+        <h4>Project costs todate
+         <i class="fa-solid fa-dollar-sign" style="color: #3898b9;"></i>
+        </h4>
         <p>lorem ipsum 4</p><br>
         <%= link_to "Accumulated costs", "#", class: "btn btn-primary", id: "total-cost-btn" %>
       </div>
