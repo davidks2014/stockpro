@@ -25,7 +25,9 @@ Rails.application.routes.draw do
   # resources :materials
 
   resources :requests, only: %i[index new create show]
-  resources :delivery_orders, only: %i[index create]
+  resources :delivery_orders, only: %i[index create] do
+    post 'receive', to: 'delivery_orders#receive'
+  end
 
 
 end

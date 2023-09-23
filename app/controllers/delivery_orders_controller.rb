@@ -29,4 +29,12 @@ class DeliveryOrdersController < ApplicationController
       # You may want to render a different view, depending on your application
     end
   end
+
+  def receive
+    @delivery_order = DeliveryOrder.find(params[:delivery_order_id])
+    @delivery_order.update(delivery_status: 'Received')
+
+    redirect_to delivery_orders_path, notice: "Delivery order received"
+  end
+
 end
