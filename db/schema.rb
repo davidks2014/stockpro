@@ -10,9 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_18_024709) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_20_045946) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "b_materials", force: :cascade do |t|
+    t.string "name"
+    t.string "category"
+    t.string "cost_code"
+    t.float "unit_price"
+    t.float "qty"
+    t.string "uom"
+    t.bigint "location_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["location_id"], name: "index_b_materials_on_location_id"
+  end
+
+  create_table "delivery_orders", force: :cascade do |t|
+    t.string "delivery_status"
+    t.bigint "location_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["location_id"], name: "index_delivery_orders_on_location_id"
+  end
 
   create_table "equipment", force: :cascade do |t|
     t.string "category"
@@ -56,6 +77,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_18_024709) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "del_approv_status"
+    t.bigint "delivery_order_id"
+    t.index ["delivery_order_id"], name: "index_item_requests_on_delivery_order_id"
     t.index ["item_type", "item_id"], name: "index_item_requests_on_item"
     t.index ["request_id"], name: "index_item_requests_on_request_id"
   end
@@ -129,9 +152,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_18_024709) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "b_materials", "locations"
+  add_foreign_key "delivery_orders", "locations"
   add_foreign_key "equipment", "locations"
   add_foreign_key "import_materials", "locations"
   add_foreign_key "item_deliveries", "item_requests"
+  add_foreign_key "item_requests", "delivery_orders"
   add_foreign_key "item_requests", "requests"
   add_foreign_key "material_stockcounts", "locations"
   add_foreign_key "materials", "locations"
