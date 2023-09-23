@@ -29,5 +29,6 @@ Rails.application.routes.draw do
     post 'receive', to: 'delivery_orders#receive'
   end
 
+  resources :sites, only: %i[index show new create]
 
 end

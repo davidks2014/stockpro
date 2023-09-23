@@ -131,6 +131,9 @@ GEM
     irb (1.8.1)
       rdoc
       reline (>= 0.3.8)
+    jbuilder (2.11.5)
+      actionview (>= 5.0.0)
+      activesupport (>= 5.0.0)
     jsbundling-rails (1.1.2)
       railties (>= 6.0.0)
     loofah (2.21.3)
@@ -286,6 +289,7 @@ DEPENDENCIES
   dotenv-rails
   font-awesome-sass (~> 6.1)
   geocoder
+  jbuilder
   jsbundling-rails
   pg (~> 1.1)
   puma (~> 5.0)

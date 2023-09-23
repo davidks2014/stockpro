@@ -1,0 +1,77 @@
+// styling for div containers
+
+.container {
+  margin-bottom: 40px;
+}
+
+.wrapper-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 20px;
+  gap: 2rem;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  // margin: 10px;
+  gap: 2rem;
+}
+
+.border-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  // justify-content: space-between;
+  background-color: #3a98b9;
+  border-radius: 30px;
+  border: 2px solid black;
+  align-items: center;
+  text-align: center;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.card {
+  background-color: #fef1dc;
+  border: 2px solid white;
+  border-radius: 30px;
+  padding: 10px;
+  width: 320px;
+  height: 200px;
+  box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.grid-header1 {
+  // justify-content: center;
+  align-items: center;
+  margin: 10px;
+  background-color: #e8d5c4;
+  border: 2px solid white;
+  border-radius: 40px;
+  padding: 10px;
+  width: 300px;
+  height: 70px;
+  box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.grid-header2 {
+  // text-justify: center;
+  align-items: center;
+  margin: 20px;
+  background-color: #e8d5c4;
+  border: 2px solid white;
+  border-radius: 40px;
+  padding: 12px;
+  width: 360px;
+  height: 60px;
+  box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.map-card {
+  background-color: white;
+  border: 2px solid white;
+  border-radius: 30px;
+  padding-left: 10px;
+  width: 585px;
+  height: 450px;
+  box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.2);
+}
