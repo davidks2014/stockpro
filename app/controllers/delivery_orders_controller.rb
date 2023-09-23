@@ -35,6 +35,9 @@ class DeliveryOrdersController < ApplicationController
     @delivery_order.update(delivery_status: 'Received')
 
     redirect_to delivery_orders_path, notice: "Delivery order received"
+
+    
+
   end
 
 end
