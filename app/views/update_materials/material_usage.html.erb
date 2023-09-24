@@ -1,8 +1,8 @@
 <div class="container">
   <% if @remarks == "Project Usage" %>
-    <h1>Record Project Usage Materials Qty</h1>
+    <h1>Record Project Usage Materials Qty for <%= @location.name %></h1>
   <% elsif @remarks == "Import New Materials" %>
-    <h1>Record Import Materials Qty</h1>
+    <h1>Record Import Materials Qty for <%= @location.name  %></h1>
   <% end %>
   <br>
 
@@ -21,14 +21,11 @@
             <th>Imported Unit Rate</th>
           <% end %>
 
-
-
           <% if @remarks == "Project Usage" %>
             <th>Usage Qty</th>
           <% else %>
             <th>Imported Qty</th>
           <% end %>
-
 
           <th>Type</th>
         </tr>
