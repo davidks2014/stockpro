@@ -38,6 +38,10 @@ class UpdateMaterialsController < ApplicationController
     @material_movements = MaterialMovement.create(material_movement_params)
     # Handle success or failure
     # Redirect or render appropriate view
+
+    if 
+
+
   end
 
 
