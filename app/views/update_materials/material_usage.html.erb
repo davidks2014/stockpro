@@ -1,7 +1,7 @@
 <div class="container">
-<h1>Record Monthly Material Usage</h1>
+  <h1>Record Monthly Material Usage</h1>
 
-  <%= simple_form_for [@material_movment] do |f| %>
+  <%= form_tag(update_materials_path) do %>
     <table class="table table-bordered">
       <thead>
         <tr>
@@ -9,19 +9,24 @@
           <th>Name</th>
           <th>Unit Rate</th>
           <th>Usage Qty</th>
+          <th>Type</th>
         </tr>
       </thead>
       <tbody>
-          <% @location.materials.each do |material| %>
-            <tr>
-              <td> <%= material.id %></td>
-              <td> <%= material.name %></td>
-              <td> <%= material.unit_price %></td>
-              <td> <%= f.input :qty %></td>
-            </tr>
-          <% end %>
+        <% @location.materials.each do |material| %>
+          <tr>
+            <td><%= material.id %></td>
+            <td><%= material.name %></td>
+            <td><%= material.unit_price %></td>
+            <td><%= text_field_tag "material_movements[][qty]", nil, name: "material_movements[][qty]" %></td>
+            <td><%= text_field_tag "material_movements[][remarks]", @remarks, name: "material_movements[][remarks]" %></td>
+            <%= hidden_field_tag "material_movements[][location_id]", @location.id %>
+            <%= hidden_field_tag "material_movements[][material_id]", material.id %>
+            <%= hidden_field_tag "material_movements[][update_date]", Time.now %>
+          </tr>
+        <% end %>
       </tbody>
     </table>
-    <%= f.submit "Submit review", class: "btn btn-primary" %>
+    <%= submit_tag "Create Material Movements", class: "btn btn-primary" %>
   <% end %>
 </div>

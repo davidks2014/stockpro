@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   resources :locations do
     post "update_materials", to: "update_materials#update"
-    get "update_materials", to: "update_materials#material_usage", as: "material_usage"
+    get "material_usage", to: "update_materials#material_usage", as: "material_usage"
   end
 
 

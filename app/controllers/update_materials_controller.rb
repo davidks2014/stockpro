@@ -25,8 +25,31 @@ class UpdateMaterialsController < ApplicationController
 
   def material_usage
     @location = Location.find(params[:location_id])
-    @materials = @location.materials
-    @update_material = UpdateMaterial.new
+    @remarks = params[:remarks]
+
+    material_movements = []
+
+    @location.materials.each do |material|
+      material_movements << MaterialMovement.new
+    end
+  end
+
+  # In your controller action for form submission
+  def create
+    @material_movements = MaterialMovement.create(material_movement_params)
+    # Handle success or failure
+    # Redirect or render appropriate view
+  end
+
+
+
+
+  private
+
+  def material_movement_params
+    params.require(:material_movements).map do |movement_params|
+      movement_params.permit(:qty, :location_id, :material_id, :update_date, :remarks)
+    end
   end
 
 
