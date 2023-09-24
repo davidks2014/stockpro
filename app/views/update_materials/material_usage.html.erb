@@ -27,7 +27,7 @@
             <td><%= material.unit_price %></td>
 
             <% if @remarks == "Project Usage" %>
-              <td><%= text_field_tag "material_movements[][unit_rate]", material.unit_price, name: "material_movements[][unit_rate]", class: "form-control" %></td>
+              <td><%= material.unit_price %></td>
             <% else %>
               <td><%= text_field_tag "material_movements[][unit_rate]", nil, name: "material_movements[][unit_rate]", class: "form-control" %></td>
             <% end %>
