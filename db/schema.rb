@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_24_065610) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_24_144935) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -99,6 +99,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_24_065610) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "remarks"
+    t.float "amount"
     t.index ["location_id"], name: "index_material_movements_on_location_id"
     t.index ["material_id"], name: "index_material_movements_on_material_id"
   end
@@ -126,6 +127,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_24_065610) do
     t.bigint "location_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "amount"
     t.index ["location_id"], name: "index_materials_on_location_id"
   end
 

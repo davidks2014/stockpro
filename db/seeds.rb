@@ -12,13 +12,22 @@ locations = [warehouse, projectA, projectB, projectC]
 locations.each do |attributes|
   location = Location.create!(attributes)
   puts "Created #{location.name}"
-  rose = Material.create({category: "flower", name: "rose", cost_code: "MFR", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(0), uom: "no.", location: location})
 
-  brocoli = Material.create({category: "vegetable", name: "brocoli", cost_code: "MVB", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(0), uom: "kg", location: location})
+  qty = rand(0.0..10.0).round(0)
+  unit_price= rand(1.00..10.00).round(2)
+  rose = Material.create({category: "flower", name: "rose", cost_code: "MFR", unit_price: unit_price, qty: qty, amount: qty * unit_price, uom: "no.", location: location})
 
-  orange = Material.create({category: "fruit", name: "orange", cost_code: "MFO", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(0), uom: "kg", location: location})
+  qty = rand(0.0..10.0).round(0)
+  unit_price= rand(1.00..10.00).round(2)
+  brocoli = Material.create({category: "vegetable", name: "brocoli", cost_code: "MVB", unit_price: unit_price, qty: qty, amount: qty * unit_price, uom: "kg", location: location})
 
-  oak = Material.create({category: "tree", name: "oak", cost_code: "MTO", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(0), uom: "no.", location: location})
+  qty = rand(0.0..10.0).round(0)
+  unit_price= rand(1.00..10.00).round(2)
+  orange = Material.create({category: "fruit", name: "orange", cost_code: "MFO", unit_price: unit_price, qty: qty, amount: qty * unit_price, uom: "kg", location: location})
+
+  qty = rand(0.0..10.0).round(0)
+  unit_price= rand(1.00..10.00).round(2)
+  oak = Material.create({category: "tree", name: "oak", cost_code: "MTO", unit_price: unit_price, qty: qty, amount: qty * unit_price, uom: "no.", location: location})
 
   puts " #{location.name} Creating equipment..."
 
@@ -31,7 +40,7 @@ locations.each do |attributes|
   shelf = Equipment.create({category: "furniture", name: "shelf", qty: rand(0..10), location: location})
 
   goggles = Equipment.create({category: "sports", name: "goggles", qty: rand(0..10), location: location})
-  
+
   piano = Equipment.create({category: "instrument", name: "piano", qty: rand(0..10), location: location})
 
 

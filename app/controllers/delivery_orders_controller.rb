@@ -70,19 +70,22 @@ class DeliveryOrdersController < ApplicationController
       incoming_material_movements << MaterialMovement.new
     end
 
+
+    item_request_qty = item_request.qty
+    received_material_location = Location.find(item_request.request.original_location_id)
+    received_material = Material.where(location: received_material_location, name: item_request.item.name).first
+
     @delivery_order.item_requests.each do |item_request|
       incoming_material_movement = MaterialMovement.create(
         qty: item_request.qty,
         location_id: item_request.request.original_location_id,
-        material_id: item_request.item.id,
-        unit_rate: item_request.item.unit_price,
+        material_id: received_material.id,
+        unit_rate: item_request.item.unit_price, #using the same unit rate as outgoing materials"
         update_date: Time.now,
         remarks: "Incoming Request Items"
       )
 
-      item_request_qty = item_request.qty
-      received_material_location = Location.find(item_request.request.original_location_id)
-      received_material = Material.where(location: received_material_location, name: item_request.item.name).first
+
 
 
       Material.where(location_id: item_request.request.original_location_id, name: item_request.item.name).first.update(qty:received_material.qty  + item_request_qty)
