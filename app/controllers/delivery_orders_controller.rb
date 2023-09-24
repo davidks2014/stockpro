@@ -57,6 +57,12 @@ class DeliveryOrdersController < ApplicationController
         update_date: Time.now,
         remarks: "Outgoing Request Items"
       )
+
+      item_request_qty = item_request.qty
+      existing_qty = item_request.item.qty
+
+       Material.find(item_request.item.id).update(qty: existing_qty - item_request_qty)
+
     end
 
     incoming_material_movements = []
@@ -73,23 +79,18 @@ class DeliveryOrdersController < ApplicationController
         update_date: Time.now,
         remarks: "Incoming Request Items"
       )
+
+      item_request_qty = item_request.qty
+      received_material_location = Location.find(item_request.request.original_location_id)
+      received_material = Material.where(location: received_material_location, name: item_request.item.name).first
+
+
+      Material.where(location_id: item_request.request.original_location_id, name: item_request.item.name).first.update(qty:received_material.qty  + item_request_qty)
     end
 
 
 
-
-
-    # @delivery_order.item_requests.each do |item_request|
-    #   item_request_qty = item_request.qty
-    #   existing_qty = item_request.item.qty
-    #   sent_material_location = item_request.item.location
-    #   received_material_location = Location.find(item_request.request.original_location_id)
-
-    #   updated_project_material = Material.where(location: received_material_location, name: item_request.item.name).first
-
-    #   updated_warehouse = item_request.item.update(qty: existing_qty - item_request_qty)
-    #   updated_project_material.update(qty: updated_project_material.qty + item_request_qty)
-    # end
   end
+
 
 end
