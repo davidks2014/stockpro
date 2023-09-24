@@ -88,9 +88,6 @@ class DeliveryOrdersController < ApplicationController
       Material.where(location_id: item_request.request.original_location_id, name: item_request.item.name).first.update(qty:received_material.qty  + item_request_qty)
     end
 
-
-
   end
-
 
 end

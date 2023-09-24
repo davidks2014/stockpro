@@ -3,4 +3,4 @@ class AddRemarksToMaterialMovements < ActiveRecord::Migration[7.0]
     add_column :material_movements, :remarks, :string
   end
 end
-``
+
