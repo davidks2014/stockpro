@@ -1,0 +1,27 @@
+<div class="container">
+<h1>Record Monthly Material Usage</h1>
+
+  <%= simple_form_for [@material_movment] do |f| %>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Material ID</th>
+          <th>Name</th>
+          <th>Unit Rate</th>
+          <th>Usage Qty</th>
+        </tr>
+      </thead>
+      <tbody>
+          <% @location.materials.each do |material| %>
+            <tr>
+              <td> <%= material.id %></td>
+              <td> <%= material.name %></td>
+              <td> <%= material.unit_price %></td>
+              <td> <%= f.input :qty %></td>
+            </tr>
+          <% end %>
+      </tbody>
+    </table>
+    <%= f.submit "Submit review", class: "btn btn-primary" %>
+  <% end %>
+</div>

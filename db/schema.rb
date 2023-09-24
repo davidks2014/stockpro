@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_23_134103) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_24_015248) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -88,6 +88,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_23_134103) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "material_movements", force: :cascade do |t|
+    t.float "unit_rate"
+    t.float "qty"
+    t.datetime "update_date"
+    t.bigint "location_id", null: false
+    t.bigint "material_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["location_id"], name: "index_material_movements_on_location_id"
+    t.index ["material_id"], name: "index_material_movements_on_material_id"
   end
 
   create_table "material_stockcounts", force: :cascade do |t|
@@ -171,6 +183,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_23_134103) do
   add_foreign_key "item_deliveries", "item_requests"
   add_foreign_key "item_requests", "delivery_orders"
   add_foreign_key "item_requests", "requests"
+  add_foreign_key "material_movements", "locations"
+  add_foreign_key "material_movements", "materials"
   add_foreign_key "material_stockcounts", "locations"
   add_foreign_key "materials", "locations"
   add_foreign_key "requests", "locations"

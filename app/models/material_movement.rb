@@ -1,0 +1,2 @@
+class MaterialMovement < ApplicationRecord
+end

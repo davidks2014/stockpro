@@ -9,5 +9,8 @@
       <% end %>
     </ul>
 
-  <%= link_to "Update Current Qty", location_update_materials_path(@location), method: :post, data: { turbo_method: :post }, class: "btn btn-primary" %>
+  <%= link_to "Log Month End Material Qty", location_update_materials_path(@location), method: :post, data: { turbo_method: :post }, class: "btn btn-primary" %>
 </div>
+
+
+<%= link_to "Record Monthly Material Usage",  location_material_usage_path(@location), method: :get, class: "btn btn-primary" %>

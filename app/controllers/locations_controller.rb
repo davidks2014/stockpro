@@ -22,7 +22,7 @@ class LocationsController < ApplicationController
     @location = Location.includes(:users).find(params[:id])
   end
 
-
+ 
 
   private
 
