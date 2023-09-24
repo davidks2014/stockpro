@@ -17,9 +17,11 @@ class UpdateMaterialsController < ApplicationController
       @update_material = UpdateMaterial.create!(
       update_date: Time.now,
       location: @location,
-      unit_rate: material.unit_price,
       material: material,
-      qty: material.qty)
+      qty: material.qty,
+      amount: material.amount,
+      unit_rate: (material.amount/material.qty).round(2)
+      )
     end
   end
 
@@ -47,9 +49,9 @@ class UpdateMaterialsController < ApplicationController
     @material_movements.each do |movement|
       material = Material.find(movement.material_id)
       if movement.remarks == "Project Usage"
-        material.update(qty: material.qty - movement.qty)
+        material.update(qty: material.qty - movement.qty, amount: material.amount - movement.unit_rate * movement.qty)
       elsif movement.remarks == "Import New Materials"
-        material.update(qty: material.qty + movement.qty)
+        material.update(qty: material.qty + movement.qty, amount: material.amount + movement.unit_rate * movement.qty)
       end
     end
   end
@@ -59,6 +61,6 @@ end
 
   def material_movement_params
     params.require(:material_movements).map do |movement_params|
-      movement_params.permit(:qty, :location_id, :material_id, :update_date, :remarks, :unit_rate)
+      movement_params.permit(:qty, :location_id, :material_id, :update_date, :remarks, :unit_rate, :amount)
     end
   end
