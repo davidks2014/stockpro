@@ -28,7 +28,6 @@ class UpdateMaterialsController < ApplicationController
     @remarks = params[:remarks]
 
     material_movements = []
-
     @location.materials.each do |material|
       material_movements << MaterialMovement.new
     end
@@ -48,7 +47,7 @@ class UpdateMaterialsController < ApplicationController
 
   def material_movement_params
     params.require(:material_movements).map do |movement_params|
-      movement_params.permit(:qty, :location_id, :material_id, :update_date, :remarks)
+      movement_params.permit(:qty, :location_id, :material_id, :update_date, :remarks, :unit_rate)
     end
   end
 
