@@ -42,7 +42,7 @@ class UpdateMaterialsController < ApplicationController
     record_movement
   end
 
-  
+
   def record_movement
     @material_movements.each do |movement|
       material = Material.find(movement.material_id)

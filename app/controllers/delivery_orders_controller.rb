@@ -38,17 +38,58 @@ class DeliveryOrdersController < ApplicationController
 
     #now we need to update the qty in location
 
-    @delivery_order.item_requests.each do |item_request|
-      item_request_qty = item_request.qty
-      existing_qty = item_request.item.qty
-      sent_material_location = item_request.item.location
-      received_material_location = Location.find(item_request.request.original_location_id)
+    sent_location = @delivery_order.item_requests.first.request.location
+    #sent location
+    received_location =Location.find(@delivery_order.item_requests.first.request.original_location_id)
+    #received location
 
-      updated_project_material = Material.where(location: received_material_location, name: item_request.item.name).first
-
-      updated_warehouse = item_request.item.update(qty: existing_qty - item_request_qty)
-      updated_project_material.update(qty: updated_project_material.qty + item_request_qty)
+    outgoing_material_movements = []
+    @delivery_order.item_requests.each do |material|
+      outgoing_material_movements << MaterialMovement.new
     end
+
+    @delivery_order.item_requests.each do |item_request|
+      outgoing_material_movement = MaterialMovement.create(
+        qty: item_request.qty,
+        location_id: item_request.request.location.id,
+        material_id: item_request.item.id,
+        unit_rate: item_request.item.unit_price,
+        update_date: Time.now,
+        remarks: "Outgoing Request Items"
+      )
+    end
+
+    incoming_material_movements = []
+    @delivery_order.item_requests.each do |material|
+      incoming_material_movements << MaterialMovement.new
+    end
+
+    @delivery_order.item_requests.each do |item_request|
+      incoming_material_movement = MaterialMovement.create(
+        qty: item_request.qty,
+        location_id: item_request.request.original_location_id,
+        material_id: item_request.item.id,
+        unit_rate: item_request.item.unit_price,
+        update_date: Time.now,
+        remarks: "Incoming Request Items"
+      )
+    end
+
+
+
+
+
+    # @delivery_order.item_requests.each do |item_request|
+    #   item_request_qty = item_request.qty
+    #   existing_qty = item_request.item.qty
+    #   sent_material_location = item_request.item.location
+    #   received_material_location = Location.find(item_request.request.original_location_id)
+
+    #   updated_project_material = Material.where(location: received_material_location, name: item_request.item.name).first
+
+    #   updated_warehouse = item_request.item.update(qty: existing_qty - item_request_qty)
+    #   updated_project_material.update(qty: updated_project_material.qty + item_request_qty)
+    # end
   end
 
 end
