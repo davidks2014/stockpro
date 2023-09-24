@@ -44,7 +44,6 @@ class DeliveryOrdersController < ApplicationController
       sent_material_location = item_request.item.location
       received_material_location = Location.find(item_request.request.original_location_id)
 
-
       updated_project_material = Material.where(location: received_material_location, name: item_request.item.name).first
 
       updated_warehouse = item_request.item.update(qty: existing_qty - item_request_qty)

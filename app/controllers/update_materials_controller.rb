@@ -39,14 +39,11 @@ class UpdateMaterialsController < ApplicationController
     # Handle success or failure
     # Redirect or render appropriate view
 
-
     record_movement
-
-
   end
 
+  
   def record_movement
-
     @material_movements.each do |movement|
       material = Material.find(movement.material_id)
       if movement.remarks == "Project Usage"
@@ -56,7 +53,6 @@ class UpdateMaterialsController < ApplicationController
       end
     end
   end
-
 end
 
   private
