@@ -3,7 +3,7 @@ require 'time'
 class UpdateMaterialsController < ApplicationController
 
   def index
-    @update_materials = UpdateMaterial.all
+    @material_movements = MaterialMovement.all
   end
 
   def new
