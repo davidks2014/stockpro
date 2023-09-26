@@ -11,7 +11,7 @@
       <% if @item_requests.any? %>
         <% filtered_item_requests = @item_requests.select do |x| %>
           <% x.request.location == current_user.location %>
-        <% end %>@
+        <% end %>
           <%# raise %>
           <% filtered_item_requests.group_by { |item_request| Location.find(item_request.request.original_location_id).name }.each do |loc, item_requests| %>
             <div>

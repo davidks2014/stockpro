@@ -3,7 +3,7 @@ require 'time'
 class UpdateMaterialsController < ApplicationController
 
   def index
-    @material_movements = MaterialMovement.all
+    @update_materials = UpdateMaterial.all
   end
 
   def new
@@ -60,14 +60,14 @@ class UpdateMaterialsController < ApplicationController
     end
   end
 
-  def stockcount
-    @stockcounts = stockcount.create(material_movement_params)
+  # def stockcount
+  #   @stockcounts = stockcount.create(material_movement_params)
 
-    material_movements = []
-    @location.materials.each do |material|
-      material_movements << MaterialMovement.new
-    end
-  end
+  #   material_movements = []
+  #   @location.materials.each do |material|
+  #     material_movements << MaterialMovement.new
+  #   end
+  # end
 
 
 
