@@ -22,7 +22,11 @@ class LocationsController < ApplicationController
     @location = Location.includes(:users).find(params[:id])
   end
 
- 
+  def stockcount_report
+    @location = Location.find(params[:location_id])
+  end
+
+
 
   private
 

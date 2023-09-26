@@ -25,9 +25,15 @@ class UpdateMaterialsController < ApplicationController
 
       Material.find(material.id).update(unit_price: @update_material.unit_rate)
       Material.find(material.id).update(update_date: @update_material.update_date)
-
     end
+  end
 
+  def updatestock
+    
+    @location = Location.find(params[:location_id])
+    @location.materials.each do |material|
+      Material.find(material.id).update(qty: material.stockcounts.last.qty)
+    end
   end
 
   def material_usage
@@ -74,10 +80,13 @@ class UpdateMaterialsController < ApplicationController
     @stockcounts = Stockcount.create(stockcount_params)
 
     @stockcounts.each do |stock|
-      stock.update(diff: Material.find(stock.material_id).qty - stock.qty)
+      stock.update(diff: stock.qty - Material.find(stock.material_id).qty )
 
-      Material.find(stock.material_id).update(qty: stock.qty)
+      # Material.find(stock.material_id).update(qty: stock.qty)
     end
+
+    redirect_to stockcount_report_path
+
   end
 
 end

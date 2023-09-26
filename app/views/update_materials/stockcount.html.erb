@@ -13,6 +13,7 @@
           <th>Existing Unit Rate</th>
           <th>Existing Qty</th>
           <th>Stockcount qty</th>
+          
         </tr>
       </thead>
       <tbody>
@@ -28,6 +29,7 @@
             <%= hidden_field_tag "stockcounts[][material_id]", material.id %>
             <%= hidden_field_tag "stockcounts[][update_date]", Time.now %>
             <%= hidden_field_tag "material[][qty]", material.qty %>
+
           </tr>
         <% end %>
       </tbody>
