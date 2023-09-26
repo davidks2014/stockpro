@@ -75,9 +75,10 @@ class UpdateMaterialsController < ApplicationController
 
     @stockcounts.each do |stock|
       stock.update(diff: Material.find(stock.material_id).qty - stock.qty)
+
+      Material.find(stock.material_id).update(qty: stock.qty)
     end
   end
-
 
 end
 
