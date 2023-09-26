@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     get "stockcount", to: "update_materials#stockcount", as: "stockcount"
   end
 
+  post '/locations/:location_id/stockcount_update', to: 'update_materials#stockcount_update', as: 'stockcount_update'
 
   post 'materials/importnew', to: 'materials#import', as: 'material_import'
   get 'materials/import', to: 'materials#import', as: 'import'

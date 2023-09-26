@@ -60,15 +60,25 @@ class UpdateMaterialsController < ApplicationController
     end
   end
 
-  # def stockcount
-  #   @stockcounts = stockcount.create(material_movement_params)
+  def stockcount
+    @location = Location.find(params[:location_id])
+    @remarks = params[:remarks]
 
-  #   material_movements = []
-  #   @location.materials.each do |material|
-  #     material_movements << MaterialMovement.new
-  #   end
-  # end
+    stockcounts = []
+    @location.materials.each do |material|
+      stockcounts << Stockcount.new
+    end
+  end
 
+  def stockcount_update
+    @location = Location.find(params[:location_id])
+    @remarks = params[:remarks]
+
+    stockcounts = []
+    @location.materials.each do |material|
+      stockcounts << Stockcount.new
+    end
+  end
 
 
 end
