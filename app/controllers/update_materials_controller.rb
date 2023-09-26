@@ -71,19 +71,13 @@ class UpdateMaterialsController < ApplicationController
   end
 
   def stockcount_update
-    @location = Location.find(params[:location_id])
-    @remarks = params[:remarks]
+    
+    @stockcounts = Stockcount.create(stockcount_params)
 
-    stockcounts = []
-    @location.materials.each do |material|
-      stockcounts << Stockcount.new
-    end
   end
 
 
 end
-
-
 
 
   private
@@ -91,5 +85,11 @@ end
   def material_movement_params
     params.require(:material_movements).map do |movement_params|
       movement_params.permit(:qty, :location_id, :material_id, :update_date, :remarks, :unit_rate, :amount)
+    end
+  end
+
+  def stockcount_params
+    params.require(:stockcounts).map do |stock_params|
+      stock_params.permit(:qty, :location_id, :material_id, :update_date, :unit_rate, :amount)
     end
   end
