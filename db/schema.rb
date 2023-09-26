@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_24_152318) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_26_143213) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -128,6 +128,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_24_152318) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float "amount"
+    t.datetime "update_date"
     t.index ["location_id"], name: "index_materials_on_location_id"
   end
 
@@ -149,6 +150,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_24_152318) do
     t.datetime "updated_at", null: false
     t.float "latitude"
     t.float "longitude"
+  end
+
+  create_table "stockcounts", force: :cascade do |t|
+    t.datetime "update_date"
+    t.float "qty"
+    t.bigint "location_id", null: false
+    t.bigint "material_id", null: false
+    t.float "unit_rate"
+    t.float "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["location_id"], name: "index_stockcounts_on_location_id"
+    t.index ["material_id"], name: "index_stockcounts_on_material_id"
   end
 
   create_table "update_materials", force: :cascade do |t|
@@ -193,6 +207,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_24_152318) do
   add_foreign_key "materials", "locations"
   add_foreign_key "requests", "locations"
   add_foreign_key "requests", "users"
+  add_foreign_key "stockcounts", "locations"
+  add_foreign_key "stockcounts", "materials"
   add_foreign_key "update_materials", "locations"
   add_foreign_key "update_materials", "materials"
   add_foreign_key "users", "locations"

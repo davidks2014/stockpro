@@ -1,0 +1,37 @@
+<div class="container">
+
+  <h1> Record Monthly Stockcount for <%= @location.name  %></h1>
+
+  <br>
+
+  <%= form_tag({controller: "update_materials", action: "stockcount"} class: "form") do %>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Material ID</th>
+          <th>Name</th>
+          <th>Existing Unit Rate</th>
+          <th>Existing Qty</th>
+          <th>Stockcount qty</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @location.materials.each do |material| %>
+          <tr>
+            <td><%= material.id %></td>
+            <td><%= material.name %></td>
+            <td><%= material.unit_price %></td>
+            <td><%= material.qty %></td>
+            <td><%= text_field_tag "stockcount[][qty]", nil, name: "stockcount[][qty]", class: "form-control" %></td>
+
+            <%= hidden_field_tag "stockcount[][location_id]", @location.id %>
+            <%= hidden_field_tag "stockcount[][material_id]", material.id %>
+            <%= hidden_field_tag "stockcount[][update_date]", Time.now %>
+            <%= hidden_field_tag "material[][qty]", material.qty %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= submit_tag "Submit stockcount", class: "btn btn-primary" %>
+  <% end %>
+</div>

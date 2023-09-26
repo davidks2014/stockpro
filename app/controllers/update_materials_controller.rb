@@ -22,7 +22,12 @@ class UpdateMaterialsController < ApplicationController
       amount: material.amount,
       unit_rate: (material.amount/material.qty).round(2)
       )
+
+      Material.find(material.id).update(unit_price: @update_material.unit_rate)
+      Material.find(material.id).update(update_date: @update_material.update_date)
+
     end
+
   end
 
   def material_usage
@@ -44,7 +49,6 @@ class UpdateMaterialsController < ApplicationController
     record_movement
   end
 
-
   def record_movement
     @material_movements.each do |movement|
       material = Material.find(movement.material_id)
@@ -55,7 +59,22 @@ class UpdateMaterialsController < ApplicationController
       end
     end
   end
+
+  def stockcount
+    @stockcounts = stockcount.create(material_movement_params)
+
+    material_movements = []
+    @location.materials.each do |material|
+      material_movements << MaterialMovement.new
+    end
+  end
+
+
+
 end
+
+
+
 
   private
 

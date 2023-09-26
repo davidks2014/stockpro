@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :locations do
     post "update_materials", to: "update_materials#update"
     get "material_usage", to: "update_materials#material_usage", as: "material_usage"
+    get "stockcount", to: "update_materials#stockcount", as: "stockcount"
   end
 
 
@@ -31,7 +32,7 @@ Rails.application.routes.draw do
   resources :requests, only: %i[index new create show]
   resources :delivery_orders, only: %i[index create] do
     post 'receive', to: 'delivery_orders#receive'
-    
+
   end
 
   resources :sites, only: %i[index show new create]

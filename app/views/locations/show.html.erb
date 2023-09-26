@@ -14,5 +14,12 @@
 
 <%= link_to "Record Monthly Material Usage",  location_material_usage_path(@location, remarks: "Project Usage" ), method: :get, class: "btn btn-primary" %>
 
-<% remarks2 = "Imported Materials" %>
+<br>
+<br>
+
 <%= link_to "Record New Imported Materials",  location_material_usage_path(@location, remarks: "Import New Materials" ), method: :get, class: "btn btn-primary" %>
+
+<br>
+<br>
+
+<%= link_to "Monthly Stockcount",  location_stockcount_path(@location, remarks: "Project Usage"), method: :get, class: "btn btn-primary" %>
