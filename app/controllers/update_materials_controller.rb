@@ -71,9 +71,11 @@ class UpdateMaterialsController < ApplicationController
   end
 
   def stockcount_update
-    
     @stockcounts = Stockcount.create(stockcount_params)
 
+    @stockcounts.each do |stock|
+      stock.update(diff: Material.find(stock.material_id).qty - stock.qty)
+    end
   end
 
 
