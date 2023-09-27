@@ -81,7 +81,7 @@ end
   puts "#{pingyu.name} created"
 
 puts " Creating user manager..."
-company = Location.create({name: "HQ", address: "Singapore"})
+company = Location.create({name: "company", address: "Singapore"})
 manager = User.create({name: "Manager", role: "manager", email: "manager@gmail.com", password: "123456"})
 puts "#{manager.name} created"
 

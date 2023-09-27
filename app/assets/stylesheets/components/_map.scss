@@ -11,11 +11,15 @@
   height: 40px;
   width: 40px;
   border-radius: 50%;
-  border-color: white;
+  border-color: darkgray;
   border: 2px;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
 }
 
 #map {
   border-radius: 20px;
+}
+
+.badge {
+  background-color: blue;
 }
