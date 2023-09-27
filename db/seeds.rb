@@ -2,10 +2,10 @@ puts "Cleaning database..."
 Location.destroy_all
 
 puts "Creating Locations..."
-warehouse = {name: "Warehouse", address: "5 Joon Koon Way"}
-projectA = {name: "Project A", address: "161 Hougang St 11"}
-projectB = {name: "Project B", address: "9 Elias Road"}
-projectC = {name: "Project C", address: "686 Hougang Ave 4"}
+warehouse = {name: "Warehouse", address: "15 Science Centre Rd, Singapore 609081"}
+projectA = {name: "Marina Bay Sands", address: "10 Bayfront Ave, Singapore 018956"}
+projectB = {name: "Singapore Zoo", address: "80 Mandai Lake Rd, 729826"}
+projectC = {name: "Changi Airport", address: "70 Airport Blvd., Singapore 819661"}
 
 locations = [warehouse, projectA, projectB, projectC]
 
@@ -31,6 +31,20 @@ locations.each do |attributes|
 
   puts " #{location.name} Creating equipment..."
 
+  # bricks = Material.create({category: "", name: "bricks", cost_code: "MFR", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(2), uom: "no.", location: location})
+  # cement = Material.create({category: "", name: "cement", cost_code: "MFR", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(2), uom: "no.", location: location})
+  # concrete = Material.create({category: "", name: "concrete", cost_code: "MFR", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(2), uom: "no.", location: location})
+  # glass = Material.create({category: "", name: "glass", cost_code: "MFR", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(2), uom: "no.", location: location})
+  # gravel = Material.create({category: "", name: "gravel", cost_code: "MFR", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(2), uom: "no.", location: location})
+  # paint = Material.create({category: "", name: "paint", cost_code: "MFR", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(2), uom: "no.", location: location})
+  # pipes = Material.create({category: "", name: "pipes", cost_code: "MFR", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(2), uom: "no.", location: location})
+  # sand = Material.create({category: "", name: "sand", cost_code: "MFR", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(2), uom: "no.", location: location})
+  # steel = Material.create({category: "", name: "steel", cost_code: "MFR", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(2), uom: "no.", location: location})
+  # tiles = Material.create({category: "", name: "tiles", cost_code: "MFR", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(2), uom: "no.", location: location})
+  # wood = Material.create({category: "", name: "wood", cost_code: "MFR", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(2), uom: "no.", location: location})
+
+
+
   location.materials.each  do |material|
     puts "#{material.name} created"
   end
@@ -51,13 +65,13 @@ end
 
   puts "Creating sites for geomap..."
   warehse = {name: "Warehouse", address: "15 Science Centre Rd, Singapore 609081"}
-  projA = {name: "Project A", address: "10 Bayfront Ave, Singapore 018956"}
-  projB = {name: "Project B", address: "33 Sengkang West Ave, Singapore 797653"}
-  projC = {name: "Project C", address: "4 Tampines Central 5, Singapore 529510"}
-  company = {name: "Company", address: "9 Bishan Pl, Singapore 579837"}
+  mbs_sg = {name: "Marina Bay Sands", address: "10 Bayfront Ave, Singapore 018956"}
+  zoo_sg = {name: "Singapore Zoo", address: "80 Mandai Lake Rd, 729826"}
+  airport_sg = {name: "Changi Airport", address: "70 Airport Blvd., Singapore 819661"}
+  hq_sg = {name: "HQ", address: "9 Bishan Pl, Singapore 579837"}
 
 
-  sites = [warehse, projA, projB, projC, company]
+  sites = [warehse, mbs_sg, zoo_sg, airport_sg, hq_sg]
 
   sites.each do |attributes|
     site = Site.create!(attributes)
@@ -82,7 +96,7 @@ end
   puts "#{pingyu.name} created"
 
 puts " Creating user manager..."
-company = Location.create({name: "company", address: "Singapore"})
+company = Location.create({name: "HQ", address: "Singapore"})
 manager = User.create({name: "Manager", role: "manager", email: "manager@gmail.com", password: "123456"})
 puts "#{manager.name} created"
 

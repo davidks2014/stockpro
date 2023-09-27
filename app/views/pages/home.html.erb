@@ -1,4 +1,5 @@
 <%# Welcome page after successful login %>
+<%# <div  id="landing-img" > %>
 <div class="container">
   <h1>Project Overview</h1>
   <% if current_user.role == "manager" %>
@@ -20,11 +21,11 @@
         <%= link_to "Pending requests", requests_path, class: "btn btn-primary", id: "view-request-btn" %>
       </div>
       <div class="card py-4">
-        <h4>Delivery In Transit  <i class="fa-solid fa-truck-fast" style="color: #3a98b9;"></i>
+        <h4>Tracking Delivery  <i class="fa-solid fa-truck-fast" style="color: #3a98b9;"></i>
         </h4>
         <p>lorem ipsum 2 hello hello</p>
         <br>
-        <%= link_to "Tracking", "#", class: "btn btn-info", id: "transit-delivery-btn" %>
+        <%= link_to "Tracking delivery", "#", class: "btn btn-info", id: "transit-delivery-btn" %>
       </div>
       <div class="card py-4">
         <h4>Low Stock Alert  <i class="fa-solid fa-bell" style="color: #3a98b9;"></i>
@@ -41,7 +42,7 @@
       </div>
     </div>
 
-  <%# Map showing project locations. Occupy 50% of total layout on right of screen%>
+  <%# Map showing project locations. Occupy 46% of total layout on right of screen%>
     <div class="map-card">
       <p style="color: green"><%= notice %></p>
       <h3>Project Site Locations</h3>
@@ -49,8 +50,9 @@
         id='map'
         data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
         data-map-markers-value="<%= @markers.to_json %>"
-        style='width: 560px; height: 380px;'>
+        style='width: 560px; height: 370px;'>
       </div>
     </div>
   </div>
 </div>
+<%# </div> %>
