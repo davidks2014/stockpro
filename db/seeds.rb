@@ -26,6 +26,20 @@ locations.each do |attributes|
   banyan = Material.create({category: "tree", name: "banyan", cost_code: "MTB", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(2), uom: "no.", location: location})
   puts " #{location.name} Creating equipment..."
 
+  # bricks = Material.create({category: "", name: "bricks", cost_code: "MFR", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(2), uom: "no.", location: location})
+  # cement = Material.create({category: "", name: "cement", cost_code: "MFR", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(2), uom: "no.", location: location})
+  # concrete = Material.create({category: "", name: "concrete", cost_code: "MFR", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(2), uom: "no.", location: location})
+  # glass = Material.create({category: "", name: "glass", cost_code: "MFR", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(2), uom: "no.", location: location})
+  # gravel = Material.create({category: "", name: "gravel", cost_code: "MFR", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(2), uom: "no.", location: location})
+  # paint = Material.create({category: "", name: "paint", cost_code: "MFR", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(2), uom: "no.", location: location})
+  # pipes = Material.create({category: "", name: "pipes", cost_code: "MFR", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(2), uom: "no.", location: location})
+  # sand = Material.create({category: "", name: "sand", cost_code: "MFR", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(2), uom: "no.", location: location})
+  # steel = Material.create({category: "", name: "steel", cost_code: "MFR", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(2), uom: "no.", location: location})
+  # tiles = Material.create({category: "", name: "tiles", cost_code: "MFR", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(2), uom: "no.", location: location})
+  # wood = Material.create({category: "", name: "wood", cost_code: "MFR", unit_price: rand(1.00..10.00).round(2), qty: rand(0.00..10.00).round(2), uom: "no.", location: location})
+
+
+
   location.materials.each  do |material|
     puts "#{material.name} created"
   end
