@@ -1,4 +1,4 @@
-<%# Welcome page after successful login %>
+
 <div class="container">
   <h1>Project Overview</h1>
   <% if current_user.role == "manager" %>
@@ -52,5 +52,11 @@
         style='width: 560px; height: 380px;'>
       </div>
     </div>
+
+    <div class="map-card">
+      <% materials_by_location = Material.where(location: current_user.location).group(:name).sum(:qty) %>
+      <%= pie_chart materials_by_location %>
+    </div>
   </div>
+
 </div>
