@@ -9,17 +9,43 @@
       <% end %>
     </ul>
 
-  <%= link_to "Log Month End Material Qty", location_update_materials_path(@location), method: :post, data: { turbo_method: :post }, class: "btn btn-primary" %>
-</div>
+  <h1>Existing Material Qty</h1>
+  <br>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Material ID</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Cost Code</th>
+        <th>Existing Unit Rate</th>
+        <th>Existing Qty</th>
+        <th>UOM</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @location.materials.each do |material| %>
+        <tr>
+          <td><%= material.id %></td>
+          <td><%= material.name %></td>
+          <td><%= material.category %></td>
+          <td><%= material.cost_code %></td>
+          <td><%= material.unit_price %></td>
+          <td><%= material.qty %></td>
+          <td><%= material.uom %></td>
+        <% end %>
+    </tbody>
+  </table>
+  
+<br>
 
 <%= link_to "Record Monthly Material Usage",  location_material_usage_path(@location, remarks: "Project Usage" ), method: :get, class: "btn btn-primary" %>
 
-<br>
-<br>
-
 <%= link_to "Record New Imported Materials",  location_material_usage_path(@location, remarks: "Import New Materials" ), method: :get, class: "btn btn-primary" %>
 
-<br>
-<br>
 
 <%= link_to "Monthly Stockcount",  location_stockcount_path(@location, remarks: "Stockcount"), method: :get, class: "btn btn-primary" %>
+
+<%= link_to "Log Month End Material Qty", location_update_materials_path(@location), method: :post, data: { turbo_method: :post }, class: "btn btn-primary" %>
+
+</div>
