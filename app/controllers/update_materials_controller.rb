@@ -10,6 +10,11 @@ class UpdateMaterialsController < ApplicationController
     @update_material = UpdateMaterial.new
   end
 
+  def show
+    @location = Location.find(params[:location_id])
+
+  end
+
   def update
     @location = Location.find(params[:location_id])
     @location.materials.each do |material|
@@ -26,14 +31,26 @@ class UpdateMaterialsController < ApplicationController
       Material.find(material.id).update(unit_price: @update_material.unit_rate)
       Material.find(material.id).update(update_date: @update_material.update_date)
     end
+
   end
 
   def updatestock
-    
+
     @location = Location.find(params[:location_id])
     @location.materials.each do |material|
       Material.find(material.id).update(qty: material.stockcounts.last.qty)
-    end
+
+      MaterialMovement.create!(
+          qty: material.stockcounts.last.diff,
+          remarks: "Stockcount",
+          unit_rate: material.stockcounts.last.unit_rate,
+          location_id: material.stockcounts.last.location_id,
+          material_id: material.stockcounts.last.material_id,
+          update_date: material.stockcounts.last.update_date
+        )
+      end
+
+    redirect_to location_path(@location)
   end
 
   def material_usage
@@ -44,6 +61,7 @@ class UpdateMaterialsController < ApplicationController
     @location.materials.each do |material|
       material_movements << MaterialMovement.new
     end
+
   end
 
   # In your controller action for form submission
@@ -53,6 +71,9 @@ class UpdateMaterialsController < ApplicationController
     # Redirect or render appropriate view
 
     record_movement
+
+    @material_movements
+    redirect_to location_path(@material_movements.last.location_id)
   end
 
   def record_movement
@@ -80,8 +101,10 @@ class UpdateMaterialsController < ApplicationController
     @stockcounts = Stockcount.create(stockcount_params)
 
     @stockcounts.each do |stock|
-      stock.update(diff: stock.qty - Material.find(stock.material_id).qty )
-
+      stock.update(diff: stock.qty - Material.find(stock.material_id).qty)
+      if stock.diff !=0
+        MaterialMovement.find(stock.material.id).update(qty: stock.diff, remarks: "Stockcount")
+      end
       # Material.find(stock.material_id).update(qty: stock.qty)
     end
 
