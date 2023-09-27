@@ -38,18 +38,57 @@ class DeliveryOrdersController < ApplicationController
 
     #now we need to update the qty in location
 
+    sent_location = @delivery_order.item_requests.first.request.location
+    #sent location
+    received_location =Location.find(@delivery_order.item_requests.first.request.original_location_id)
+    #received location
+
+    outgoing_material_movements = []
+    @delivery_order.item_requests.each do |material|
+      outgoing_material_movements << MaterialMovement.new
+    end
+
     @delivery_order.item_requests.each do |item_request|
+      outgoing_material_movement = MaterialMovement.create(
+        qty: item_request.qty,
+        location_id: item_request.request.location.id,
+        material_id: item_request.item.id,
+        unit_rate: item_request.item.unit_price,
+        update_date: Time.now,
+        remarks: "Outgoing Request Items"
+      )
+
       item_request_qty = item_request.qty
       existing_qty = item_request.item.qty
-      sent_material_location = item_request.item.location
-      received_material_location = Location.find(item_request.request.original_location_id)
 
+       Material.find(item_request.item.id).update(qty: existing_qty - item_request_qty, amount:(existing_qty - item_request_qty)* item_request.item.unit_price)
 
-      updated_project_material = Material.where(location: received_material_location, name: item_request.item.name).first
-
-      updated_warehouse = item_request.item.update(qty: existing_qty - item_request_qty)
-      updated_project_material.update(qty: updated_project_material.qty + item_request_qty)
     end
+
+    incoming_material_movements = []
+    @delivery_order.item_requests.each do |material|
+      incoming_material_movements << MaterialMovement.new
+    end
+
+
+
+    @delivery_order.item_requests.each do |item_request|
+      item_request_qty = item_request.qty
+      received_material_location = Location.find(item_request.request.original_location_id)
+      received_material = Material.where(location: received_material_location, name: item_request.item.name).first
+
+      incoming_material_movement = MaterialMovement.create(
+        qty: item_request.qty,
+        location_id: item_request.request.original_location_id,
+        material_id: received_material.id,
+        unit_rate: item_request.item.unit_price, #using the same unit rate as outgoing materials"
+        update_date: Time.now,
+        remarks: "Incoming Request Items"
+      )
+
+      Material.where(location_id: item_request.request.original_location_id, name: item_request.item.name).first.update(qty:received_material.qty + item_request_qty, amount:received_material.qty*received_material.unit_price + item_request_qty*item_request.item.unit_price)
+    end
+
   end
 
 end
