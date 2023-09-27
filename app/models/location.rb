@@ -5,4 +5,5 @@ class Location < ApplicationRecord
   has_many :materials, dependent: :destroy
   has_many :equipment, dependent: :destroy
   has_many :requests
+  has_many :material_movements
 end
