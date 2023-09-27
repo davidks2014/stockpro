@@ -1,9 +1,25 @@
 <!-- show.html.erb -->
-<p>Location Name: <%= @location.name %></p>
-<p>Location Address: <%= @location.address %></p>
-<p>Assigned Engineer/s: </p>
-<ul>
-    <% @location.users.each do |user| %>
-      <li><%= user.name %></li>
-    <% end %>
-  </ul>
+<div class="container">
+  <p>Location Name: <%= @location.name %></p>
+  <p>Location Address: <%= @location.address %></p>
+  <p>Assigned Engineer/s: </p>
+    <ul>
+      <% @location.users.each do |user| %>
+        <li><%= user.name %></li>
+      <% end %>
+    </ul>
+
+  <%= link_to "Log Month End Material Qty", location_update_materials_path(@location), method: :post, data: { turbo_method: :post }, class: "btn btn-primary" %>
+</div>
+
+<%= link_to "Record Monthly Material Usage",  location_material_usage_path(@location, remarks: "Project Usage" ), method: :get, class: "btn btn-primary" %>
+
+<br>
+<br>
+
+<%= link_to "Record New Imported Materials",  location_material_usage_path(@location, remarks: "Import New Materials" ), method: :get, class: "btn btn-primary" %>
+
+<br>
+<br>
+
+<%= link_to "Monthly Stockcount",  location_stockcount_path(@location, remarks: "Stockcount"), method: :get, class: "btn btn-primary" %>

@@ -1,0 +1,63 @@
+<div class="container">
+  <% if @remarks == "Project Usage" %>
+    <h1>Record Project Usage Materials Qty for <%= @location.name %></h1>
+  <% elsif @remarks == "Import New Materials" %>
+    <h1>Record Import Materials Qty for <%= @location.name  %></h1>
+  <% end %>
+  <br>
+
+  <%= form_tag(update_materials_path, class: "form") do %>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Material ID</th>
+          <th>Name</th>
+          <th>Existing Unit Rate</th>
+           <th>Existing Qty</th>
+
+          <% if @remarks == "Project Usage" %>
+            <th>Project Usage Unit Rate</th>
+          <% else %>
+            <th>Imported Unit Rate</th>
+          <% end %>
+
+          <% if @remarks == "Project Usage" %>
+            <th>Usage Qty</th>
+          <% else %>
+            <th>Imported Qty</th>
+          <% end %>
+
+          <th>Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @location.materials.each do |material| %>
+          <tr>
+            <td><%= material.id %></td>
+            <td><%= material.name %></td>
+            <td><%= material.unit_price %></td>
+            <td><%= material.qty %></td>
+
+            <% if @remarks == "Project Usage" %>
+              <td><%= text_field_tag "material_movements[][unit_rate]", material.unit_price, name: "material_movements[][unit_rate]", class: "form-control" %></td>
+            <% else %>
+              <td><%= text_field_tag "material_movements[][unit_rate]", nil, name: "material_movements[][unit_rate]", class: "form-control" %></td>
+            <% end %>
+
+            <td><%= text_field_tag "material_movements[][qty]", nil, name: "material_movements[][qty]", class: "form-control" %></td>
+
+            <td><%= text_field_tag "material_movements[][remarks]", @remarks, name: "material_movements[][remarks]", class: "form-control" %></td>
+
+
+            <%= hidden_field_tag "material_movements[][location_id]", @location.id %>
+            <%= hidden_field_tag "material_movements[][material_id]", material.id %>
+            <%= hidden_field_tag "material_movements[][update_date]", Time.now %>
+
+            <%= hidden_field_tag "material[][qty]", material.qty %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= submit_tag "Create Material Movements", class: "btn btn-primary" %>
+  <% end %>
+</div>

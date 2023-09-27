@@ -6,6 +6,7 @@ class LocationsController < ApplicationController
 
   def new
     @location = Location.new
+    @new_user = User.where(location_id: nil, role: "engineer")
   end
 
   def create
@@ -20,6 +21,10 @@ class LocationsController < ApplicationController
 
   def show
     @location = Location.includes(:users).find(params[:id])
+  end
+
+  def stockcount_report
+    @location = Location.find(params[:location_id])
   end
 
 
