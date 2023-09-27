@@ -1,13 +1,21 @@
 /* Default styles for larger screens */
 
 .container {
-  margin-bottom: 40px;
+  // margin-bottom: 40px;
   text-align: center;
   width: auto;
+  background-color: rgba(245,245,220,0.3);
+}
+
+.title-container {
+  text-align: center;
+  width: auto;
+  color: white;
+  background: transparent;
 }
 
 .wrapper-container {
-  display: grid;
+  // display: grid;
   grid-template-columns: 1fr 1fr;
   margin: 20px;
   gap: 2rem;
@@ -17,8 +25,17 @@
 
 .grid-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 2rem;
+  width: auto;
+}
+
+.bottom-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content:space-between;
+  gap: 2rem;
+  margin: 20px;
   width: auto;
 }
 
@@ -36,9 +53,10 @@
   background-color: white;
   border: 2px solid white;
   border-radius: 30px;
-  padding: 10px;
-  width: 100%;
-  max-width: 320px; /* Adjust the maximum width as needed */
+  margin-top: 30px;
+  margin-bottom: 20px;
+  width: auto;
+  // max-width: 320px; /* Adjust the maximum width as needed */
   height: auto;
   box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.2);
   align-items: center;
@@ -50,7 +68,7 @@
   background-color: #e8d5c4;
   border: 2px solid white;
   border-radius: 40px;
-  padding: 10px;
+  // padding: 10px;
   width: 100%;
   max-width: 300px; /* Adjust the maximum width as needed */
   height: 70px;
@@ -63,7 +81,7 @@
   background-color: white;
   border: 2px solid white;
   border-radius: 40px;
-  padding: 12px;
+  // padding: 12px;
   width: 100%;
   max-width: 360px; /* Adjust the maximum width as needed */
   height: 60px;
@@ -74,11 +92,11 @@
   background-color: white;
   border: 2px solid white;
   border-radius: 30px;
-  padding-left: 10px;
   width: 100%;
-  max-width: 585px; /* Adjust the maximum width as needed */
+  max-width: 615px; /* Adjust the maximum width as needed */
   height: auto;
-  box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.2);
+  margin-bottom: 35px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
 }
 
 /* Media queries for smaller screens */
