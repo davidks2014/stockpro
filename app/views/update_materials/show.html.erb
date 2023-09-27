@@ -21,7 +21,7 @@
           <td><%= movement.remarks %></td>
           <td><%= Material.find(movement.material_id).name %></td>
           <td><%= Material.find(movement.material_id).cost_code %></td>
-          <td><%= Material.find(movement.material_id).unit_price %></td>
+          <td><%= movement.unit_rate %></td>
           <td><%= movement.qty %></td>
           <td><%= Material.find(movement.material_id).uom %></td>
         <% end %>
