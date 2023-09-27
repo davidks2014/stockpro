@@ -4,7 +4,7 @@
     <%= f.input :name %>
     <%= f.input :address %>
     <%= f.input :users, collection: @new_user, label: "Assign Engineer",
-      as: :select, label_method: :email, value_method: :id, include_blank: "Select Engineer", multiple: true %>
-    <%= f.button :submit, "Create Location", class: "btn btn-primary"   %>
+       label_method: :email, value_method: :id, multiple: true, prompt: "Select Engineer"%>
+    <%= f.button :submit, "Create Location", class: "btn btn-primary" %>
   <% end %>
 </div>

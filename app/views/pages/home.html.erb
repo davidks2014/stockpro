@@ -15,7 +15,7 @@
     <div class="grid-container">
       <div class="card py-4">
         <h4>Pending Requests <i class="fa-solid fa-list-check" style="color: #3898b9;"></i></h4>
-        <p>code in requests</p>
+        <p>You have <%= current_user.requests.count %> requests </p>
         <br>
         <%= link_to "Pending requests", requests_path, class: "btn btn-primary", id: "view-request-btn" %>
       </div>
