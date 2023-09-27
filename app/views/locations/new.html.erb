@@ -3,7 +3,8 @@
   <%= simple_form_for(@location) do |f| %>
     <%= f.input :name %>
     <%= f.input :address %>
-    <%= f.association :users, collection: User.where(role: "engineer"), label: "Assign Engineer", label_method: :email, value_method: :id, include_blank: false, multiple: true %>
-    <%= f.button :submit, "Create Location", class: "btn btn-primary"   %>
+    <%= f.input :users, collection: @new_user, label: "Assign Engineer",
+       label_method: :email, value_method: :id, multiple: true, prompt: "Select Engineer"%>
+    <%= f.button :submit, "Create Location", class: "btn btn-primary" %>
   <% end %>
 </div>

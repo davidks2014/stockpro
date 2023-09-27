@@ -16,7 +16,7 @@
     <div class="grid-container">
       <div class="card py-4">
         <h4>Pending Requests <i class="fa-solid fa-list-check" style="color: #3898b9;"></i></h4>
-        <p>code in requests</p>
+        <p>You have <%= current_user.requests.count %> requests </p>
         <br>
         <%= link_to "Pending requests", requests_path, class: "btn btn-primary", id: "view-request-btn" %>
       </div>
@@ -53,6 +53,12 @@
         style='width: 560px; height: 370px;'>
       </div>
     </div>
+
+    <div class="map-card">
+      <% materials_by_location = Material.where(location: current_user.location).group(:name).sum(:qty) %>
+      <%= pie_chart materials_by_location %>
+    </div>
   </div>
+
 </div>
 <%# </div> %>
