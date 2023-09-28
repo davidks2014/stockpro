@@ -31,7 +31,8 @@
 }
 
 .bottom-container {
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
   grid-template-columns: 1fr 1fr;
   justify-content:space-between;
   gap: 2rem;
@@ -89,13 +90,11 @@
 }
 
 .map-card {
-  background-color: white;
-  border: 2px solid white;
-  border-radius: 30px;
-  width: 100%;
-  max-width: 615px; /* Adjust the maximum width as needed */
-  height: auto;
-  margin-bottom: 35px;
+  flex: 1; /* Each map-card takes up an equal amount of space */
+  margin: 1rem;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  background-color: #fff;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
 }
 
