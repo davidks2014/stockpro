@@ -4,7 +4,7 @@
   <h1>Project Overview</h1>
   <% if current_user.role == "manager" %>
   <% else %>
-    <h2>Location: <%= current_user.location.name %></h2>
+    <h2>Location: <strong><%= current_user.location.name %></strong></h2>
   <% end %>
 </div>
 
