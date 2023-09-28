@@ -1,10 +1,10 @@
 <%# Welcome page after successful login %>
-<%# <div  id="landing-img" > %>
-<div class="container">
+<div  class="banner" >
+<div class="title-container">
   <h1>Project Overview</h1>
   <% if current_user.role == "manager" %>
   <% else %>
-    <h2>Location: <%= current_user.location.name %></h2>
+    <h2>Location: <strong><%= current_user.location.name %></strong></h2>
   <% end %>
 </div>
 
@@ -20,6 +20,7 @@
         <br>
         <%= link_to "Pending requests", requests_path, class: "btn btn-primary", id: "view-request-btn" %>
       </div>
+
       <div class="card py-4">
         <h4>Tracking Delivery  <i class="fa-solid fa-truck-fast fa-bounce" style="color: #3a98b9;"></i>
         </h4>
@@ -27,22 +28,32 @@
         <br>
         <%= link_to "Tracking delivery", "#", class: "btn btn-info", id: "transit-delivery-btn" %>
       </div>
+
       <div class="card py-4">
         <h4>Low Stock Alert  <i class="fa-solid fa-bell fa-bounce" style="color: #de1721;"></i>
         </h4>
         <p>lorem ipsum 3</p><br>
         <%= link_to "Stock Alert", "#", class: "btn btn-danger", id: "stock-alert-btn" %>
       </div>
-      <div class="card py-4">
+
+      <%# <div class="card py-4">
         <h4>Project costs todate
          <i class="fa-solid fa-dollar-sign" style="color: #3898b9;"></i>
         </h4>
         <p>lorem ipsum 4</p><br>
         <%= link_to "Accumulated costs", "#", class: "btn btn-primary", id: "total-cost-btn" %>
-      </div>
+      <%# </div> %>
+    </div>
+  </div>
+
+  <div class="bottom-container">
+    <%# display pie chart %>
+    <div class="map-card">
+      <% materials_by_location = Material.where(location: current_user.location).group(:name).sum(:qty) %>
+      <%= pie_chart materials_by_location %>
     </div>
 
-  <%# Map showing project locations. Occupy 46% of total layout on right of screen%>
+    <%# Map showing project locations. Occupy 46% of total layout on right of screen%>
     <div class="map-card">
       <p style="color: green"><%= notice %></p>
       <h3>Project Site Locations</h3>
@@ -50,15 +61,9 @@
         id='map'
         data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
         data-map-markers-value="<%= @markers.to_json %>"
-        style='width: 560px; height: 370px;'>
+        style='width: auto; height: 370px;'>
       </div>
     </div>
 
-    <div class="map-card">
-      <% materials_by_location = Material.where(location: current_user.location).group(:name).sum(:qty) %>
-      <%= pie_chart materials_by_location %>
-    </div>
   </div>
-
 </div>
-<%# </div> %>
