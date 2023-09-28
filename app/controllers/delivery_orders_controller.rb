@@ -61,7 +61,12 @@ class DeliveryOrdersController < ApplicationController
       item_request_qty = item_request.qty
       existing_qty = item_request.item.qty
 
-       Material.find(item_request.item.id).update(qty: existing_qty - item_request_qty, amount:(existing_qty - item_request_qty)* item_request.item.unit_price)
+       Material.find(item_request.item.id).update(
+        unit_price: (item_request.item.unit_price * existing_qty - item_request.item.unit_price*item_request_qty) / (item_request_qty - existing_qty),
+        qty: existing_qty - item_request_qty,
+        amount:(existing_qty - item_request_qty) * item_request.item.unit_price,
+        update_date: MaterialMovement.find(item_request.item.id).update_date
+        )
 
     end
 
@@ -69,7 +74,6 @@ class DeliveryOrdersController < ApplicationController
     @delivery_order.item_requests.each do |material|
       incoming_material_movements << MaterialMovement.new
     end
-
 
 
     @delivery_order.item_requests.each do |item_request|
@@ -86,7 +90,11 @@ class DeliveryOrdersController < ApplicationController
         remarks: "Incoming Request Items"
       )
 
-      Material.where(location_id: item_request.request.original_location_id, name: item_request.item.name).first.update(qty:received_material.qty + item_request_qty, amount:received_material.qty*received_material.unit_price + item_request_qty*item_request.item.unit_price)
+      Material.where(location_id: item_request.request.original_location_id, name: item_request.item.name).first.update(
+        unit_price = received_material.unit_price * received_material.qty + item_request.item.unit_price * item_request_qty
+        qty:received_material.qty + item_request_qty,
+        amount:received_material.qty * received_material.unit_price + item_request_qty * item_request.item.unit_price)
+        update_date: MaterialMovement.find(received_material.id).update_date
     end
 
   end
