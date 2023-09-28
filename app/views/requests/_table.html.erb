@@ -13,7 +13,7 @@
       <td><%= item.category %></td>
       <td><%= number_with_delimiter(item.qty) %></td>
       <td><%= item.cost_code if item.is_a?(Material) %></td>
-      <td><%= number_with_delimiter(format("%.2f", item.unit_price.round(1))) if item.is_a?(Material) %></td>
+      <td>$<%= number_with_delimiter(format("%.2f", item.unit_price.round(1))) if item.is_a?(Material) %></td>
       <td><%= item.uom if item.is_a?(Material) %></td>
       <td><%= item.location.name %></td>
       <td><%= text_field_tag :qty, "",

@@ -50,18 +50,18 @@ locations.each do |attributes|
     puts "#{material.name} created"
   end
 
-  vacuum = Equipment.create({category: "electronics", name: "vacuum", qty: rand(0..10), location: location})
+  # vacuum = Equipment.create({category: "electronics", name: "vacuum", qty: rand(0..10), location: location})
 
-  shelf = Equipment.create({category: "furniture", name: "shelf", qty: rand(0..10), location: location})
+  # shelf = Equipment.create({category: "furniture", name: "shelf", qty: rand(0..10), location: location})
 
-  goggles = Equipment.create({category: "sports", name: "goggles", qty: rand(0..10), location: location})
+  # goggles = Equipment.create({category: "sports", name: "goggles", qty: rand(0..10), location: location})
 
-  piano = Equipment.create({category: "instrument", name: "piano", qty: rand(0..10), location: location})
+  # piano = Equipment.create({category: "instrument", name: "piano", qty: rand(0..10), location: location})
 
 
-  location.equipment.each  do |equipment|
-    puts "#{equipment.name} created"
-  end
+  # location.equipment.each  do |equipment|
+  #   puts "#{equipment.name} created"
+  # end
 end
 
   puts "Creating sites for geomap..."
