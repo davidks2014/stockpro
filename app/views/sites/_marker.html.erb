@@ -1,5 +1,26 @@
-<%= image_tag "robot_sq.png", class: "robo-img", alt: "Logo-robot" %>
+<%#= link_to root_path do %>
+  <%= image_tag "robot_sq.png", class: "robo-img", alt: "Logo-robot" %>
+<%# end %>
+
 
 <div class="badge rounded-pill fs-6">
-  <%= site.name %>
+  <%# site.name %>
+  <%# @locations.each do |location| %>
+    <% if site.name == "Warehouse" %>
+      <%= link_to "Warehouse", location_path(id=1)%>
+    <% elsif site.name == "Marina Bay Sands" %>
+      <%= link_to "Marina Bay Sands", location_path(id=2)%>
+    <% elsif site.name == "Singapore Zoo" %>
+      <%= link_to "Singapore Zoo", location_path(id=3)%>
+    <% elsif site.name == "Changi Airport" %>
+      <%= link_to "Changi Airport", location_path(id=4)%>
+    <% end %>
+    <%# end %>
 </div>
+
+
+<%# <div class="marker">
+  <p><%= link_to site.name, site_path(site) %></p>
+  <%# link_to image_tag('robo_img.png'), site_path(site) %>
+  <%# <%= link_to root_path %>
+<%# </div> %>
