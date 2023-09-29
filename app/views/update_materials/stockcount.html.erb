@@ -21,9 +21,9 @@
           <tr>
             <td><%= material.id %></td>
             <td><%= material.name %></td>
-            <td><%= number_with_delimiter(format("%.2f", material.unit_price.round(1))) %></td>
+            <td>$<%= number_with_delimiter(format("%.2f", material.unit_price.round(1))) %></td>
             <td><%= number_with_delimiter(material.qty) %></td>
-            <td><%= text_field_tag "stockcounts[][qty]", 0, name: "stockcounts[][qty]", class: "form-control" %></td>
+            <td><%= text_field_tag "stockcounts[][qty]",material.qty , name: "stockcounts[][qty]", class: "form-control" %></td>
 
             <%= hidden_field_tag "stockcounts[][location_id]", @location.id %>
             <%= hidden_field_tag "stockcounts[][material_id]", material.id %>

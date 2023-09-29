@@ -64,7 +64,6 @@ class UpdateMaterialsController < ApplicationController
         material.update(unit_price: movement.unit_rate)
         material.update(qty: material.qty - movement.qty, amount: material.amount - movement.unit_rate * movement.qty)
 
-
       elsif movement.remarks == "Import New Materials"
         material.update(unit_price: (movement.unit_rate*movement.qty + material.unit_price*material.qty)/(movement.qty+material.qty))
         material.update(qty: material.qty + movement.qty, amount: material.amount + movement.unit_rate * movement.qty)
@@ -88,9 +87,22 @@ class UpdateMaterialsController < ApplicationController
 
     @stockcounts.each do |stock|
       stock.update(diff: stock.qty - Material.find(stock.material_id).qty)
-      if stock.diff !=0
-        MaterialMovement.find(stock.material.id).update(qty: stock.diff, remarks: "Stockcount", update_date: stock.update_date, unit_rate: stock.unit_rate)
-      end
+      # if stock.diff > 0
+      #   MaterialMovement.find(stock.material.id).update(qty: stock.diff, remarks: "Stockcount(excess)", update_date: stock.update_date, unit_rate: stock.unit_rate)
+      # elsif stock.diff < 0
+      #   MaterialMovement.find(stock.material.id).update(qty: stock.diff, remarks: "Stockcount(shorfall)", update_date: stock.update_date, unit_rate: stock.unit_rate)
+      # end
+
+      MaterialMovement.create!(
+          qty: stock.diff.abs,
+          remarks: (stock.diff > 0) ? "Stockcount(excess)" : (stock.diff < 0) ? "Stockcount(shortfall)" : "Stockcount(even)",
+          unit_rate: stock.unit_rate,
+          location_id: stock.location_id,
+          material_id: stock.material_id,
+          update_date: stock.update_date
+        )
+
+      Material.find(stock.material_id).update(qty: stock.qty)
     end
 
     redirect_to stockcount_report_path
@@ -100,18 +112,18 @@ class UpdateMaterialsController < ApplicationController
   def updatestock
 
     @location = Location.find(params[:location_id])
-    @location.materials.each do |material|
-    Material.find(material.id).update(qty: material.stockcounts.last.qty)
+    # @location.materials.each do |material|
+    # Material.find(material.id).update(qty: material.stockcounts.last.qty)
 
-      MaterialMovement.create!(
-          qty: material.stockcounts.last.diff,
-          remarks: "Stockcount",
-          unit_rate: material.stockcounts.last.unit_rate,
-          location_id: material.stockcounts.last.location_id,
-          material_id: material.stockcounts.last.material_id,
-          update_date: material.stockcounts.last.update_date
-        )
-      end
+    #   MaterialMovement.create!(
+    #       qty: material.stockcounts.last.diff,
+    #       remarks: "Stockcount",
+    #       unit_rate: material.stockcounts.last.unit_rate,
+    #       location_id: material.stockcounts.last.location_id,
+    #       material_id: material.stockcounts.last.material_id,
+    #       update_date: material.stockcounts.last.update_date
+    #     )
+    #   end
 
     redirect_to location_path(@location)
   end
