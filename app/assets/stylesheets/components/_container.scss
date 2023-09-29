@@ -35,8 +35,8 @@
   flex-wrap: wrap;
   grid-template-columns: 1fr 1fr;
   justify-content:space-between;
-  gap: 2rem;
-  margin: 20px;
+  gap: 1rem;
+  margin: 5px;
   width: auto;
 }
 
@@ -59,7 +59,7 @@
   width: auto;
   // max-width: 320px; /* Adjust the maximum width as needed */
   height: auto;
-  box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
   align-items: center;
 }
 
