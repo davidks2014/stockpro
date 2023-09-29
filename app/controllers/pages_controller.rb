@@ -10,7 +10,7 @@ class PagesController < ApplicationController
       {
         lat: site.latitude,
         lng: site.longitude,
-        info_window_html: render_to_string(partial: "sites/info_window", locals: { site: }),
+        # info_window_html: render_to_string(partial: "sites/info_window", locals: { site: }),
         marker_html: render_to_string(partial: "sites/marker", locals: { site: }) # Pass the flat to the partial
       }
     end
