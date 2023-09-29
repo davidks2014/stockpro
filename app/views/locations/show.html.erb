@@ -30,8 +30,8 @@
           <td><%= material.name %></td>
           <td><%= material.category %></td>
           <td><%= material.cost_code %></td>
-          <td><%= material.unit_price %></td>
-          <td><%= material.qty %></td>
+          <td>$<%= number_with_delimiter(format("%.2f", material.unit_price.round(1))) %></td>
+          <td><%= number_with_delimiter(material.qty) %></td>
           <td><%= material.uom %></td>
         <% end %>
     </tbody>
@@ -49,5 +49,3 @@
 <%= link_to "Log Month End Material Qty", location_update_materials_path(@location), method: :post, data: { turbo_method: :post }, class: "btn btn-primary" %>
 
 <%= link_to "Show Material Movement History", location_updatematerials_path(@location), class: "btn btn-primary" %>
-
-
