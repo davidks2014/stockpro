@@ -17,8 +17,12 @@
     <div class="wrapper-container">
       <div class="grid-container">
         <div class="card py-4">
-          <h4>Pending Requests <i class="fa-solid fa-list-check" style="color: #3898b9;"></i></h4>
-          <p>You have <%= current_user.requests.count %> requests </p>
+          <h4>Pending Approval <i class="fa-solid fa-list-check" style="color: #3898b9;"></i></h4>
+          <% if current_user.role == "engineer" %>
+            <p>You have <%= @item_request_count %> pending approval </p>
+          <% else %>
+            <p>You have <%= @item_request_manager_count %> pending approval </p>
+          <% end %>
 
           <%= link_to "Pending requests", requests_path, class: "btn btn-primary", id: "view-request-btn" %>
         </div>

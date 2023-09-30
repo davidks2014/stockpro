@@ -1,5 +1,6 @@
 puts "Cleaning database..."
 Location.destroy_all
+Material.destroy_all
 
 puts "Creating Locations..."
 warehouse = {name: "Warehouse", address: "15 Science Centre Rd, Singapore 609081"}
@@ -15,42 +16,51 @@ locations.each do |attributes|
 
   qty = rand(400..500).round(0)
   unit_price= rand(16.00..18.00).round(1)
-  graniteblock = Material.create({category: "block", name: "granite block - 20x20x10 cm", cost_code: "bgb-202010", unit_price: unit_price, qty: qty, amount: qty * unit_price, uom: "pcs", location: location})
+  graniteblock = Material.create(
+    category: "block",
+    name: "granite block - 20x20x10 cm",
+    cost_code: "bgb-202010",
+    unit_price: unit_price,
+    qty:,
+    amount: qty * unit_price,
+    uom: "pcs",
+    image_path: "granite_block.jpeg",
+    location:
+  )
 
   qty = rand(400..600).round(0)
   unit_price= rand(11.00..13.00).round(1)
-  hollowcoreblock = Material.create({category: "block", name: "hollow core block - 39x10x19 cm", cost_code: "bhc-301019", unit_price: unit_price, qty: qty, amount: qty * unit_price, uom: "pcs", location: location})
+  hollowcoreblock = Material.create({category: "  block", name: "hollow core block - 39x10x19 cm", cost_code: "bhc-301019", unit_price: unit_price, qty: qty, amount: qty * unit_price, uom: "pcs", image_path: "hollow_core_block.jpeg", location: })
 
   qty = rand(600..700).round(0)
   unit_price= rand(6.00..8.00).round(1)
-  redbrick = Material.create({category: "block", name: "red brick - 20x10x9 cm", cost_code: "brb-201009", unit_price: unit_price, qty: qty, amount: qty * unit_price, uom: "pcs", location: location})
+  redbrick = Material.create({category: "block", name: "red brick - 20x10x9 cm", cost_code: "brb-201009", unit_price: unit_price, qty: qty, amount: qty * unit_price, uom: "pcs", image_path: "red_brick.jpg", location: })
 
  qty = rand(100..200).round(0)
   unit_price= rand(28.00..30.00).round(1)
-  riversand = Material.create({category: "sand", name: "river sand (10kg)", cost_code: "srs-001", unit_price: unit_price, qty: qty, amount: qty * unit_price, uom: "bag", location: location})
-
+  riversand = Material.create({category: "sand", name: "river sand (10kg)", cost_code: "srs-001", unit_price: unit_price, qty: qty, amount: qty * unit_price, uom: "bag", image_path: "sand.jpeg", location:})
  qty = rand(400..600).round(0)
   unit_price= rand(12.00..13.00).round(1)
-  portlandcement = Material.create({category: "cement", name: "portland cement (50kg)", cost_code: "cpc-50", unit_price: unit_price, qty: qty, amount: qty * unit_price, uom: "bag", location: location})
+  portlandcement = Material.create({category: "cement", name: "portland cement (50kg)", cost_code: "cpc-50", unit_price: unit_price, qty: qty, amount: qty * unit_price, uom: "bag", image_path: "portland_cement.jpg", location:})
 
  qty = rand(50..60).round(0)
   unit_price= rand(1140.00..1150.00).round(0)
-  t10 = Material.create({category: "rebar", name: "10mm dia. rebar", cost_code: "T10", unit_price: unit_price, qty: qty, amount: qty * unit_price, uom: "tons", location: location})
+  t10 = Material.create({category: "rebar", name: "10mm dia. rebar", cost_code: "T10", unit_price: unit_price, qty: qty, amount: qty * unit_price, uom: "tons", image_path: "T10_rebar.jpg", location:})
 
  qty = rand(40..60).round(0)
   unit_price= rand(1140.00..1150.00).round(0)
-  t12 = Material.create({category: "rebar", name: "12mm dia. rebar", cost_code: "T12", unit_price: unit_price, qty: qty, amount: qty * unit_price, uom: "tons", location: location})
+  t12 = Material.create({category: "rebar", name: "12mm dia. rebar", cost_code: "T12", unit_price: unit_price, qty: qty, amount: qty * unit_price, uom: "tons", image_path: "T12_rebar.jpg", location:})
 
  qty = rand(20..40).round(0)
   unit_price= rand(1140.00..1150.00).round(0)
-  t16 = Material.create({category: "rebar", name: "16mm dia. rebar", cost_code: "T16", unit_price: unit_price, qty: qty, amount: qty * unit_price, uom: "tons", location: location})
+  t16 = Material.create({category: "rebar", name: "16mm dia. rebar", cost_code: "T16", unit_price: unit_price, qty: qty, amount: qty * unit_price, uom: "tons", image_path: "T16_rebar.jpg", location:})
 
 
   location.materials.each  do |material|
     puts "#{material.name} created"
   end
 
-  # vacuum = Equipment.create({category: "electronics", name: "vacuum", qty: rand(0..10), location: location})
+  # vacuum = Equipment.create({category: "electronics", name: "vacuum", qty: rand(0..10), image_path: })
 
   # shelf = Equipment.create({category: "furniture", name: "shelf", qty: rand(0..10), location: location})
 

@@ -39,6 +39,9 @@ export default class extends Controller {
       "Accept": "application/json",
     }, body: body })
     .then(response => response.json())
+    // data = { item_request: "......", request_id: "......" }
+    // or
+    // data = { errors: "....."}
     .then((data) => {
       console.log(data)
       if (data.errors) {
