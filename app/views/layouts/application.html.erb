@@ -25,11 +25,12 @@
     <% end %>
 
     <%= render "shared/flashes" %>
-
-      <%= yield %>
-
-    <footer data-controller="dissapear-footer" style="background-color: #333; transition: opacity 0.5s ease; opacity: 1; color: white; text-align: center; position: fixed; bottom: 0; left: 0; width: 100%; padding: 1rem;">
+    <%= yield %>
+    <div data-controller="dissapear-footer" data-action="scroll@window->dissapear-footer#hide">
+      <footer data-dissapear-footer-target="footer" style="background-color: #333; transition: opacity 0.5s ease; opacity: 1; color: white; text-align: center; position: fixed; bottom: 0; left: 0; width: 100%; padding: 1rem;">
       &copy; 2023 StockPro - the team that is going to bring you
-    </footer>
+      </footer>
+    </div>
+
   </body>
 </html>
