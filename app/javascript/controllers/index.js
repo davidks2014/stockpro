@@ -7,6 +7,9 @@ import { application } from "./application"
 import ChartController from "./chart_controller"
 application.register("chart", ChartController)
 
+import DissapearFooterController from "./dissapear_footer_controller"
+application.register("dissapear-footer", DissapearFooterController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
