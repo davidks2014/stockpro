@@ -1,5 +1,5 @@
 .avatar {
-  width: 70px;
+  width: 72px;
   border-radius: 50%;
   box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
   border: white 2px solid;
@@ -18,12 +18,23 @@
 }
 .avatar-square {
   width: 40px;
-  border-radius: 0px;
+  // border-radius: 0px;
   box-shadow: 3px 3px 8px rgba(0,0,0,0.3);
   border: white 2px solid;
 }
 
 .greeting {
-  margin-top: 20px;
+  margin-top: 18px;
   margin-right: 20px;
+  font-size: 22px;
+}
+
+.large-font {
+  font-size: 22px;
+}
+
+#avatar-role {
+  font-size: 25px;
+  color: #3A98B9;
+  margin-left: 20px;
 }
