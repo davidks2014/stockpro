@@ -3,7 +3,7 @@
     <tr>
       <th scope="row"><%= index + 1 %></th>
       <td>
-
+        <%#= cl_image_tag(item.image_public_id, width: 300, height: 300, crop: :fill) if item.image_public_id.present? %>
       </td>
       <td>
         <% if item.is_a?(Material) %>
