@@ -35,16 +35,11 @@
           <tr>
             <td><%= material.id %></td>
             <td><%= material.name %></td>
-            <td><%= material.unit_price %></td>
-            <td><%= material.qty %></td>
+            <td>$<%= number_with_delimiter(format("%.2f", material.unit_price.round(1))) %></td>
+            <td><%= number_with_delimiter(material.qty) %></td>
+            <td><%= text_field_tag "material_movements[][unit_rate]", number_with_delimiter(format("%.2f", material.unit_price.round(1))), name: "material_movements[][unit_rate]", class: "form-control" %></td>
 
-            <% if @remarks == "Project Usage" %>
-              <td><%= text_field_tag "material_movements[][unit_rate]", material.unit_price, name: "material_movements[][unit_rate]", class: "form-control" %></td>
-            <% else %>
-              <td><%= text_field_tag "material_movements[][unit_rate]", nil, name: "material_movements[][unit_rate]", class: "form-control" %></td>
-            <% end %>
-
-            <td><%= text_field_tag "material_movements[][qty]", nil, name: "material_movements[][qty]", class: "form-control" %></td>
+            <td><%= text_field_tag "material_movements[][qty]", 0, name: "material_movements[][qty]", class: "form-control" %></td>
 
             <td><%= text_field_tag "material_movements[][remarks]", @remarks, name: "material_movements[][remarks]", class: "form-control" %></td>
 
@@ -54,6 +49,7 @@
             <%= hidden_field_tag "material_movements[][update_date]", Time.now %>
 
             <%= hidden_field_tag "material[][qty]", material.qty %>
+
           </tr>
         <% end %>
       </tbody>

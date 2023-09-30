@@ -1,16 +1,7 @@
-// Import Google fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito:400,700%7CWork+Sans:400,700&display=swap');
+/* Import Google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;400&display=swap');/* Define font for both body and headers as Montserrat */
+body, h1, h2, h3, h4, h5, h6 {
+  font-family: "Montserrat", sans-serif;
+}
 
-// Define fonts for body and headers
-$body-font: "Work Sans", "Helvetica", "sans-serif";
-$headers-font: "Nunito", "Helvetica", "sans-serif";
-
-// To use a font file (.woff) uncomment following lines
-// @font-face {
-//   font-family: "Font Name";
-//   src: font-url('FontFile.eot');
-//   src: font-url('FontFile.eot?#iefix') format('embedded-opentype'),
-//        font-url('FontFile.woff') format('woff'),
-//        font-url('FontFile.ttf') format('truetype')
-// }
-// $my-font: "Font Name";
+/* Additional styling for headers if needed */

@@ -1,0 +1,39 @@
+<div class="container">
+  <h1>Materials Movement History for <%= @location.name %></h1>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Update Date</th>
+        <th>Movement Type</th>
+        <th>Category</th>
+        <th>Cost Code</th>
+        <th>Existing Unit Rate</th>
+        <th>Movement Qty</th>
+        <th>UOM</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @location.material_movements.each do |movement| %>
+        <% if movement.remarks != "Stockcount(even)"   %>
+          <tr>
+            <% Time.zone = 'Singapore' %>
+            <td><%= movement.update_date.strftime('%Y/%m/%d -- %H:%M') %></td>
+            <td><%= movement.remarks %></td>
+            <td><%= Material.find(movement.material_id).name %></td>
+            <td><%= Material.find(movement.material_id).cost_code %></td>
+            <td>$<%= movement.unit_rate %></td>
+            <% if movement.remarks == "Incoming Request Items" || movement.remarks == "Import New Materials" || movement.remarks == "Stockcount(excess)" %>
+            <td><%= movement.qty %></td>
+            <% elsif movement.remarks == "Outgoing Request Items" || movement.remarks == "Project Usage" || movement.remarks == "Stockcount(shortfall)" %>
+              <td>-<%= movement.qty %></td>
+            <% elsif movement.remarks == "Outgoing Request Items" || movement.remarks == "Project Usage" || movement.remarks == "Stockcount(even)" %>
+              <td><%= movement.qty %></td>
+            <% end %>
+            <td><%= Material.find(movement.material_id).uom %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

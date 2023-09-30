@@ -26,5 +26,8 @@
       <% end %>
     </tbody>
   </table>
+
   <%= link_to "Submit Report & Update Qty", location_update_stock_path(@location), method: :post, data: { turbo_method: :post }, class: "btn btn-primary" %>
+
+  <%# need to jump to another page %>
 </div>
