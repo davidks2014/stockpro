@@ -14,7 +14,7 @@
   <table class="table table-bordered table-striped table-hover">
     <thead>
       <tr>
-        <th>Material ID</th>
+        <th>Image</th>
         <th>Name</th>
         <th>Category</th>
         <th>Cost Code</th>
@@ -26,7 +26,7 @@
     <tbody>
       <% @location.materials.each do |material| %>
         <tr>
-          <td><%= material.id %></td>
+          <td><%= image_tag material.image_path %></td>
           <td><%= material.name %></td>
           <td><%= material.category %></td>
           <td><%= material.cost_code %></td>
