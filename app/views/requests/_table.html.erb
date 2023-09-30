@@ -17,9 +17,9 @@
       <td><%= item.uom if item.is_a?(Material) %></td>
       <td><%= item.location.name %></td>
       <td><%= text_field_tag :qty, "",
-      class: "form-control",
-      placeholder: "0", type: "number", id: item.class.to_s + "-" + item.id.to_s, max: item.qty
-  %></td>
+        class: "form-control",
+        placeholder: "0", type: "number", id: item.class.to_s + "-" + item.id.to_s, max: item.qty %>
+      </td>
     </tr>
   <% end %>
 </tbody>
