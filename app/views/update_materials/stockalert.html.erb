@@ -24,11 +24,11 @@
             <td><%= number_with_delimiter(material.qty) %></td>
             <td><%= text_field_tag "materials[][alertlevel]", 0.0, name: "materials[][alertlevel]", class: "form-control" %></td>
             <%= hidden_field_tag "materials[][id]", material.id %>
-
           </tr>
         <% end %>
       </tbody>
     </table>
+    <%= hidden_field_tag :location_id, @location.id %>
     <%= submit_tag "Create Material Movements", class: "btn btn-primary" %>
   <% end %>
 </div>
