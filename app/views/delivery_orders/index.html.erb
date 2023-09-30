@@ -15,7 +15,7 @@
           <div>
           <h1>Outgoing Material</h1>
           <h2>Deliver To: <%= delivery_order.location.name %> (DO: <%= delivery_order.id %>)</h2>
-            <table class="table table-bordered">
+            <table class="table table-bordered table-striped table-hover">
               <thead>
                 <tr>
                   <th>Request ID</th>
@@ -62,7 +62,7 @@
           <div>
             <h1>Incoming Material</h1>
             <h2>Deliver from: <%= delivery_order.item_requests.last.request.location.name %> (DO: <%= delivery_order.id %>)</h2>
-            <table class="table table-bordered">
+            <table class="table table-bordered table-striped table-hover">
               <thead>
                 <tr>
                   <th>Request ID</th>
