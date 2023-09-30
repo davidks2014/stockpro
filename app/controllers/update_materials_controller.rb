@@ -128,7 +128,9 @@ class UpdateMaterialsController < ApplicationController
     redirect_to location_path(@location)
   end
 
-
+  def stockalert
+    @location = Location.find(params[:location_id])
+  end
 
 end
 

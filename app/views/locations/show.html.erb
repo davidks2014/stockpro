@@ -49,3 +49,5 @@
 <%= link_to "Log Month End Material Qty", location_update_materials_path(@location), method: :post, data: { turbo_method: :post }, class: "btn btn-primary" %>
 
 <%= link_to "Show Material Movement History", location_updatematerials_path(@location), class: "btn btn-primary" %>
+
+<%= link_to "Set Low Stock Level", location_stockalert_path(@location), class: "btn btn-primary" %>

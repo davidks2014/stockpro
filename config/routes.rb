@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     post "update_stock", to: "update_materials#updatestock"
     get "material_usage", to: "update_materials#material_usage", as: "material_usage"
     get "stockcount", to: "update_materials#stockcount", as: "stockcount"
+    get "stockalert", to: "update_materials#stockalert", as: "stockalert"
 
   end
 
