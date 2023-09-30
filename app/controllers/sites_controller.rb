@@ -10,7 +10,7 @@ class SitesController < ApplicationController
       {
         lat: site.latitude,
         lng: site.longitude,
-        info_window_html: render_to_string(partial: "info_window", locals: { site: site }),
+        # info_window_html: render_to_string(partial: "info_window", locals: { site: site }),
         marker_html: render_to_string(partial: "marker", locals: {site: site}) # Pass the flat to the partial
       }
     end
@@ -18,6 +18,7 @@ class SitesController < ApplicationController
 
   # GET /sites/1
   def show
+    @site = Site.includes(:users).find(params[:id])
   end
 
   # GET /sites/new

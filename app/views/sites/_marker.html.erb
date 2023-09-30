@@ -1,5 +1,19 @@
-<%= image_tag "robot_sq.png", class: "robo-img", alt: "Logo-robot" %>
+<%# robot image %>
+<% if site.name == "Warehouse" %>
+  <% location_path_id = 1 %>
+<% elsif site.name == "Marina Bay Sands" %>
+  <% location_path_id = 2 %>
+<% elsif site.name == "Singapore Zoo" %>
+  <% location_path_id = 3 %>
+<% elsif site.name == "Changi Airport" %>
+  <% location_path_id = 4 %>
+<% else %>
+  <% location_path_id = 5 %>
+<% end %>
 
-<div class="badge rounded-pill fs-6">
-  <%= site.name %>
-</div>
+<%= link_to location_path(location_path_id) do %>
+  <%= image_tag "robot_sq.png", class: "robo-img", alt: "Logo-robot" %>
+  <div class="badge rounded-pill fs-6">
+    <%= site.name %>
+  </div>
+<% end %>

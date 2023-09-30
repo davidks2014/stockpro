@@ -1,5 +1,5 @@
 .mapboxgl-popup {
-  max-width: 200px;
+  max-width: 160px;
 }
 
 .mapboxgl-popup-content {
@@ -8,8 +8,8 @@
 }
 
 .robo-img {
-  height: 40px;
-  width: 40px;
+  height: 35px;
+  width: 35px;
   border-radius: 50%;
   border-color: darkgray;
   border: 2px;
@@ -18,9 +18,11 @@
 
 #map {
   border-radius: 20px;
+  margin: 10px;
 }
 
 .badge {
-  background-color: rgba(0,0,255,0.5);
+  background-color: rgba(0,0,255,1);
   // background-color: rgba(0,0,128,0.6);
+  font: white !important;
 }
