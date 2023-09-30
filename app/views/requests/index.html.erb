@@ -19,7 +19,7 @@
         <h2>Requests made between locations</h2>
       <% end  %>
       <% @requests.each do |request| %>
-        <% if (current_user.location == request.location || current_user.role == "manager") && request.item_requests.any?{|x| x.del_approv_status == "Pending"} %>
+        <% if (current_user.location == request.location || current_user.role == "manager") && (request.item_requests.any?{|x| x.del_approv_status == "Pending engineer approval"} || request.item_requests.any?{|x| x.del_approv_status == "Pending manager approval"}    ) %>
         <%# raise %>
           <div class="table-responsive">
             <table class="table table-bordered table-striped table-hover">

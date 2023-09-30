@@ -45,7 +45,7 @@ class RequestsController < ApplicationController
           item_id: item["item_id"],
           qty: item["qty"],
           request: @request,
-          del_approv_status: "Pending"
+          del_approv_status: "Pending engineer approval"
         )
 
         item_requests << item_request
