@@ -38,7 +38,7 @@
           </a>
           <ul class="dropdown-menu">
             <% @locations.each do |location| %>
-              <li><%= link_to "#{location.name}", location_path(location)%></li>
+              <li class="nav-link"><%= link_to "#{location.name}", location_path(location), class: "dropdown-item" %></li>
             <% end %>
 
           </ul>
