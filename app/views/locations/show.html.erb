@@ -11,7 +11,7 @@
 
   <h1>Existing Materials Qty</h1>
   <br>
-  <table class="table table-bordered">
+  <table class="table table-bordered table-striped table-hover">
     <thead>
       <tr>
         <th>Material ID</th>
@@ -31,7 +31,12 @@
           <td><%= material.category %></td>
           <td><%= material.cost_code %></td>
           <td>$<%= number_with_delimiter(format("%.2f", material.unit_price.round(1))) %></td>
-          <td><%= number_with_delimiter(material.qty) %></td>
+
+          <% if material.alertlevel? && material.alertlevel> material.qty %>
+            <td style = "color: red;" ><%= material.qty %></td>
+          <% else  %>
+            <td><%= material.qty %></td>
+          <% end %>
           <td><%= material.uom %></td>
         <% end %>
     </tbody>
@@ -49,3 +54,5 @@
 <%= link_to "Log Month End Material Qty", location_update_materials_path(@location), method: :post, data: { turbo_method: :post }, class: "btn btn-primary" %>
 
 <%= link_to "Show Material Movement History", location_updatematerials_path(@location), class: "btn btn-primary" %>
+
+<%= link_to "Set Low Stock Level", location_stockalert_path(@location), class: "btn btn-primary" %>

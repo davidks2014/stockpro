@@ -1,0 +1,38 @@
+<div class="container">
+
+  <h1>Set Low Stock Alert Level for <%= @location.name %></h1>
+
+  <br>
+
+  <%= form_tag({controller: "update_materials", action: "stockalert_update"}, class: "form") do %>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Material ID</th>
+          <th>Name</th>
+          <th>Existing Unit Rate</th>
+          <th>Existing Qty</th>
+          <th>Low Stock Level</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @location.materials.each do |material| %>
+          <tr>
+            <td><%= material.id %></td>
+            <td><%= material.name %></td>
+            <td>$<%= number_with_delimiter(format("%.2f", material.unit_price.round(1))) %></td>
+            <td><%= number_with_delimiter(material.qty) %></td>
+            <% if material.alertlevel? %>
+              <td><%= text_field_tag "materials[][alertlevel]", material.alertlevel , name: "materials[][alertlevel]", class: "form-control" %></td>
+            <% else %>
+              <td><%= text_field_tag "materials[][alertlevel]", 0 , name: "materials[][alertlevel]", class: "form-control" %></td>
+            <% end %>
+            <%= hidden_field_tag "materials[][id]", material.id %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= hidden_field_tag :location_id, @location.id %>
+    <%= submit_tag "Create Material Movements", class: "btn btn-primary" %>
+  <% end %>
+</div>

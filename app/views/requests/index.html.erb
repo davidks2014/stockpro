@@ -22,7 +22,7 @@
         <% if (current_user.location == request.location || current_user.role == "manager") && request.item_requests.any?{|x| x.del_approv_status == "Pending"} %>
         <%# raise %>
           <div class="table-responsive">
-            <table class="table table-bordered">
+            <table class="table table-bordered table-striped table-hover">
               <thead>
                 <tr>
                   <th>Request from</th>
@@ -123,7 +123,7 @@
       <% @requests.each do |request| %>
           <% if current_user.location == Location.find(request.original_location_id) %>
             <div class="table-responsive">
-              <table class="table table-bordered">
+              <table class="table table-bordered table-striped table-hover">
                 <thead>
                   <tr>
                     <th>Request to</th>

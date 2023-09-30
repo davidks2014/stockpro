@@ -1,0 +1,20 @@
+.moving-truck {
+  // background-color: #00f; /* Blue truck for example */
+  position: absolute;
+  top: 15%; /* Initial vertical position */
+  left: -50px; /* Initial horizontal position (off-screen) */
+  background-size: cover; /* Adjust the image size as needed */
+  animation-name: speed;
+  animation-duration: 5s; /* Animation duration in seconds */
+  animation-timing-function: linear; /* Linear timing for constant speed */
+  animation-iteration-count: infinite; /* Loop the animation infinitely */
+}
+
+@keyframes speed {
+  0% {
+      left: -50px; /* Starting position */
+  }
+  100% {
+      left: 100%; /* Ending position (move off-screen to the right) */
+  }
+}
