@@ -132,6 +132,21 @@ class UpdateMaterialsController < ApplicationController
     @location = Location.find(params[:location_id])
   end
 
+  def stockalert_update
+    
+    # Iterate over the submitted parameters
+    params[:materials].each do |material_params|
+      # Find the Material record based on the material ID
+      material = Material.find(material_params[:id])
+
+      # Update the alertlevel attribute with the submitted value
+      material.update(alertlevel: material_params[:alertlevel])
+    end
+
+    # Redirect or render as needed
+    # ...
+  end
+
 end
 
 

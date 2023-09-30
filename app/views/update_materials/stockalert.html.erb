@@ -4,7 +4,7 @@
 
   <br>
 
-  <%= form_tag({controller: "update_materials", action: "stockalert"}, class: "form") do %>
+  <%= form_tag({controller: "update_materials", action: "stockalert_update"}, class: "form") do %>
     <table class="table table-bordered">
       <thead>
         <tr>
@@ -23,11 +23,7 @@
             <td>$<%= number_with_delimiter(format("%.2f", material.unit_price.round(1))) %></td>
             <td><%= number_with_delimiter(material.qty) %></td>
             <td><%= text_field_tag "materials[][alertlevel]", 0.0, name: "materials[][alertlevel]", class: "form-control" %></td>
-            <%= hidden_field_tag "material_movements[][location_id]", @location.id %>
-            <%= hidden_field_tag "material_movements[][material_id]", material.id %>
-            <%= hidden_field_tag "material_movements[][update_date]", Time.now %>
-
-            <%= hidden_field_tag "material[][qty]", material.qty %>
+            <%= hidden_field_tag "materials[][id]", material.id %>
 
           </tr>
         <% end %>
