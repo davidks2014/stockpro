@@ -12,15 +12,18 @@ Rails.application.routes.draw do
     post "update_stock", to: "update_materials#updatestock"
     get "material_usage", to: "update_materials#material_usage", as: "material_usage"
     get "stockcount", to: "update_materials#stockcount", as: "stockcount"
+    get "stockalert", to: "update_materials#stockalert", as: "stockalert"
 
   end
 
   post '/locations/:location_id/stockcount_update', to: 'update_materials#stockcount_update', as: 'stockcount_update'
 
+  post '/locations/:location_id/stockalert_update', to: "update_materials#stockalert_update", as: "stockalert_update"
+
   get "/locations/:location_id/stockcount_report", to: "locations#stockcount_report", as: "stockcount_report"
 
-
   post 'materials/importnew', to: 'materials#import', as: 'material_import'
+
   get 'materials/import', to: 'materials#import', as: 'import'
   resources :materials, except: [:show]
 

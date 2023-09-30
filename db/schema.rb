@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_26_162617) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_30_012920) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -129,6 +129,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_26_162617) do
     t.datetime "updated_at", null: false
     t.float "amount"
     t.datetime "update_date"
+    t.float "alertlevel"
     t.index ["location_id"], name: "index_materials_on_location_id"
   end
 
