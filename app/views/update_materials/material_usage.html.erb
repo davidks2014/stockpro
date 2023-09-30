@@ -10,7 +10,7 @@
     <table class="table table-bordered table-striped table-hover">
       <thead>
         <tr>
-          <th>Material ID</th>
+          <th>Image</th>
           <th>Name</th>
           <th>Existing Unit Rate</th>
            <th>Existing Qty</th>
@@ -33,7 +33,7 @@
       <tbody>
         <% @location.materials.each do |material| %>
           <tr>
-            <td><%= material.id %></td>
+            <td><%= image_tag material.image_path %></td>
             <td><%= material.name %></td>
             <td>$<%= number_with_delimiter(format("%.2f", material.unit_price.round(1))) %></td>
             <td><%= number_with_delimiter(material.qty) %></td>
