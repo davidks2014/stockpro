@@ -4,6 +4,13 @@ class PagesController < ApplicationController
   def home
     @sites = Site.geocoded
     @requests = Request.all
+    @item_request = ItemRequest.where(del_approv_status: "Pending")
+    @item_request_count = 0
+    @item_request_manager_count = 0
+    @received_requests = @requests.each do |request|
+      @item_request_count += request.item_requests.select { |item_request| item_request.eng_appr_status == nil && item_request.request.location_id == current_user.id }.count
+      @item_request_manager_count += request.item_requests.select { |item_request| item_request.eng_appr_status == 'approved' && item_request.man_appr_status == nil}.count
+    end
     # @sites = Site.all
     # The `geocoded` scope filters only sites with coordinates
     @markers = @sites.geocoded.map do |site|
