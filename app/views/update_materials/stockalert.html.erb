@@ -22,7 +22,11 @@
             <td><%= material.name %></td>
             <td>$<%= number_with_delimiter(format("%.2f", material.unit_price.round(1))) %></td>
             <td><%= number_with_delimiter(material.qty) %></td>
-            <td><%= text_field_tag "materials[][alertlevel]", 0.0, name: "materials[][alertlevel]", class: "form-control" %></td>
+            <% if material.alertlevel? %>
+              <td><%= text_field_tag "materials[][alertlevel]", material.alertlevel , name: "materials[][alertlevel]", class: "form-control" %></td>
+            <% else %>
+              <td><%= text_field_tag "materials[][alertlevel]", 0 , name: "materials[][alertlevel]", class: "form-control" %></td>
+            <% end %>
             <%= hidden_field_tag "materials[][id]", material.id %>
           </tr>
         <% end %>
