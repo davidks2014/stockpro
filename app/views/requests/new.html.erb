@@ -25,6 +25,7 @@
             <thead>
               <tr>
                 <th scope="col">#</th>
+                <th scope="col">Image</th>
                 <th scope="col">Type</th>
                 <th scope="col">Name</th>
                 <th scope="col">Category</th>
@@ -49,4 +50,8 @@
   </div>
 </div>
 
+<div>
+  <%= cl_image_tag("sand_tvinbz",
+      width: 80, height: 80, crop: :fill) %>
+</div>
 <%# </div> %>

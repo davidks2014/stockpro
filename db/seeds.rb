@@ -58,10 +58,6 @@ locations.each do |attributes|
   piano = Equipment.create({category: "instrument", name: "piano", qty: rand(0..10), location: location})
 
 
-  location.equipment.each  do |equipment|
-    puts "#{equipment.name} created"
-  end
-end
 
   puts "Creating sites for geomap..."
   warehse = {name: "Warehouse", address: "15 Science Centre Rd, Singapore 609081"}
