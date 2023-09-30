@@ -10,14 +10,19 @@ export default class extends Controller {
 
   hide() {
     const scrollY = window.scrollY
-    // const scrollThreshold = 100;
-    console.log(scrollY);
+    // console.log(scrollY);
 
-    const opacity = 1 - (scrollY / 100)
-    console.log("opacity: ", opacity);
-    this.footerTarget.style.opacity = opacity
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+    const opacity =scrollY / ( documentHeight - windowHeight )
 
-    if (opacity < 0) {
+
+    console.log("percentage: ", opacity);
+    console.log("trueOpacity: ", 1- opacity);
+
+    this.footerTarget.style.opacity = 1 - opacity
+
+    if (opacity > 0.9 ) {
       this.footerTarget.style.display = 'none'
     } else {
       this.footerTarget.style.display = 'block'
