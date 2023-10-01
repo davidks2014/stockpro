@@ -19,7 +19,8 @@
         <div class="card py-4">
           <h4>Pending Approvals <i class="fa-solid fa-list-check fa-bounce" style="color: #3898b9;"></i></h4>
           <% if current_user.role == "engineer" %>
-            <p>You have <%= @item_request_count %> pending approvals </p>
+            <h1><%= @item_request_count %></h1>
+            <p>Your pending approvals </p>
           <% else %>
             <p>You have <%= @item_request_manager_count %> pending approvals </p>
           <% end %>
@@ -55,7 +56,7 @@
     <div class="bottom-container">
 
       <%# display pie chart %>
-      <div class="map-card">
+      <div class="pie-chart">
         <% materials_by_location = Material.where(location: current_user.location).group(:name).sum(:qty) %>
         <%= pie_chart materials_by_location %>
       </div>

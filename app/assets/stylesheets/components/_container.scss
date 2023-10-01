@@ -89,6 +89,15 @@
   box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
+.pie-chart {
+  padding-top: 75px;
+  flex: 1; /* Each map-card takes up an equal amount of space */
+  border-radius: 25px;
+  margin: 1rem;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+}
 .map-card {
   flex: 1; /* Each map-card takes up an equal amount of space */
   border-radius: 25px;
