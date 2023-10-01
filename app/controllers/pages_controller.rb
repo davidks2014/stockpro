@@ -27,7 +27,6 @@ class PagesController < ApplicationController
       end
     end
 
-
     @materials = Material.all
     @low_stock_count = 0
     @materials.each do |material|
