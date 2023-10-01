@@ -90,6 +90,7 @@
 }
 
 .pie-chart {
+  display: flex;
   flex: 1; /* Each map-card takes up an equal amount of space */
   border-radius: 25px;
   margin: 1rem;
