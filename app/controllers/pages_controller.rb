@@ -11,6 +11,23 @@ class PagesController < ApplicationController
       @item_request_count += request.item_requests.select { |item_request| item_request.eng_appr_status == nil && item_request.request.location_id == current_user.id }.count
       @item_request_manager_count += request.item_requests.select { |item_request| item_request.eng_appr_status == 'approved' && item_request.man_appr_status == nil}.count
     end
+
+    @low_stock_count = 0
+
+
+    @materials = Material.all
+    @materials.each do |material|
+      if current_user.role == "engineer"
+        if (material.qty < material.alertlevel && material.location == current_user.location)
+          @low_stock_count += 1
+        end
+      elsif current_user.role == "manager"
+        if (material.qty < material.alertlevel)
+          @low_stock_count += 1
+        end
+      end
+    end
+
     # @sites = Site.all
     # The `geocoded` scope filters only sites with coordinates
     @markers = @sites.geocoded.map do |site|

@@ -38,7 +38,13 @@
         <div class="card py-4">
           <h4>Low Stock Alert  <i class="fa-solid fa-bell fa-bounce" style="color: #de1721;"></i>
           </h4>
-          <p>lorem ipsum 3</p>
+
+          <% if current_user.role == "engineer" %>
+            <h1><%= @low_stock_count %></h1>
+          <% elsif current_user.role == "manager" %>
+            <h1><%= @low_stock_count %></h1>
+          <% end %></p>
+
           <%= link_to "Stock Alert", "#", class: "btn btn-danger", id: "stock-alert-btn" %>
         </div>
 
