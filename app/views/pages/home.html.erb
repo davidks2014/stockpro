@@ -21,7 +21,7 @@
           <% if current_user.role == "engineer" %>
             <p>You have <%= @item_request_count %> pending approval </p>
           <% else %>
-            <p>You have <%= @item_request_manager_count %> pending approval </p>
+            <p>You have <%= @item_request_manager_count %> pending approvals </p>
           <% end %>
 
           <%= link_to "Pending requests", requests_path, class: "btn btn-primary", id: "view-request-btn" %>
