@@ -28,11 +28,18 @@
         </div>
 
         <div class="card py-4">
-          <h4>Incoming Delivery  <i class="fa-solid fa-truck-fast fa-bounce" style="color: #3a98b9;"></i>
-          </h4>
-          <h1><%= @item_delivery_count %></h1>
+          <% if current_user.role == "engineer" %>
+            <h4>Incoming Delivery  <i class="fa-solid fa-truck-fast fa-bounce" style="color: #3a98b9;"></i></h4>
+          <% elsif current_user.role == "manager" %>
+            <h4>Items in Delivery <i class="fa-solid fa-truck-fast fa-bounce" style="color: #3a98b9;"></i></h4>
+          <% end %>
 
-          <%= link_to "List incoming delivery", delivery_orders_path, class: "btn btn-info", id: "transit-delivery-btn" %>
+          <h1><%= @item_delivery_count %></h1>
+          <% if current_user.role == "engineer" %>
+            <%= link_to "List incoming delivery", delivery_orders_path, class: "btn btn-info", id: "transit-delivery-btn" %>
+          <% elsif current_user.role == "manager" %>
+            <%= link_to "List items in delivery", delivery_orders_path, class: "btn btn-info", id: "transit-delivery-btn" %>
+          <% end %>
         </div>
 
         <div class="card py-4">
@@ -44,6 +51,7 @@
           <% elsif current_user.role == "manager" %>
             <h1><%= @low_stock_count %></h1>
           <% end %></p>
+
 
           <%= link_to "List low stock items", show_low_stock_path(current_user.location), class: "btn btn-danger", id: "stock-alert-btn" %>
         </div>

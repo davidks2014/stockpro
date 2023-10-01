@@ -59,7 +59,9 @@
         <% if user_signed_in? %>
           <p class="greeting">Hi there, <strong> <%= current_user.name %>
           <br>
-          <span id="avatar-role">(<%= current_user.role.capitalize %>) </span></strong></p>
+          <span id="avatar-role">(<%= current_user.role.capitalize %>) </span>
+
+          <span id="avatar-role">@<%= current_user.location.name.capitalize %></span></strong></p>
 
           <%# display right avatar image according to current user %>
           <li class="nav-item dropdown avatar-menu">
