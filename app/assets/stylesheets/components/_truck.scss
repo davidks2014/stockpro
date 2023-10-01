@@ -1,13 +1,16 @@
 .moving-truck {
   // background-color: #00f; /* Blue truck for example */
+  font-size: 5em;
   position: absolute;
-  top: 22%; /* Initial vertical position */
+  top: 42%; /* Initial vertical position */
   left: -50px; /* Initial horizontal position (off-screen) */
   background-size: cover; /* Adjust the image size as needed */
   animation-name: speed;
   animation-duration: 5s; /* Animation duration in seconds */
   animation-timing-function: linear; /* Linear timing for constant speed */
-  animation-iteration-count: infinite; /* Loop the animation infinitely */
+  // animation-iteration-count: infinite; /* Loop the animation infinitely */
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
 }
 
 @keyframes speed {

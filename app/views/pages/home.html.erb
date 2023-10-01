@@ -18,9 +18,12 @@
       <div class="grid-container">
         <div class="card py-4">
           <h4>Pending Approval <i class="fa-solid fa-list-check" style="color: #3898b9;"></i></h4>
+          <br><br><br><br>
           <% if current_user.role == "engineer" %>
+          <p style: "font-size: 30px; align-items: center;"><%= @item_request_count %></p>
             <p>You have <%= @item_request_count %> pending approval </p>
           <% else %>
+            <p style: "font-size: 30px; align-items: center;"><%= @item_request_manager_count %></p>
             <p>You have <%= @item_request_manager_count %> pending approval </p>
           <% end %>
 
@@ -28,8 +31,9 @@
         </div>
 
         <div class="card py-4">
-          <h4>Tracking Delivery  <i class="fa-solid fa-truck-fast fa-bounce" style="color: #3a98b9;"></i>
+          <h4>Tracking Delivery <i class="fa-solid fa-truck-fast fa-bounce" style="color: #3a98b9;"></i>
           </h4>
+          <br><br><br><br>
           <p>lorem ipsum 2 hello hello</p>
 
           <%= link_to "Tracking delivery", "#", class: "btn btn-info", id: "transit-delivery-btn" %>
@@ -38,6 +42,7 @@
         <div class="card py-4">
           <h4>Low Stock Alert  <i class="fa-solid fa-bell fa-bounce" style="color: #de1721;"></i>
           </h4>
+          <br><br><br><br>
           <p>lorem ipsum 3</p>
           <%= link_to "Stock Alert", "#", class: "btn btn-danger", id: "stock-alert-btn" %>
         </div>
