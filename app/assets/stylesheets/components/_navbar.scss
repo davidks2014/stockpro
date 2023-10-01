@@ -5,7 +5,7 @@
 .navbar-logo {
   justify-content: space-between;
   // background: transparent;
-  background: #eadecb;
+  background-color: #f1edd5;
   border-bottom: 1px solid white ;
   box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
 }
@@ -15,7 +15,7 @@
 }
 
 .navbar-logo .navbar-brand img {
-  width: 130px;
+  width: 135px;
   border: 4px;
   margin-left: 40px;
   background-color: #ffd900;
@@ -33,14 +33,14 @@
 .nav-header {
   // background-color: #eadecb;
   // border-bottom: 1px solid white ;
-  font-size: 25px;
+  font-size: 22px;
   color: black;
   // font-weight: bold;
   // box-shadow: 5px 5px 10px rgba(0,0,0,0.2);
 }
 
 .dropdown-item {
-  font-size: 22px;
+  font-size: 18px;
 }
 
 .dropdown-menu {
