@@ -19,9 +19,9 @@
         <div class="card py-4">
           <h4>Pending Approval <i class="fa-solid fa-list-check" style="color: #3898b9;"></i></h4>
           <% if current_user.role == "engineer" %>
-            <p>You have <%= @item_request_count %> pending approval </p>
+            <h1><%= @item_request_count %></h1>
           <% else %>
-            <p>You have <%= @item_request_manager_count %> pending approval </p>
+            <h1> <%= @item_request_manager_count %></h1>
           <% end %>
 
           <%= link_to "Pending requests", requests_path, class: "btn btn-primary", id: "view-request-btn" %>
@@ -30,7 +30,7 @@
         <div class="card py-4">
           <h4>Tracking Delivery  <i class="fa-solid fa-truck-fast fa-bounce" style="color: #3a98b9;"></i>
           </h4>
-          <p>lorem ipsum 2 hello hello</p>
+          <h1><%= @item_delivery_count %></h1>
 
           <%= link_to "Tracking delivery", "#", class: "btn btn-info", id: "transit-delivery-btn" %>
         </div>
