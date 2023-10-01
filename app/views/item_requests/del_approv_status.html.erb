@@ -11,12 +11,13 @@
       <h1>Arrange Delivery</h1>
       <br>
     <% end %>
+
     <div>
       <%# raise %>
-      <% if @item_requests.any? %>
-        <% filtered_item_requests = @item_requests.select do |x| %>
-          <% x.request.location == current_user.location %>
-        <% end %>
+      <% filtered_item_requests = @item_requests.select do |x| %>
+        <% x.request.location == current_user.location %>
+      <% end %>
+      <% if filtered_item_requests.any? {|item_request| item_request.delivery_order.nil?} %>
           <%# raise %>
           <% filtered_item_requests.group_by { |item_request| Location.find(item_request.request.original_location_id).name }.each do |loc, item_requests| %>
             <div>

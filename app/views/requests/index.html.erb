@@ -114,10 +114,11 @@
       <% if @requests.none? { |request| current_user.location == Location.find(request.original_location_id) } && current_user.role != "manager" %>
         <h2>No request is sent from <%= current_user.location.name %></h2>
       <% elsif current_user.role != "manager" %>
-        <h2>Sent requests from <%= current_user.location.name %> </h2>
+        <h2>Sent requests from <%= current_user.location.name %></h2>
       <% end %>
+
       <% @requests.each do |request| %>
-          <% if current_user.location == Location.find(request.original_location_id) %>
+          <% if (current_user.location == Location.find(request.original_location_id) || current_user.role == "manager") && request.item_requests.any?{|x| x.del_approv_status == "Pending"} %>
             <div class="table-responsive">
               <table class="table table-bordered table-striped table-hover">
                 <thead>

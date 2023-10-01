@@ -9,9 +9,7 @@ class ItemRequestsController < ApplicationController
   def eng_decline
     @item_request = ItemRequest.find(params[:item_request_id])
     @item_request.update(eng_appr_status: 'declined')
-
     @item_request.update(del_approv_status: "Declined")
-
     redirect_to requests_path, notice: "Engineer declined item for delivery"
   end
 
