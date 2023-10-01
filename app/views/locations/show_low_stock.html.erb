@@ -1,0 +1,38 @@
+
+<div class="container">
+<h1>Show Low Stock Materials</h1>
+<table class="table table-bordered">
+      <thead>
+        <tr>
+          <% if current_user.role == "manager" %>
+            <th>Location</th>
+          <% else %>
+          <% end %>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Existing Unit Rate</th>
+          <th>Existing Qty</th>
+          <th>UOM</th>
+          <th>Low Stock Level</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <% @low_stock_materials.sort_by! { |material| material.location.id.to_i } %>
+        <% @low_stock_materials.each do |material| %>
+        <%# @low_stock_materials.sort_by! { |material| material.location.id.to_i } %>
+          <tr>
+            <% if current_user.role == "manager" %>
+              <td><%= material.location.name  %></td>
+            <% end %>
+            <td><%= image_tag material.image_path %></td>
+            <td><%= material.name %></td>
+            <td>$<%= number_with_delimiter(format("%.2f", material.unit_price.round(1))) %></td>
+            <td style = "color: red;"><%= number_with_delimiter(material.qty) %></td>
+            <td><%= material.uom %></td>
+            <td><%= material.alertlevel %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>

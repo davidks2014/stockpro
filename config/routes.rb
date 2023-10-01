@@ -22,6 +22,9 @@ Rails.application.routes.draw do
 
   get "/locations/:location_id/stockcount_report", to: "locations#stockcount_report", as: "stockcount_report"
 
+  get "/locations/:location_id/show_low_stock", to: "locations#show_low_stock", as: "show_low_stock"
+
+
   post 'materials/importnew', to: 'materials#import', as: 'material_import'
 
   get 'materials/import', to: 'materials#import', as: 'import'

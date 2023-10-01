@@ -45,7 +45,7 @@
             <h1><%= @low_stock_count %></h1>
           <% end %></p>
 
-          <%= link_to "Stock Alert", "#", class: "btn btn-danger", id: "stock-alert-btn" %>
+          <%= link_to "Stock Alert", show_low_stock_path(current_user.location), class: "btn btn-danger", id: "stock-alert-btn" %>
         </div>
 
         <%# <div class="card py-4">

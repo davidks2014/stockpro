@@ -27,7 +27,17 @@ class LocationsController < ApplicationController
     @location = Location.find(params[:location_id])
   end
 
+  def show_low_stock
 
+    @location = Location.find(params[:location_id])
+    @materials = Material.all
+    if current_user.role == "engineer"
+      @low_stock_materials = @materials.select{|material| (material.qty < material.alertlevel && material.location == current_user.location)}
+    elsif current_user.role == "manager"
+      @low_stock_materials = @materials.select{|material| material.qty < material.alertlevel}
+    end
+
+  end
 
   private
 
