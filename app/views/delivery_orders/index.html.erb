@@ -1,15 +1,15 @@
 <div class="container">
   <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
-      <button class="nav-link active" id="out-tab" data-bs-toggle="tab" data-bs-target="#out-tab-pane" type="button" role="tab" aria-controls="out-tab-pane" aria-selected="true">Outgoing items</button>
+      <button class="nav-link" id="out-tab" data-bs-toggle="tab" data-bs-target="#out-tab-pane" type="button" role="tab" aria-controls="out-tab-pane" aria-selected="false">Outgoing items</button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="in-tab" data-bs-toggle="tab" data-bs-target="#in-tab-pane" type="button" role="tab" aria-controls="in-tab-pane" aria-selected="false">Incoming items</button>
+      <button class="nav-link active" id="in-tab" data-bs-toggle="tab" data-bs-target="#in-tab-pane" type="button" role="tab" aria-controls="in-tab-pane" aria-selected="true">Incoming items</button>
     </li>
-
   </ul>
+
   <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active" id="out-tab-pane" role="tabpanel" aria-labelledby="out-tab" tabindex="0">
+    <div class="tab-pane fade" id="out-tab-pane" role="tabpanel" aria-labelledby="out-tab" tabindex="0">
       <% @delivery_orders.each do |delivery_order| %>
         <% if current_user.location == delivery_order.item_requests.last.request.location || current_user.role == "manager" %>
           <div>
@@ -54,9 +54,7 @@
       <% end %>
     </div>
 
-
-
-    <div class="tab-pane fade" id="in-tab-pane" role="tabpanel" aria-labelledby="in-tab" tabindex="0">
+    <div class="tab-pane fade show active" id="in-tab-pane" role="tabpanel" aria-labelledby="in-tab" tabindex="0">
       <% @delivery_orders.each do |delivery_order| %>
         <% if current_user.location == delivery_order.location %>
           <div>
@@ -100,6 +98,5 @@
         <% end %>
       <% end %>
     </div>
-
   </div>
 </div>

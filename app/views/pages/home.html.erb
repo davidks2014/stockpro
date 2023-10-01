@@ -24,15 +24,15 @@
             <h1> <%= @item_request_manager_count %></h1>
           <% end %>
 
-          <%= link_to "Pending requests", requests_path, class: "btn btn-primary", id: "view-request-btn" %>
+          <%= link_to "List pending requests", requests_path, class: "btn btn-primary", id: "view-request-btn" %>
         </div>
 
         <div class="card py-4">
-          <h4>Tracking Delivery  <i class="fa-solid fa-truck-fast fa-bounce" style="color: #3a98b9;"></i>
+          <h4>Incoming Delivery  <i class="fa-solid fa-truck-fast fa-bounce" style="color: #3a98b9;"></i>
           </h4>
           <h1><%= @item_delivery_count %></h1>
 
-          <%= link_to "Tracking delivery", delivery_orders_path, class: "btn btn-info", id: "transit-delivery-btn" %>
+          <%= link_to "List incoming delivery", delivery_orders_path, class: "btn btn-info", id: "transit-delivery-btn" %>
         </div>
 
         <div class="card py-4">
@@ -45,7 +45,7 @@
             <h1><%= @low_stock_count %></h1>
           <% end %></p>
 
-          <%= link_to "Stock Alert", show_low_stock_path(current_user.location), class: "btn btn-danger", id: "stock-alert-btn" %>
+          <%= link_to "List low stock items", show_low_stock_path(current_user.location), class: "btn btn-danger", id: "stock-alert-btn" %>
         </div>
 
         <%# <div class="card py-4">
