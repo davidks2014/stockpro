@@ -39,14 +39,15 @@
 
 <br>
 
-<%= link_to "Record New Imported Materials", location_material_usage_path(@location, remarks: "Import New Materials"), method: :get, class: "btn btn-primary", id: "view-request-btn" %>
+<% if current_user.location == @location || current_user.role == "manager" %>
+  <%= link_to "Record New Imported Materials", location_material_usage_path(@location, remarks: "Import New Materials"), method: :get, class: "btn btn-primary", id: "view-request-btn" %>
 
-<%= link_to "Monthly Stockcount", location_stockcount_path(@location, remarks: "Stockcount"), method: :get, class: "btn btn-primary", id: "view-request-btn" %>
+  <%= link_to "Monthly Stockcount", location_stockcount_path(@location, remarks: "Stockcount"), method: :get, class: "btn btn-primary", id: "view-request-btn" %>
 
-<%= link_to "Log Month End Material Qty", location_update_materials_path(@location), method: :post, data: { turbo_method: :post }, class: "btn btn-primary", id: "view-request-btn" %>
+  <%= link_to "Log Month End Material Qty", location_update_materials_path(@location), method: :post, data: { turbo_method: :post }, class: "btn btn-primary", id: "view-request-btn" %>
 
-<%= link_to "Show Material Movement History", location_updatematerials_path(@location), class: "btn btn-primary", id: "view-request-btn" %>
+  <%= link_to "Show Material Movement History", location_updatematerials_path(@location), class: "btn btn-primary", id: "view-request-btn" %>
 
-<%= link_to "Set Low Stock Level", location_stockalert_path(@location), class: "btn btn-primary", id: "view-request-btn" %>
-
+  <%= link_to "Set Low Stock Level", location_stockalert_path(@location), class: "btn btn-primary", id: "view-request-btn" %>
+<% end %>
 <br><br><br><br>
