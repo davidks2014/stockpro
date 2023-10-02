@@ -1,9 +1,11 @@
 .moving-truck {
-  // background-color: #00f; /* Blue truck for example */
-  font-size: 5em;
+  // background-color: $primary; /* Blue truck for example */
+  font-size: 2.5em;
+  color: navy;
   position: absolute;
-  top: 42%; /* Initial vertical position */
-  left: -50px; /* Initial horizontal position (off-screen) */
+  top: 15%; /* Initial vertical position */
+  // left: -50px; /* Initial horizontal position (off-screen) */
+  left: 100px;
   background-size: cover; /* Adjust the image size as needed */
   animation-name: speed;
   animation-duration: 5s; /* Animation duration in seconds */
@@ -15,9 +17,9 @@
 
 @keyframes speed {
   0% {
-      left: -50px; /* Starting position */
+      left: 10%; /* Starting position */
   }
   100% {
-      left: 100%; /* Ending position (move off-screen to the right) */
+      left: 90%; /* Ending position (move off-screen to the right) */
   }
 }
