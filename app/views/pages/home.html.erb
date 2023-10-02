@@ -52,11 +52,8 @@
             <h1><%= @low_stock_count %></h1>
           <% end %></p>
 
-          <% if current_user.role == "engineer" %>
-            <%= link_to "List low stock items", show_low_stock_path(current_user.location), class: "btn btn-danger", id: "stock-alert-btn" %>
-          <% elsif current_user.role == "manager" %>
-            <%= link_to "List low stock items", show_low_stock_path(Location.find(5)), class: "btn btn-danger", id: "stock-alert-btn" %>
-          <% end %>
+
+          <%= link_to "List low stock items", show_low_stock_path(current_user.location), class: "btn btn-danger", id: "stock-alert-btn" %>
         </div>
 
         <%# <div class="card py-4">
