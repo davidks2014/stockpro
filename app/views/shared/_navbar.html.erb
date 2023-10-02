@@ -61,7 +61,11 @@
           <br>
           <span id="avatar-role">(<%= current_user.role.capitalize %>) </span>
 
+          <% current_user.role == "engineer" %>
           <span id="avatar-role">@<%= current_user.location.name.capitalize %></span></strong></p>
+          <% elsif current_user.role == "manager" %>
+          <span id="avatar-role">@<%= Location.find(5).name.capitalize %></span></strong></p>
+          <% end %>
 
           <%# display right avatar image according to current user %>
           <li class="nav-item dropdown avatar-menu">

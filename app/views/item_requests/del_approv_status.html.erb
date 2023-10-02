@@ -1,9 +1,10 @@
 <div class="container">
   <% if @item_requests.any? %>
+
     <% if @item_requests.first.del_approv_status == "Declined" %>
       <h1>Declined Item requests</h1>
       <br>
-     <% else %>
+    <% else %>
       <div class="moving-truck">
         <i class="fa-solid fa-truck-fast fa-bounce fa-2xl"></i>
       </div>
@@ -15,13 +16,15 @@
     <div>
       <%# raise %>
       <% filtered_item_requests = @item_requests.select do |x| %>
-        <% x.request.location == current_user.location %>
+        <% x.request.location == current_user.location  %>
       <% end %>
       <% if filtered_item_requests.any? {|item_request| item_request.delivery_order.nil?} %>
-          <%# raise %>
+
           <% filtered_item_requests.group_by { |item_request| Location.find(item_request.request.original_location_id).name }.each do |loc, item_requests| %>
             <div>
-              <%= simple_form_for @delivery_order, url: delivery_orders_path do |f|%>
+              <% if item_requests.any { |item_request| item_request.delivery_order.nil?} %>
+
+                <%= simple_form_for @delivery_order, url: delivery_orders_path do |f|%>
                 <h2>Deliver to <%= loc %></h2>
                 <table class="table table-bordered table-striped table-hover">
                   <thead>
@@ -67,10 +70,12 @@
                   <%= f.submit "confirm delivery" %>
                 <% end %>
 
+                <% end %>
               <% end %>
             </div>
             <br>
           <% end %>
+
       <% end %>
     </div>
   <% else %>
