@@ -15,10 +15,11 @@
             <strong class="nav-header">Item Request</strong>
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/requests/new">Make New Request</a></li>
-            <li><a class="dropdown-item" href="/requests/">See Pending Approval Requests</a></li>
+            <li><a class="dropdown-item" href="/requests/new">Make new request</a></li>
+            <li><a class="dropdown-item" href="/requests/">See requests pending approval</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="/item_requests/status/Declined">Declined Items</a></li>
+            <li><a class="dropdown-item" href="/locations/<%= current_user.location_id %>/item_requests_approval">Item request status</a></li>
+            <%# raise %>
           </ul>
         </li>
 
@@ -59,7 +60,9 @@
         <% if user_signed_in? %>
           <p class="greeting">Hi there, <strong> <%= current_user.name %>
           <br>
-          <span id="avatar-role">(<%= current_user.role.capitalize %>) </span></strong></p>
+          <span id="avatar-role">(<%= current_user.role.capitalize %>) </span>
+
+          <span id="avatar-role">@<%= current_user.location.name.capitalize %></span></strong></p>
 
           <%# display right avatar image according to current user %>
           <li class="nav-item dropdown avatar-menu">

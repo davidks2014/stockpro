@@ -17,10 +17,11 @@ Rails.application.routes.draw do
   end
 
   post '/locations/:location_id/stockcount_update', to: 'update_materials#stockcount_update', as: 'stockcount_update'
-
   post '/locations/:location_id/stockalert_update', to: "update_materials#stockalert_update", as: "stockalert_update"
-
   get "/locations/:location_id/stockcount_report", to: "locations#stockcount_report", as: "stockcount_report"
+  get "/locations/:location_id/show_low_stock", to: "locations#show_low_stock", as: "show_low_stock"
+  get "/locations/:location_id/item_requests_approval", to: "item_requests#approval", as: "item_requests_approval"
+
 
   post 'materials/importnew', to: 'materials#import', as: 'material_import'
 
