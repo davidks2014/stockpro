@@ -94,13 +94,11 @@
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <% if current_user.role == "manager" %>
                 <%= link_to "Create location", new_location_path, class: "dropdown-item" %>
-                <%= link_to "Add new items to warehouse", "#", class: "dropdown-item" %>
-                <%= link_to "Approve monthly reconciliation report", "#", class: "dropdown-item" %>
+                <%= link_to "Import materials to warehouse", location_material_usage_path(Location.find(1), remarks: "Import New Materials"), class: "dropdown-item" %>
                 <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
               <% elsif current_user.role == "engineer" %>
-                <%= link_to "Upload monthly stockcount", "#", class: "dropdown-item" %>
-                <%= link_to "Upload monthly usage", "#", class: "dropdown-item" %>
-                <%= link_to "Generate monthly reconciliation report", "#", class: "dropdown-item" %>
+                <%= link_to "Upload monthly stockcount", location_stockcount_path(current_user.location), class: "dropdown-item" %>
+                <%= link_to "Record monthly material usage", location_material_usage_path(current_user.location, remarks: "Project Usage") , class: "dropdown-item" %>
                 <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
               <% end %>
             </div>

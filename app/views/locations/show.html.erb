@@ -40,7 +40,8 @@
 <br>
 
 <% if current_user.location == @location || current_user.role == "manager" %>
-  <%= link_to "Record New Imported Materials", location_material_usage_path(@location, remarks: "Import New Materials"), method: :get, class: "btn btn-primary", id: "view-request-btn" %>
+
+  <%= link_to "Record Monthly Materials Usage", location_material_usage_path(@location, remarks: "Project Usage"), method: :get, class: "btn btn-primary", id: "view-request-btn" %>
 
   <%= link_to "Monthly Stockcount", location_stockcount_path(@location, remarks: "Stockcount"), method: :get, class: "btn btn-primary", id: "view-request-btn" %>
 
