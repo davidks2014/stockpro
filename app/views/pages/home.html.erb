@@ -19,27 +19,41 @@
         <div class="card py-4">
           <h4>Pending Approval <i class="fa-solid fa-list-check" style="color: #3898b9;"></i></h4>
           <% if current_user.role == "engineer" %>
-            <p>You have <%= @item_request_count %> pending approval </p>
+            <h1><%= @item_request_count %></h1>
           <% else %>
-            <p>You have <%= @item_request_manager_count %> pending approval </p>
+            <h1> <%= @item_request_manager_count %></h1>
           <% end %>
 
-          <%= link_to "Pending requests", requests_path, class: "btn btn-primary", id: "view-request-btn" %>
+          <%= link_to "List pending requests", requests_path, class: "btn btn-primary", id: "view-request-btn" %>
         </div>
 
         <div class="card py-4">
-          <h4>Tracking Delivery  <i class="fa-solid fa-truck-fast fa-bounce" style="color: #3a98b9;"></i>
-          </h4>
-          <p>lorem ipsum 2 hello hello</p>
+          <% if current_user.role == "engineer" %>
+            <h4>Incoming Delivery  <i class="fa-solid fa-truck-fast fa-bounce" style="color: #3a98b9;"></i></h4>
+          <% elsif current_user.role == "manager" %>
+            <h4>Items in Delivery <i class="fa-solid fa-truck-fast fa-bounce" style="color: #3a98b9;"></i></h4>
+          <% end %>
 
-          <%= link_to "Tracking delivery", "#", class: "btn btn-info", id: "transit-delivery-btn" %>
+          <h1><%= @item_delivery_count %></h1>
+          <% if current_user.role == "engineer" %>
+            <%= link_to "List incoming delivery", delivery_orders_path, class: "btn btn-info", id: "transit-delivery-btn" %>
+          <% elsif current_user.role == "manager" %>
+            <%= link_to "List items in delivery", delivery_orders_path, class: "btn btn-info", id: "transit-delivery-btn" %>
+          <% end %>
         </div>
 
         <div class="card py-4">
           <h4>Low Stock Alert  <i class="fa-solid fa-bell fa-bounce" style="color: #de1721;"></i>
           </h4>
-          <p>lorem ipsum 3</p>
-          <%= link_to "Stock Alert", "#", class: "btn btn-danger", id: "stock-alert-btn" %>
+
+          <% if current_user.role == "engineer" %>
+            <h1><%= @low_stock_count %></h1>
+          <% elsif current_user.role == "manager" %>
+            <h1><%= @low_stock_count %></h1>
+          <% end %></p>
+
+
+          <%= link_to "List low stock items", show_low_stock_path(current_user.location), class: "btn btn-danger", id: "stock-alert-btn" %>
         </div>
 
         <%# <div class="card py-4">
