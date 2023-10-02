@@ -110,7 +110,7 @@ end
 
 puts " Creating user manager..."
 company = Location.create({name: "HQ", address: "Singapore"})
-manager = User.create({name: "Manager", role: "manager", email: "manager@gmail.com", password: "123456"})
+manager = User.create({name: "Manager", role: "manager", email: "manager@gmail.com", password: "123456", location: company})
 puts "#{manager.name} created"
 
 puts "Finished!"

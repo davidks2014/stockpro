@@ -39,5 +39,17 @@ class ItemRequestsController < ApplicationController
     @delivery_order = DeliveryOrder.new
   end
 
+  def approval
+    @item_requests = ItemRequest.all
+    @location = Location.find(params[:location_id])
+
+    if (current_user.location_id == @location.id || current_user.role == "manager")
+      @requests_made_to_others = @item_requests.select { |item_request| Location.find(item_request.request.original_location_id) == @location }
+
+      @requests_made_from_others = @item_requests.select { |item_request| Location.find(item_request.request.location_id) == @location }
+    end
+    
+  end
+
 
 end
