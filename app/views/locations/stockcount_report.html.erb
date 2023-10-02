@@ -7,7 +7,7 @@
         <th>Image</th>
         <th>Name</th>
         <th>Existing Unit Rate</th>
-        <th>Existing Qty</th>
+        <th>Theoretical Qty</th>
         <th>Stockcount qty</th>
         <th>shortfall(-) / excess(+)</th>
         <th>Cost Added(+) / Reduced(-)</th>
@@ -22,7 +22,7 @@
           <td><%= material.qty %></td>
           <td><%= material.stockcounts.last.qty %></td>
           <td><%= material.stockcounts.last.diff %></td>
-          <td><%= -material.stockcounts.last.diff * material.unit_price %></td>
+          <td><%= number_with_delimiter(format("%.2f", -(material.stockcounts.last.diff * material.unit_price).round(1))) %></td>
       <% end %>
     </tbody>
   </table>
