@@ -20,56 +20,58 @@
       <% if filtered_item_requests.any? {|item_request| item_request.delivery_order.nil?} %>
           <%# raise %>
           <% filtered_item_requests.group_by { |item_request| Location.find(item_request.request.original_location_id).name }.each do |loc, item_requests| %>
-            <div>
-              <%= simple_form_for @delivery_order, url: delivery_orders_path do |f|%>
-                <h2>Deliver to <%= loc %></h2>
-                <table class="table table-bordered table-striped table-hover">
-                  <thead>
-                    <tr>
-                      <th>Image</th>
-                      <th>Name</th>
-                      <th>Unit Price</th>
-                      <th>Qty</th>
-                      <% if item_requests.first.del_approv_status == "Declined" %>
+            <% if item_requests.any? { |item_request| item_request.delivery_order.nil? } %>
+              <div>
+                <%= simple_form_for @delivery_order, url: delivery_orders_path do |f|%>
+                  <h2>Deliver to <%= loc %></h2>
+                  <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                      <tr>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Unit Price</th>
+                        <th>Qty</th>
+                        <% if item_requests.first.del_approv_status == "Declined" %>
 
-                      <% else %>
-                        <th>Group for delivery</th>
+                        <% else %>
+                          <th>Group for delivery</th>
+                        <% end %>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% filtered_item_requests.each do |item_request| %>
+                        <% if Location.find(item_request.request.original_location_id).name == loc && item_request.delivery_order == nil %>
+                          <tr class="tablerow" id=<%= item_request.id %>>
+                            <td><%= image_tag item_request.item.image_path %></td>
+                            <td><%= item_request.item.name %></td>
+                            <% if item_request.item.is_a? Material %>
+                              <td>$<%= item_request.item.unit_price %></td>
+                            <% else %>
+                              <td>N/A</td>
+                            <% end %>
+                            <td><%= item_request.qty %></td>
+                            <% if item_requests.first.del_approv_status == "Declined" %>
+                            <% else %>
+                            <td>
+                            <%#if u want to select all, use checked in input %>
+                              <input type="checkbox" name="selected_item_request_ids[]" value="<%= item_request.id %>">
+                            </td>
+                            <% end %>
+                          </tr>
+                        <% end %>
                       <% end %>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <% filtered_item_requests.each do |item_request| %>
-                      <% if Location.find(item_request.request.original_location_id).name == loc && item_request.delivery_order == nil %>
-                        <tr class="tablerow" id=<%= item_request.id %>>
-                          <td><%= image_tag item_request.item.image_path %></td>
-                          <td><%= item_request.item.name %></td>
-                          <% if item_request.item.is_a? Material %>
-                            <td>$<%= item_request.item.unit_price %></td>
-                          <% else %>
-                            <td>N/A</td>
-                          <% end %>
-                          <td><%= item_request.qty %></td>
-                          <% if item_requests.first.del_approv_status == "Declined" %>
-                          <% else %>
-                          <td>
-                          <%#if u want to select all, use checked in input %>
-                            <input type="checkbox" name="selected_item_request_ids[]" value="<%= item_request.id %>">
-                          </td>
-                          <% end %>
-                        </tr>
-                      <% end %>
-                    <% end %>
-                  </tbody>
-                </table>
-                <% if item_requests.first.del_approv_status == "Declined" %>
+                    </tbody>
+                  </table>
+                  <% if item_requests.first.del_approv_status == "Declined" %>
 
-                <% else %>
-                  <%= f.submit "confirm delivery" %>
+                  <% else %>
+                    <%= f.submit "confirm delivery" %>
+                  <% end %>
+
                 <% end %>
-
-              <% end %>
-            </div>
-            <br>
+              </div>
+              <br>
+            <% end %>
           <% end %>
       <% end %>
     </div>
