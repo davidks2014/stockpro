@@ -19,7 +19,10 @@
         <h2>Requests made between locations</h2>
       <% end  %>
       <% @requests.each do |request| %>
-        <% if (current_user.location == request.location || current_user.role == "manager") && request.item_requests.any?{|x| x.del_approv_status == "Pending"}%>
+
+        <% if (current_user.role == "manager") && request.item_requests.all?{ |item_request| item_request.eng_appr_status.nil? || item_request.eng_appr_status == "declined" } %>
+
+        <% elsif (current_user.location == request.location || current_user.role == "manager") && request.item_requests.any?{|item_request| item_request.del_approv_status == "Pending"}%>
         <%# raise %>
           <div class="table-responsive">
             <table class="table table-bordered table-striped table-hover">
@@ -46,6 +49,8 @@
               <tbody>
                 <% request.item_requests.each do |item_request| %>
                   <% if item_request.man_appr_status == "approved" || item_request.man_appr_status == "declined" || item_request.eng_appr_status == "declined" %>
+
+                  <% elsif current_user.role == "manager" && (item_request.eng_appr_status == nil) %>
 
                   <% else %>
                     <tr>
