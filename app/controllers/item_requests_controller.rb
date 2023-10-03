@@ -47,8 +47,9 @@ class ItemRequestsController < ApplicationController
       @requests_made_to_others = @item_requests.select { |item_request| Location.find(item_request.request.original_location_id) == @location }
 
       @requests_made_from_others = @item_requests.select { |item_request| Location.find(item_request.request.location_id) == @location }
+      
     end
-    
+
   end
 
 
