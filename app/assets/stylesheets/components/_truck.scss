@@ -1,9 +1,9 @@
 .moving-truck {
   // background-color: $primary; /* Blue truck for example */
-  font-size: 2.5em;
-  color: navy;
+  font-size: 1.8em;
+  color: black;
   position: absolute;
-  top: 15%; /* Initial vertical position */
+  top: 21%; /* Initial vertical position */
   // left: -50px; /* Initial horizontal position (off-screen) */
   left: 100px;
   background-size: cover; /* Adjust the image size as needed */
@@ -17,9 +17,9 @@
 
 @keyframes speed {
   0% {
-      left: 10%; /* Starting position */
+      left: 5%; /* Starting position */
   }
   100% {
-      left: 90%; /* Ending position (move off-screen to the right) */
+      left: 105%; /* Ending position (move off-screen to the right) */
   }
 }
