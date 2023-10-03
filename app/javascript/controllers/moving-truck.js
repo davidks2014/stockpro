@@ -1,17 +1,21 @@
-<script>
-  // Get references to the tab buttons and the truck element
-  const outgoingTabButton = document.getElementById("out-tab");
-  const truckElement = document.getElementById("truck");
+ <script>
+document.addEventListener("DOMContentLoaded", function() {
+  const confirmDeliveryButton = document.getElementById("confirm-delivery-button");
+  const movingTruckIcon = document.querySelector(".moving-truck i");
 
-  // Add an event listener to the 'Outgoing items' tab button
-  outgoingTabButton.addEventListener("click", function () {
+  confirmDeliveryButton.addEventListener("click", function() {
+    // Add a CSS class to trigger the animation
+    movingTruckIcon.style.animationName = "speed";
+    movingTruckIcon.style.animationDuration = "5s";
+    movingTruckIcon.style.animationTimingFunction = "linear";
+    movingTruckIcon.style.animationIterationCount = "1"; // Play the animation only once
+    movingTruckIcon.style.animationFillMode = "forwards";
 
-// Check if the tab is active and add or remove the animation class accordingly
-    const isActive = this.getAttribute("aria-selected") === "true";
-    if (isActive) {
-      truckElement.classList.add("animated-truck");
-    } else {
-      truckElement.classList.remove("animated-truck");
-    }
+    // Adjust the starting and ending positions if needed
+    movingTruckIcon.style.left = "60%"; // Starting position
+    setTimeout(function() {
+      movingTruckIcon.style.left = "105%"; // Ending position (move off-screen to the right)
+    }, 0); // Delay is set to 0 to ensure the animation starts immediately
   });
-</script>
+});
+</script> %>
