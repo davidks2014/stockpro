@@ -8,14 +8,14 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div data-controller="dropdown" data-action="click->dropdown#click">
+    <div data-controller="dropdown">
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <strong class="nav-header">Item request</strong>
+            <a data-action="click->dropdown#click" id="one" class="nav-link dropdown-toggle nav-header" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Item request
             </a>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu" data-dropdown-target="one">
               <li><a class="dropdown-item" href="/requests/new">Make new request</a></li>
               <li><a class="dropdown-item" href="/requests/">See pending approval requests</a></li>
               <li><hr class="dropdown-divider"></li>
@@ -24,20 +24,20 @@
           </li>
 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <strong class="nav-header">Item Delivery</strong>
+            <a data-action="click->dropdown#click" id="two" class="nav-link dropdown-toggle nav-header" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Item Delivery
             </a>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu" data-dropdown-target="two">
               <li><a class="dropdown-item" href="/item_requests/status/Approved">Group items for delivery</a></li>
               <li><a class="dropdown-item" href="/delivery_orders">Delivery Order Status</a></li>
             </ul>
           </li>
 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <strong class="nav-header">Locations</strong>
+            <a data-action="click->dropdown#click" id="three" class="nav-link dropdown-toggle nav-header" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Locations
             </a>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu" data-dropdown-target="three">
               <% @locations.each do |location| %>
                 <li class="nav-link"><%= link_to "#{location.name}", location_path(location), class: "dropdown-item" %></li>
               <% end %>
