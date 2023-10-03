@@ -101,9 +101,8 @@
       </div>
     </div>
 
-
- <% elsif current_user.location == Location.find(1)%>
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
+  <% elsif current_user.location == Location.find(1)%>
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
         <button class="nav-link active" id="out-tab" data-bs-toggle="tab" data-bs-target="#out-tab-pane" type="button" role="tab" aria-controls="out-tab-pane" aria-selected="false">Outgoing items</button>
       </li>
@@ -203,11 +202,7 @@
         <% end %>
       </div>
     </div>
-
-
-
-
-  <% elsif current_user == "manager" %>
+  <% elsif current_user.role == "manager" %>
     <h1>Outgoing Material</h1>
     <hr>
     <% @delivery_orders.each do |delivery_order| %>

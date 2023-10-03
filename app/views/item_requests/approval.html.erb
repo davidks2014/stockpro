@@ -1,93 +1,213 @@
 <div class="container">
 
-  <h1>Requests made from others</h1>
+  <% if current_user.location != Location.find(1) || current_user.role == "manager"%>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="out-tab" data-bs-toggle="tab" data-bs-target="#out-tab-pane" type="button" role="tab" aria-controls="out-tab-pane" aria-selected="false">Request from others</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="in-tab" data-bs-toggle="tab" data-bs-target="#in-tab-pane" type="button" role="tab" aria-controls="in-tab-pane" aria-selected="true">Request to others</button>
+      </li>
+    </ul>
 
-  <table class="table table-bordered table-striped table-hover">
-    <thead>
-      <tr>
-        <th>Request from</th>
-        <th>Image</th>
-        <th>Name</th>
-        <th>Request Qty</th>
-        <th>UOM</th>
-        <th>Unit Price</th>
-        <th>Delivery Approval Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @requests_made_from_others.each do |item_request| %>
-        <tr>
-          <td><%= Location.find(item_request.request.original_location_id).name %></td>
-          <td><%= image_tag item_request.item.image_path %></td>
-          <td><%= item_request.item.name %></td>
-          <td><%= item_request.qty %></td>
-          <% if item_request.item.is_a? Material %>
-            <td><%= item_request.item.uom %></td>
-          <% else %>
-            <td>N/A</td>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade" id="out-tab-pane" role="tabpanel" aria-labelledby="out-tab" tabindex="0">
+        <h1>Requests made from others</h1>
+        <table class="table table-bordered table-striped table-hover">
+        <thead>
+          <tr>
+            <th>Request from</th>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Request Qty</th>
+            <th>UOM</th>
+            <th>Unit Price</th>
+            <th>Delivery Approval Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @requests_made_from_others.each do |item_request| %>
+            <tr>
+              <td><%= Location.find(item_request.request.original_location_id).name %></td>
+              <td><%= image_tag item_request.item.image_path %></td>
+              <td><%= item_request.item.name %></td>
+              <td><%= item_request.qty %></td>
+              <% if item_request.item.is_a? Material %>
+                <td><%= item_request.item.uom %></td>
+              <% else %>
+                <td>N/A</td>
+              <% end %>
+              <% if item_request.item.is_a? Material %>
+                <td>$<%= item_request.item.unit_price %></td>
+              <% else %>
+                <td>N/A</td>
+              <% end %>
+              <td style="<% if item_request.del_approv_status == 'Approved' %>
+                background-color: green;
+                color: white;
+              <% elsif item_request.del_approv_status == 'Declined' %>
+                background-color: red;
+                color: white;
+              <% end %>">
+              <%= item_request.del_approv_status %>
+              </td>
+            </tr>
           <% end %>
-          <% if item_request.item.is_a? Material %>
-            <td>$<%= item_request.item.unit_price %></td>
-          <% else %>
-            <td>N/A</td>
-          <% end %>
-          <td style="<% if item_request.del_approv_status == 'Approved' %>
-            background-color: green;
-            color: white;
-          <% elsif item_request.del_approv_status == 'Declined' %>
-            background-color: red;
-            color: white;
-          <% end %>">
-          <%= item_request.del_approv_status %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+        </tbody>
+        </table>
+      </div>
 
-  <h1>Requests made to others</h1>
+      <div class="tab-pane fade show active" id="in-tab-pane" role="tabpanel" aria-labelledby="in-tab" tabindex="0">
+        <h1>Requests made to others</h1>
+        <table class="table table-bordered table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Request to</th>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Request Qty</th>
+              <th>UOM</th>
+              <th>Unit Price</th>
+              <th>Delivery Approval Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @requests_made_to_others.each do |item_request| %>
+              <tr>
+                <td><%= item_request.request.location.name %></td>
+                <td><%= image_tag item_request.item.image_path %></td>
+                <td><%= item_request.item.name %></td>
+                <td><%= item_request.qty %></td>
+                <% if item_request.item.is_a? Material %>
+                  <td><%= item_request.item.uom %></td>
+                <% else %>
+                  <td>N/A</td>
+                <% end %>
+                <% if item_request.item.is_a? Material %>
+                  <td>$<%= item_request.item.unit_price %></td>
+                <% else %>
+                  <td>N/A</td>
+                <% end %>
+                <td style="<% if item_request.del_approv_status == 'Approved' %>
+                  background-color: green;
+                  color: white;
+                <% elsif item_request.del_approv_status == 'Declined' %>
+                  background-color: red;
+                  color: white;
+                <% end %>">
+                <%= item_request.del_approv_status %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
 
-  <table class="table table-bordered table-striped table-hover">
-    <thead>
-      <tr>
-        <th>Request to</th>
-        <th>Image</th>
-        <th>Name</th>
-        <th>Request Qty</th>
-        <th>UOM</th>
-        <th>Unit Price</th>
-        <th>Delivery Approval Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @requests_made_to_others.each do |item_request| %>
-        <tr>
-          <td><%= item_request.request.location.name %></td>
-          <td><%= image_tag item_request.item.image_path %></td>
-          <td><%= item_request.item.name %></td>
-          <td><%= item_request.qty %></td>
-          <% if item_request.item.is_a? Material %>
-            <td><%= item_request.item.uom %></td>
-          <% else %>
-            <td>N/A</td>
+  <% elsif current_user.location == Location.find(1) %>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="out-tab" data-bs-toggle="tab" data-bs-target="#out-tab-pane" type="button" role="tab" aria-controls="out-tab-pane" aria-selected="false">Request from others</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="in-tab" data-bs-toggle="tab" data-bs-target="#in-tab-pane" type="button" role="tab" aria-controls="in-tab-pane" aria-selected="true">Request to others</button>
+      </li>
+    </ul>
+
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="out-tab-pane" role="tabpanel" aria-labelledby="out-tab" tabindex="0">
+        <h1>Requests made from others</h1>
+        <table class="table table-bordered table-striped table-hover">
+        <thead>
+          <tr>
+            <th>Request from</th>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Request Qty</th>
+            <th>UOM</th>
+            <th>Unit Price</th>
+            <th>Delivery Approval Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @requests_made_from_others.each do |item_request| %>
+            <tr>
+              <td><%= Location.find(item_request.request.original_location_id).name %></td>
+              <td><%= image_tag item_request.item.image_path %></td>
+              <td><%= item_request.item.name %></td>
+              <td><%= item_request.qty %></td>
+              <% if item_request.item.is_a? Material %>
+                <td><%= item_request.item.uom %></td>
+              <% else %>
+                <td>N/A</td>
+              <% end %>
+              <% if item_request.item.is_a? Material %>
+                <td>$<%= item_request.item.unit_price %></td>
+              <% else %>
+                <td>N/A</td>
+              <% end %>
+              <td style="<% if item_request.del_approv_status == 'Approved' %>
+                background-color: green;
+                color: white;
+              <% elsif item_request.del_approv_status == 'Declined' %>
+                background-color: red;
+                color: white;
+              <% end %>">
+              <%= item_request.del_approv_status %>
+              </td>
+            </tr>
           <% end %>
-          <% if item_request.item.is_a? Material %>
-            <td>$<%= item_request.item.unit_price %></td>
-          <% else %>
-            <td>N/A</td>
-          <% end %>
-          <td style="<% if item_request.del_approv_status == 'Approved' %>
-            background-color: green;
-            color: white;
-          <% elsif item_request.del_approv_status == 'Declined' %>
-            background-color: red;
-            color: white;
-          <% end %>">
-          <%= item_request.del_approv_status %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+        </tbody>
+        </table>
+      </div>
+
+      <div class="tab-pane fade" id="in-tab-pane" role="tabpanel" aria-labelledby="in-tab" tabindex="0">
+        <h1>Requests made to others</h1>
+        <table class="table table-bordered table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Request to</th>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Request Qty</th>
+              <th>UOM</th>
+              <th>Unit Price</th>
+              <th>Delivery Approval Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @requests_made_to_others.each do |item_request| %>
+              <tr>
+                <td><%= item_request.request.location.name %></td>
+                <td><%= image_tag item_request.item.image_path %></td>
+                <td><%= item_request.item.name %></td>
+                <td><%= item_request.qty %></td>
+                <% if item_request.item.is_a? Material %>
+                  <td><%= item_request.item.uom %></td>
+                <% else %>
+                  <td>N/A</td>
+                <% end %>
+                <% if item_request.item.is_a? Material %>
+                  <td>$<%= item_request.item.unit_price %></td>
+                <% else %>
+                  <td>N/A</td>
+                <% end %>
+                <td style="<% if item_request.del_approv_status == 'Approved' %>
+                  background-color: green;
+                  color: white;
+                <% elsif item_request.del_approv_status == 'Declined' %>
+                  background-color: red;
+                  color: white;
+                <% end %>">
+                <%= item_request.del_approv_status %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  <% end %>
 
 </div>
