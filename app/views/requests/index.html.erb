@@ -79,11 +79,11 @@
                       <% else %>
                         <td>
                           <% if current_user.role == "manager" %>
-                            <%= link_to "Approve", item_request_eng_approve_path(item_request), method: :post, data: { turbo_method: :post, turbo_confirm: "Are you sure?"}, class: "btn btn-primary disabled" %>
-                            <%= link_to "Decline", item_request_eng_decline_path(item_request), method: :post, data: { turbo_method: :post, turbo_confirm: "Are you sure?"}, class: "btn btn-danger disabled" %>
+                            <%= link_to "Approve", item_request_eng_approve_path(item_request), method: :post, data: { turbo_method: :post, turbo_confirm: "Are you sure?"}, class: "btn btn-primary disabled btn-space" %>
+                            <%= link_to "Decline", item_request_eng_decline_path(item_request), method: :post, data: { turbo_method: :post, turbo_confirm: "Are you sure?"}, class: "btn btn-danger disabled btn-space" %>
                           <% else %>
-                            <%= link_to "Approve", item_request_eng_approve_path(item_request), method: :post, data: { turbo_method: :post, turbo_confirm: "Are you sure?"}, class: "btn btn-primary" %>
-                            <%= link_to "Decline", item_request_eng_decline_path(item_request), method: :post, data: { turbo_method: :post, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" %>
+                            <%= link_to "Approve", item_request_eng_approve_path(item_request), method: :post, data: { turbo_method: :post, turbo_confirm: "Are you sure?"}, class: "btn btn-primary btn-space" %>
+                            <%= link_to "Decline", item_request_eng_decline_path(item_request), method: :post, data: { turbo_method: :post, turbo_confirm: "Are you sure?"}, class: "btn btn-danger btn-space" %>
                           <% end %>
                         </td>
                       <% end %>
