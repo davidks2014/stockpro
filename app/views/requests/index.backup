@@ -19,7 +19,10 @@
         <h2>Requests made between locations</h2>
       <% end  %>
       <% @requests.each do |request| %>
-        <% if (current_user.location == request.location || current_user.role == "manager") && request.item_requests.any?{|x| x.del_approv_status == "Pending"}%>
+
+        <% if (current_user.role == "manager") && request.item_requests.all?{ |item_request| item_request.eng_appr_status.nil? || item_request.eng_appr_status == "declined" } %>
+
+        <% elsif (current_user.location == request.location || current_user.role == "manager") && request.item_requests.any?{|item_request| item_request.del_approv_status == "Pending"}%>
         <%# raise %>
           <div class="table-responsive">
             <table class="table table-bordered table-striped table-hover">
@@ -35,13 +38,19 @@
                   <th>Request Qty</th>
                   <th>UOM</th>
                   <th>Unit Price</th>
-                  <th>Engineer's Approval</th>
-                  <th>Manager's Approval</th>
+
+                  <% if current_user.role == "manager" %>
+                    <th>Approval Status</th>
+                  <% elsif current_user.role == "engineer" %>%
+                    <th>Approval Status</th>
+                  <% end %>
                 </tr>
               </thead>
               <tbody>
                 <% request.item_requests.each do |item_request| %>
                   <% if item_request.man_appr_status == "approved" || item_request.man_appr_status == "declined" || item_request.eng_appr_status == "declined" %>
+
+                  <% elsif current_user.role == "manager" && (item_request.eng_appr_status == nil) %>
 
                   <% else %>
                     <tr>
@@ -65,41 +74,27 @@
                       <% end %>
 
                       <% if item_request.eng_appr_status == "approved" %>
-                        <td>
-                          <% if current_user.role == "manager" %>
-                            <button type="button" class="btn btn-success disabled">Approved</button>
-                          <% else %>
-                            <button type="button" class="btn btn-success">Approved</button>
-                          <% end %>
-                        </td>
-                      <% else %>
-                        <td>
-                          <% if current_user.role == "manager" %>
-                            <%= link_to "Approve", item_request_eng_approve_path(item_request), method: :post, data: { turbo_method: :post }, class: "btn btn-primary disabled" %>
-                            <%= link_to "Decline", item_request_eng_decline_path(item_request), method: :post, data: { turbo_method: :post, turbo_confirm: "Are you sure?"}, class: "btn btn-danger disabled" %>
-                          <% else %>
-                            <%= link_to "Approve", item_request_eng_approve_path(item_request), method: :post, data: { turbo_method: :post }, class: "btn btn-primary" %>
-                            <%= link_to "Decline", item_request_eng_decline_path(item_request), method: :post, data: { turbo_method: :post, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" %>
-                          <% end %>
-                        </td>
-                      <% end %>
 
-                      <% if item_request.eng_appr_status == "approved" %>
-                        <td>
                           <% if current_user.role == "manager" %>
+                            <td>
                             <%= link_to "Approve", item_request_man_approve_path(item_request), method: :post, data: { turbo_method: :post }, class: "btn btn-primary" %>
                             <%= link_to "Decline", item_request_man_decline_path(item_request), method: :post, data: { turbo_method: :post, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" %>
-                          <% else %>
-                            <%= link_to "Approve", item_request_man_approve_path(item_request), method: :post, data: { turbo_method: :post }, class: "btn btn-primary disabled" %>
-                            <%= link_to "Decline", item_request_man_decline_path(item_request), method: :post, data: { turbo_method: :post, turbo_confirm: "Are you sure?" }, class: "btn btn-danger disabled" %>
+                            </td>
+                          <% elsif current_user.role = "engineer" %>
+                            <td><button type="button" class="btn btn-success">Pending manager review</button></td>
+
                           <% end %>
-                        </td>
+
                       <% else %>
-                        <td>
-                          <%= link_to "Approve", item_request_man_approve_path(item_request), method: :post, data: { turbo_method: :post }, class: "btn btn-success disabled" %>
-                          <%= link_to "Decline", item_request_man_decline_path(item_request), method: :post, data: { turbo_method: :post, turbo_confirm: "Are you sure?" }, class: "btn btn-danger disabled" %>
-                        </td>
+                          <td>
+                            <%= link_to "Approve", item_request_eng_approve_path(item_request), method: :post, data: { turbo_method: :post }, class: "btn btn-primary" %>
+                            <%= link_to "Decline", item_request_eng_decline_path(item_request), method: :post, data: { turbo_method: :post, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" %>
+                          </td>
                       <% end %>
+
+
+
+
                     </tr>
                   <% end %>
                 <% end %>
