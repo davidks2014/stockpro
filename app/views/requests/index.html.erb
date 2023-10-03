@@ -1,160 +1,98 @@
 <div class="container">
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-    <li class="nav-item" role="presentation">
-      <button class="nav-link active" id="receive-tab" data-bs-toggle="tab" data-bs-target="#receive-tab-pane" type="button" role="tab" aria-controls="receive-tab-pane" aria-selected="true">Receive requests</button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" id="sent-tab" data-bs-toggle="tab" data-bs-target="#sent-tab-pane" type="button" role="tab" aria-controls="sent-tab-pane" aria-selected="false">Sent requests</button>
-    </li>
-  </ul>
-  <br>
 
-  <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active" id="receive-tab-pane" role="tabpanel" aria-labelledby="receive-tab" tabindex="0">
-      <% if @requests.none? { |request| request.location == current_user.location  } && current_user.role != "manager" %>
-        <h2>No request is made to <%= current_user.location.name %></h2>
-      <% elsif current_user.role != "manager" %>
-        <h2>Received requests to <%= current_user.location.name  %></h2>
-      <% elsif current_user.role == "manager" %>
-        <h2>Requests made between locations</h2>
-      <% end  %>
-      <% @requests.each do |request| %>
-        <% if (current_user.location == request.location || current_user.role == "manager") && request.item_requests.any?{|x| x.del_approv_status == "Pending"}%>
-        <%# raise %>
-          <div class="table-responsive">
-            <table class="table table-bordered table-striped table-hover">
-              <thead>
-                <tr>
-                  <th>Request from</th>
-                  <% if current_user.role == "manager"  %>
-                    <th>Request to</th>
-                  <% end %>
-                  <th>Image</th>
-                  <th>Name</th>
-                  <th>Available Qty</th>
-                  <th>Request Qty</th>
-                  <th>UOM</th>
-                  <th>Unit Price</th>
+  <div class="tab-pane fade show active" id="receive-tab-pane" role="tabpanel" aria-labelledby="receive-tab" tabindex="0">
+    <% if @requests.none? { |request| request.location == current_user.location  } && current_user.role != "manager" %>
+      <h2>No request is made to <%= current_user.location.name %></h2>
+    <% elsif current_user.role != "manager" %>
+      <h2>Received requests to <%= current_user.location.name  %></h2>
+    <% elsif current_user.role == "manager" %>
+      <h2>Requests made between locations</h2>
+    <% end  %>
+    <% @requests.each do |request| %>
 
-                  <% if current_user.role == "manager" %>
-                    <th>Approval Status</th>
-                  <% elsif current_user.role == "engineer" %>%
-                    <th>Approval Status</th>
-                  <% end %>
-                </tr>
-              </thead>
-              <tbody>
-                <% request.item_requests.each do |item_request| %>
-                  <% if item_request.man_appr_status == "approved" || item_request.man_appr_status == "declined" || item_request.eng_appr_status == "declined" %>
+      <% if (current_user.role == "manager") && request.item_requests.all?{ |item_request| item_request.eng_appr_status.nil? || item_request.eng_appr_status == "declined" } %>
 
-                  <% else %>
-                    <tr>
-                      <td><%= Location.find(request.original_location_id).name %></td>
-                      <% if current_user.role == "manager"  %>
-                        <td><%= request.location.name %></td>
-                      <% end %>
-                      <td><%= image_tag item_request.item.image_path  %></td>
-                      <td><%= item_request.item.name %></td>
-                      <td><%= item_request.item.qty %></td>
-                      <td><%= item_request.qty %></td>
-                      <% if item_request.item.is_a? Material %>
-                        <td><%= item_request.item.uom %></td>
-                      <% else %>
-                        <td>N/A</td>
-                      <% end %>
-                      <% if item_request.item.is_a? Material %>
-                        <td>$<%= item_request.item.unit_price %></td>
-                      <% else %>
-                        <td>N/A</td>
-                      <% end %>
-
-                      <% if item_request.eng_appr_status == "approved" %>
-
-                          <% if current_user.role == "manager" %>
-                            <td>
-                            <%= link_to "Approve", item_request_man_approve_path(item_request), method: :post, data: { turbo_method: :post }, class: "btn btn-primary" %>
-                            <%= link_to "Decline", item_request_man_decline_path(item_request), method: :post, data: { turbo_method: :post, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" %>
-                            </td>
-                          <% elsif current_user.role = "engineer" %>
-                            <td><button type="button" class="btn btn-success">Pending manager review</button></td>
-
-                          <% end %>
-
-                      <% else %>
-                          <td>
-                            <%= link_to "Approve", item_request_eng_approve_path(item_request), method: :post, data: { turbo_method: :post }, class: "btn btn-primary" %>
-                            <%= link_to "Decline", item_request_eng_decline_path(item_request), method: :post, data: { turbo_method: :post, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" %>
-                          </td>
-                      <% end %>
-
-
-
-
-                    </tr>
-                  <% end %>
+      <% elsif (current_user.location == request.location || current_user.role == "manager") && request.item_requests.any?{|item_request| item_request.del_approv_status == "Pending"}%>
+      <%# raise %>
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped table-hover">
+            <thead>
+              <tr>
+                <th>Request from</th>
+                <% if current_user.role == "manager"  %>
+                  <th>Request to</th>
                 <% end %>
-              </tbody>
-            </table>
-          </div>
-        <% end %>
-      <% end %>
-    </div>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Available Qty</th>
+                <th>Request Qty</th>
+                <th>UOM</th>
+                <th>Unit Price</th>
 
-    <div class="tab-pane fade" id="sent-tab-pane" role="tabpanel" aria-labelledby="sent-tab" tabindex="0">
-      <% if @requests.none? { |request| current_user.location == Location.find(request.original_location_id) } && current_user.role != "manager" %>
-        <h2>No request is sent from <%= current_user.location.name %></h2>
-      <% elsif current_user.role != "manager" %>
-        <h2>Sent requests from <%= current_user.location.name %></h2>
-      <% end %>
+                <% if current_user.role == "manager" %>
+                  <th>Approval Status</th>
+                <% elsif current_user.role == "engineer" %>%
+                  <th>Approval Status</th>
+                <% end %>
+              </tr>
+            </thead>
+            <tbody>
+              <% request.item_requests.each do |item_request| %>
+                <% if item_request.man_appr_status == "approved" || item_request.man_appr_status == "declined" || item_request.eng_appr_status == "declined" %>
 
-      <% @requests.each do |request| %>
-          <% if (current_user.location == Location.find(request.original_location_id) || current_user.role == "manager") && request.item_requests.any?{|x| x.del_approv_status == "Pending"} %>
-            <div class="table-responsive">
-              <table class="table table-bordered table-striped table-hover">
-                <thead>
+                <% elsif current_user.role == "manager" && (item_request.eng_appr_status == nil) %>
+
+                <% else %>
                   <tr>
-                    <th>Request to</th>
-                    <th>Image</th>
-                    <th>Name</th>
-                    <th>Request Qty</th>
-                    <th>UOM</th>
-                    <th>Unit Price</th>
-                    <th>Delivery Approval Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <% request.item_requests.each do |item_request| %>
-                    <tr>
+                    <td><%= Location.find(request.original_location_id).name %></td>
+                    <% if current_user.role == "manager"  %>
                       <td><%= request.location.name %></td>
-                      <td><%= image_tag item_request.item.image_path %></td>
-                      <td><%= item_request.item.name %></td>
-                      <td><%= item_request.qty %></td>
-                      <% if item_request.item.is_a? Material %>
-                        <td><%= item_request.item.uom %></td>
-                      <% else %>
-                        <td>N/A</td>
-                      <% end %>
-                      <% if item_request.item.is_a? Material %>
-                        <td>$<%= item_request.item.unit_price %></td>
-                      <% else %>
-                        <td>N/A</td>
-                      <% end %>
-                      <td style="<% if item_request.del_approv_status == 'Approved' %>
-                        background-color: green;
-                        color: white;
-                      <% elsif item_request.del_approv_status == 'Declined' %>
-                        background-color: red;
-                        color: white;
-                      <% end %>">
-                      <%= item_request.del_approv_status %>
-                      </td>
-                    </tr>
-                  <% end %>
-                </tbody>
-              </table>
-            </div>
-          <% end %>
+                    <% end %>
+                    <td><%= image_tag item_request.item.image_path  %></td>
+                    <td><%= item_request.item.name %></td>
+                    <td><%= item_request.item.qty %></td>
+                    <td><%= item_request.qty %></td>
+                    <% if item_request.item.is_a? Material %>
+                      <td><%= item_request.item.uom %></td>
+                    <% else %>
+                      <td>N/A</td>
+                    <% end %>
+                    <% if item_request.item.is_a? Material %>
+                      <td>$<%= item_request.item.unit_price %></td>
+                    <% else %>
+                      <td>N/A</td>
+                    <% end %>
+
+                    <% if item_request.eng_appr_status == "approved" %>
+
+                        <% if current_user.role == "manager" %>
+                          <td>
+                          <%= link_to "Approve", item_request_man_approve_path(item_request), method: :post, data: { turbo_method: :post }, class: "btn btn-primary" %>
+                          <%= link_to "Decline", item_request_man_decline_path(item_request), method: :post, data: { turbo_method: :post, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" %>
+                          </td>
+                        <% elsif current_user.role = "engineer" %>
+                          <td><button type="button" class="btn btn-success">Pending manager review</button></td>
+
+                        <% end %>
+
+                    <% else %>
+                        <td>
+                          <%= link_to "Approve", item_request_eng_approve_path(item_request), method: :post, data: { turbo_method: :post }, class: "btn btn-primary" %>
+                          <%= link_to "Decline", item_request_eng_decline_path(item_request), method: :post, data: { turbo_method: :post, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" %>
+                        </td>
+                    <% end %>
+
+
+
+
+                  </tr>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
       <% end %>
-    </div>
+    <% end %>
   </div>
+
 </div>
