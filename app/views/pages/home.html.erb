@@ -17,7 +17,26 @@
     <div class="wrapper-container">
       <div class="grid-container">
         <div class="card py-4">
-          <h4>Pending Approvals <i class="fa-solid fa-list-check fa-bounce" style="color: #3898b9;"></i></h4>
+          <h4>Pending Approvals
+
+          <% if current_user.role == "engineer" %>
+            <% if @item_request_count > 0 %>
+              <i class="fa-solid fa-list-check fa-bounce" style="color: #3898b9;"></i>
+            <% else %>
+              <i class="fa-solid fa-list-check" style="color: #3898b9;"></i>
+            <% end %>
+          <% end %>
+
+          <% if current_user.role == "manager" %>
+            <% if @item_request_manager_count > 0 %>
+              <i class="fa-solid fa-list-check fa-bounce" style="color: #3898b9;"></i>
+            <% else %>
+              <i class="fa-solid fa-list-check" style="color: #3898b9;"></i>
+            <% end %>
+          <% end %>
+          </h4>
+
+
           <% if current_user.role == "engineer" %>
             <h1><%= @item_request_count %></h1>
           <% else %>
@@ -29,9 +48,19 @@
 
         <div class="card py-4">
           <% if current_user.role == "engineer" %>
-            <h4>Incoming Delivery  <i class="fa-solid fa-truck-fast fa-bounce" style="color: #acac50;"></i></h4>
+            <% if @item_delivery_count > 0 %>
+              <h4>Incoming Delivery  <i class="fa-solid fa-truck-fast fa-bounce" style="color: #acac50;"></i></h4>
+            <%  else %>
+              <h4>Incoming Delivery  <i class="fa-solid fa-truck-fast" style="color: #acac50;"></i></h4>
+            <% end %>
+
           <% elsif current_user.role == "manager" %>
-            <h4>Items in Delivery <i class="fa-solid fa-truck-fast fa-bounce" style="color: #3a98b9;"></i></h4>
+            <% if  @item_delivery_count > 0 %>
+              <h4>Items in Delivery <i class="fa-solid fa-truck-fast fa-bounce" style="color: #acac50;"></i></h4>
+            <%  else %>
+              <h4>Items in Delivery <i class="fa-solid fa-truck-fast" style="color: #acac50;"></i></h4>
+            <% end %>
+
           <% end %>
 
           <h1><%= @item_delivery_count %></h1>
@@ -43,12 +72,21 @@
         </div>
 
         <div class="card py-4">
-          <h4>Low Stock Alert  <i class="fa-solid fa-bell fa-bounce" style="color: #de1721;"></i></h4>
+          <h4>Low Stock Alert
+          <% if @low_stock_count > 0 %>
+            <i class="fa-solid fa-bell fa-bounce" style="color: #de1721;"></i>
+          <% else %>
+            <i class="fa-solid fa-bell" style="color: #de1721;"></i>
+          <% end %>
+          </h4>
+
+
           <% if current_user.role == "engineer" %>
             <h1><%= @low_stock_count %></h1>
           <% elsif current_user.role == "manager" %>
             <h1><%= @low_stock_count %></h1>
           <% end %>
+
             <%= link_to "List Low Stock Items", show_low_stock_path(current_user.location), class: "btn btn-danger", id: "stock-alert-btn" %>
         </div>
 
@@ -64,14 +102,23 @@
 
     <div class="bottom-container">
       <%# display pie chart %>
-      <div class="pie-chart">
-        <% materials_by_location = Material.where(location: current_user.location).group(:name).sum(:qty) %>
-        <%= pie_chart materials_by_location %>
+
+      <div class="map-card">
+        <h3>Project Usage Amount(S$) </h3>
+        <div class="pie-chart">
+          <% materials_by_location = MaterialMovement.joins(:material).where(location_id: current_user.location).group('materials.name').sum(:amount) %>
+          <% formatted_materials_by_location = materials_by_location.transform_values { |value| number_to_currency(value, unit: "$") } %>
+
+
+          <%= pie_chart materials_by_location, legend: "bottom", height: "400px" %>
+        </div>
       </div>
 
       <%# Map showing project locations. Occupy 46% of total layout on right of screen%>
-      <div class="map-card"><br>
-        <h3>Project Sites</h3>
+      <div class="map-card">
+        <p style="color: green"><%= notice %></p>
+        <h3>Project Site Locations</h3>
+
         <div data-controller="map"
           id='map'
           data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
