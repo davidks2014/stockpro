@@ -1,113 +1,112 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-logo">
-  <div class="container-fluid">
-    <%= link_to root_path, class: "navbar-brand" do %>
-      <%= image_tag "sp_noBG.png", alt: "Logo" %>
-    <% end %>
+<div>
+  <div class="navbar navbar-expand-sm navbar-light navbar-logo">
+    <div class="container-fluid">
+      <%= link_to root_path, class: "navbar-brand" do %>
+        <%= image_tag "sp_noBG.png", alt: "Logo" %>
+      <% end %>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav  mb-2 mb-lg-0">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <strong class="nav-header">Item Request</strong>
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/requests/new">Make new request</a></li>
-            <li><a class="dropdown-item" href="/requests/">See pending approval requests</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="/item_requests/status/Declined">Items declined for delivery</a></li>
-          </ul>
-        </li>
-
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <strong class="nav-header">Item Delivery</strong>
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/item_requests/status/Approved">Group items for delivery</a></li>
-            <li><a class="dropdown-item" href="/delivery_orders">Delivery Order Status</a></li>
-          </ul>
-        </li>
-
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <strong class="nav-header">Locations</strong>
-          </a>
-          <ul class="dropdown-menu">
-            <% @locations.each do |location| %>
-              <li class="nav-link"><%= link_to "#{location.name}", location_path(location), class: "dropdown-item" %></li>
-            <% end %>
-          </ul>
-        </li>
-      </ul>
-        <%# Search function %>
-        <%# <div class="container"> %>
-          <%# <form class="d-flex" role="search"> %>
-            <%# <input class="form-control search-font me-2" type="search" placeholder="Type search item here..." aria-label="Search"> %>
-            <%# <button class="btn btn-outline-success search-font" type="submit">Search</button> %>
-          <%# </form> %>
-        <%# </div> %>
-    </div>
-
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto">
-        <% if user_signed_in? %>
-          <p class="greeting">Hi there, <strong> <%= current_user.name %>
-          <br>
-          <span id="avatar-role">(<%= current_user.role.capitalize %>) </span></strong></p>
-
-          <%# display right avatar image according to current user %>
-          <li class="nav-item dropdown avatar-menu">
-            <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-              <% username = current_user.name %>
-              <%case username %>
-              <% when "Teckguan" %>
-              <%= image_tag "Teckguan.png", class: "avatar", alt: "dropdown menu" %>
-
-              <% when "David" %>
-              <%= image_tag "David.png", class: "avatar", alt: "dropdown menu" %>
-
-              <% when "Yaya" %>
-              <%= image_tag "Yaya.png", class: "avatar", alt: "dropdown menu" %>
-
-              <% when "Pingyu" %>
-                <%= image_tag "Pingyu.png", class: "avatar", alt: "dropdown menu" %>
-
-              <% when "Manager" %>
-                <%= image_tag "Yongcheng.png", class: "avatar", alt: "dropdown menu" %>
-
-              <% else %>
-
-              <% end %>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <strong class="nav-header">Item Request</strong>
             </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/requests/new">Make new request</a></li>
+              <li><a class="dropdown-item" href="/requests/">Approve pending requests</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/locations/<%= current_user.location_id %>/item_requests_approval">Item request status</a></li>
+              <%# raise %>
+            </ul>
+          </li>
 
-            <%# dropdown menu from avatar to select role functions %>
-            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <% if current_user.role == "manager" %>
-                <%= link_to "Create location", new_location_path, class: "dropdown-item" %>
-                <%= link_to "Add new items to warehouse", "#", class: "dropdown-item" %>
-                <%= link_to "Approve monthly reconciliation report", "#", class: "dropdown-item" %>
-                <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
-              <% elsif current_user.role == "engineer" %>
-                <%= link_to "Upload monthly stockcount", "#", class: "dropdown-item" %>
-                <%= link_to "Upload monthly usage", "#", class: "dropdown-item" %>
-                <%= link_to "Generate monthly reconciliation report", "#", class: "dropdown-item" %>
-                <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <strong class="nav-header">Item Deliveries</strong>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/item_requests/status/Approved">Group Items For Delivery</a></li>
+              <li><a class="dropdown-item" href="/delivery_orders">Delivery Order Status</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <strong class="nav-header">Locations</strong>
+            </a>
+            <ul class="dropdown-menu">
+              <% @locations.each do |location| %>
+                <li class="nav-link"><%= link_to "#{location.name}", location_path(location), class: "dropdown-item" %></li>
               <% end %>
-            </div>
+            </ul>
           </li>
 
-        <% else %>
-          <li class="nav-item">
-            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
-          </li>
-        <% end %>
-      </ul>
+          <%# David: Find this out, if can delete it%>
+          <div class="container">
+
+          </div>
+        </ul>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto">
+          <% if user_signed_in? %>
+            <p class="greeting">Hi there, <strong> <%= current_user.name %>
+            <br>
+            <span id="avatar-role">(<%= current_user.role.capitalize %>) </span>
+
+            <span id="avatar-role">@<%= current_user.location.name.capitalize %></span></strong></p>
+
+            <%# display right avatar image according to current user %>
+            <li class="nav-item dropdown avatar-menu">
+              <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                <% username = current_user.name %>
+                <%case username %>
+                <% when "Teckguan" %>
+                <%= image_tag "Teckguan.png", class: "avatar", alt: "dropdown menu" %>
+
+                <% when "David" %>
+                <%= image_tag "David.png", class: "avatar", alt: "dropdown menu" %>
+
+                <% when "Yaya" %>
+                <%= image_tag "Yaya.png", class: "avatar", alt: "dropdown menu" %>
+
+                <% when "Pingyu" %>
+                  <%= image_tag "Pingyu.png", class: "avatar", alt: "dropdown menu" %>
+
+                <% when "Manager" %>
+                  <%= image_tag "Yongcheng.png", class: "avatar", alt: "dropdown menu" %>
+
+                <% else %>
+
+                <% end %>
+              </a>
+
+              <%# dropdown menu from avatar to select role functions %>
+              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <% if current_user.role == "manager" %>
+                  <%= link_to "Create location", new_location_path, class: "dropdown-item" %>
+                  <%= link_to "Import materials to warehouse", location_material_usage_path(Location.find(1), remarks: "Import New Materials"), class: "dropdown-item" %>
+                  <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
+                <% elsif current_user.role == "engineer" %>
+                  <%= link_to "Upload monthly stockcount", location_stockcount_path(current_user.location), class: "dropdown-item" %>
+                  <%= link_to "Record monthly material usage", location_material_usage_path(current_user.location, remarks: "Project Usage") , class: "dropdown-item" %>
+                  <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
+                <% end %>
+              </div>
+            </li>
+
+          <% else %>
+            <li class="nav-item">
+              <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
     </div>
   </div>
 </div>

@@ -25,35 +25,37 @@ locations.each do |attributes|
     amount: qty * unit_price,
     uom: "pcs",
     image_path: "granite_block.jpeg",
-    location:
+    location:,
+    alertlevel: 0
   )
 
   qty = rand(400..600).round(0)
   unit_price= rand(11.00..13.00).round(1)
-  hollowcoreblock = Material.create({category: "  block", name: "hollow core block - 39x10x19 cm", cost_code: "bhc-301019", unit_price: unit_price, qty: qty, amount: qty * unit_price, uom: "pcs", image_path: "hollow_core_block.jpeg", location: })
+  hollowcoreblock = Material.create({category: "  block", name: "hollow core block - 39x10x19 cm", cost_code: "bhc-301019", unit_price: unit_price, qty: qty, amount: qty * unit_price, uom: "pcs", image_path: "hollow_core_block.jpeg", location:, alertlevel: 0})
 
   qty = rand(600..700).round(0)
   unit_price= rand(6.00..8.00).round(1)
-  redbrick = Material.create({category: "block", name: "red brick - 20x10x9 cm", cost_code: "brb-201009", unit_price: unit_price, qty: qty, amount: qty * unit_price, uom: "pcs", image_path: "red_brick.jpg", location: })
+  redbrick = Material.create({category: "block", name: "red brick - 20x10x9 cm", cost_code: "brb-201009", unit_price: unit_price, qty: qty, amount: qty * unit_price, uom: "pcs", image_path: "red_brick.jpg", location:, alertlevel: 0})
 
  qty = rand(100..200).round(0)
   unit_price= rand(28.00..30.00).round(1)
-  riversand = Material.create({category: "sand", name: "river sand (10kg)", cost_code: "srs-001", unit_price: unit_price, qty: qty, amount: qty * unit_price, uom: "bag", image_path: "sand.jpeg", location:})
+  riversand = Material.create({category: "sand", name: "river sand (10kg)", cost_code: "srs-001", unit_price: unit_price, qty: qty, amount: qty * unit_price, uom: "bag", image_path: "sand.jpeg", location:, alertlevel: 0})
+
  qty = rand(400..600).round(0)
   unit_price= rand(12.00..13.00).round(1)
-  portlandcement = Material.create({category: "cement", name: "portland cement (50kg)", cost_code: "cpc-50", unit_price: unit_price, qty: qty, amount: qty * unit_price, uom: "bag", image_path: "portland_cement.jpg", location:})
+  portlandcement = Material.create({category: "cement", name: "portland cement (50kg)", cost_code: "cpc-50", unit_price: unit_price, qty: qty, amount: qty * unit_price, uom: "bag", image_path: "portland_cement.jpg", location:, alertlevel: 0})
 
  qty = rand(50..60).round(0)
   unit_price= rand(1140.00..1150.00).round(0)
-  t10 = Material.create({category: "rebar", name: "10mm dia. rebar", cost_code: "T10", unit_price: unit_price, qty: qty, amount: qty * unit_price, uom: "tons", image_path: "T10_rebar.jpg", location:})
+  t10 = Material.create({category: "rebar", name: "10mm dia. rebar", cost_code: "T10", unit_price: unit_price, qty: qty, amount: qty * unit_price, uom: "tons", image_path: "T10_rebar.jpg", location:, alertlevel: 0})
 
  qty = rand(40..60).round(0)
   unit_price= rand(1140.00..1150.00).round(0)
-  t12 = Material.create({category: "rebar", name: "12mm dia. rebar", cost_code: "T12", unit_price: unit_price, qty: qty, amount: qty * unit_price, uom: "tons", image_path: "T12_rebar.jpg", location:})
+  t12 = Material.create({category: "rebar", name: "12mm dia. rebar", cost_code: "T12", unit_price: unit_price, qty: qty, amount: qty * unit_price, uom: "tons", image_path: "T12_rebar.jpg", location:, alertlevel: 0})
 
  qty = rand(20..40).round(0)
   unit_price= rand(1140.00..1150.00).round(0)
-  t16 = Material.create({category: "rebar", name: "16mm dia. rebar", cost_code: "T16", unit_price: unit_price, qty: qty, amount: qty * unit_price, uom: "tons", image_path: "T16_rebar.jpg", location:})
+  t16 = Material.create({category: "rebar", name: "16mm dia. rebar", cost_code: "T16", unit_price: unit_price, qty: qty, amount: qty * unit_price, uom: "tons", image_path: "T16_rebar.jpg", location:, alertlevel: 0})
 
 
   location.materials.each  do |material|
@@ -108,7 +110,7 @@ end
 
 puts " Creating user manager..."
 company = Location.create({name: "HQ", address: "Singapore"})
-manager = User.create({name: "Manager", role: "manager", email: "manager@gmail.com", password: "123456"})
+manager = User.create({name: "Manager", role: "manager", email: "manager@gmail.com", password: "123456", location: company})
 puts "#{manager.name} created"
 
 puts "Finished!"

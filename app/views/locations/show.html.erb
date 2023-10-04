@@ -1,15 +1,10 @@
 <!-- show.html.erb -->
-<div class="container">
+<br><div class="container">
   <p>Location Name: <%= @location.name %></p>
   <p>Location Address: <%= @location.address %></p>
-  <p>Assigned Engineer/s: </p>
-    <ul>
-      <% @location.users.each do |user| %>
-        <li><%= user.name %></li>
-      <% end %>
-    </ul>
-
-  <h1>Existing Materials Qty</h1>
+  <p>Assigned Engineer/s: <% @location.users.each do |user| %><%= user.name %> </p>
+     <% end %>
+  <br><br><h1>Existing Materials Qty</h1>
   <br>
   <table class="table table-bordered table-striped table-hover">
     <thead>
@@ -26,7 +21,23 @@
     <tbody>
       <% @location.materials.each do |material| %>
         <tr>
-          <td><%= image_tag material.image_path %></td>
+          <td data-bs-toggle="modal" data-bs-target="#exampleModal-<%= material.id %>"><%= image_tag material.image_path %></td>
+            <div class="modal fade" id="exampleModal-<%= material.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel"><strong><%= material.name %></strong></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                    <div class="modal-body">
+                      <%= image_tag material.image_path, class: "modal-image"  %>
+                    </div>
+                  <div class="modal-footer">
+
+                  </div>
+                </div>
+              </div>
+            </div>
           <td><%= material.name %></td>
           <td><%= material.category %></td>
           <td><%= material.cost_code %></td>
@@ -38,21 +49,25 @@
             <td><%= material.qty %></td>
           <% end %>
           <td><%= material.uom %></td>
+        </tr>
         <% end %>
     </tbody>
   </table>
 
 <br>
 
-<%= link_to "Record Monthly Material Usage",  location_material_usage_path(@location, remarks: "Project Usage" ), method: :get, class: "btn btn-primary" %>
+<% if current_user.location == @location || current_user.role == "manager" %>
 
-<%= link_to "Record New Imported Materials",  location_material_usage_path(@location, remarks: "Import New Materials" ), method: :get, class: "btn btn-primary" %>
+  <%= link_to "Record Monthly Materials Usage", location_material_usage_path(@location, remarks: "Project Usage"), method: :get, class: "btn btn-primary", id: "view-request-btn" %>
+
+  <%= link_to "Monthly Stockcount", location_stockcount_path(@location, remarks: "Stockcount"), method: :get, class: "btn btn-primary", id: "view-request-btn" %>
+
+  <%= link_to "Log Month End Material Qty", location_update_materials_path(@location), method: :post, data: { turbo_method: :post }, class: "btn btn-primary", id: "view-request-btn" %>
+
+  <%= link_to "Show Material Movement History", location_updatematerials_path(@location), class: "btn btn-primary", id: "view-request-btn" %>
+
+  <%= link_to "Set Low Stock Level", location_stockalert_path(@location), class: "btn btn-primary", id: "view-request-btn" %>
+<% end %>
+<br><br><br><br>
 
 
-<%= link_to "Monthly Stockcount",  location_stockcount_path(@location, remarks: "Stockcount"), method: :get, class: "btn btn-primary" %>
-
-<%= link_to "Log Month End Material Qty", location_update_materials_path(@location), method: :post, data: { turbo_method: :post }, class: "btn btn-primary" %>
-
-<%= link_to "Show Material Movement History", location_updatematerials_path(@location), class: "btn btn-primary" %>
-
-<%= link_to "Set Low Stock Level", location_stockalert_path(@location), class: "btn btn-primary" %>
