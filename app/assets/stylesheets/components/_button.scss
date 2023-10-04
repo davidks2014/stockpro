@@ -23,3 +23,33 @@
   box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.2);
   color: white;
 }
+
+.btn-green {
+  display: inline-block;
+  margin-bottom: 5px;
+  padding: 2px 10px;
+  color: black;
+  border: 1px solid white;
+  box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-green:hover {
+  background-color: darkgreen;
+  color: white;
+  font-weight: 400;
+}
+
+.btn-red {
+  display: inline-block;
+  margin-bottom: 1px;
+  padding: 2px 12px;
+  color: black;
+  border: 1px solid white;
+  box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-red:hover {
+  background-color: darkred;
+  color: white;
+  font-weight: 400;
+}
