@@ -36,7 +36,7 @@
 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <strong class="nav-header">Locations</strong>
+              <strong class="nav-header">Site Locations</strong>
             </a>
             <ul class="dropdown-menu">
               <% @locations.each do |location| %>
@@ -55,11 +55,11 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto">
           <% if user_signed_in? %>
-            <p class="greeting">Hi there, <strong> <%= current_user.name %>
+            <p class="greeting">Hi there, <strong> <%= current_user.name %> <i class="fa-solid fa-screwdriver-wrench"></i>
             <br>
             <span id="avatar-role">(<%= current_user.role.capitalize %></span>
 
-            <span id="avatar-role">@<%= current_user.location.name.capitalize %>)</span></strong></p>
+            <span id="avatar-role">@ <%= current_user.location.name.capitalize %>)</span></strong></p>
 
             <%# display right avatar image according to current user %>
             <li class="nav-item dropdown avatar-menu">
