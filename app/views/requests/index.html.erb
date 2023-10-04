@@ -1,35 +1,27 @@
-<div class="container" style="padding-top: 20px;">
-<ul class="nav nav-tabs nav-pills" id="myTab" role="tablist">
-    <li class="nav-item tab-font" role="presentation">
-      <button class="nav-link active tab-font" id="receive-tab" data-bs-toggle="tab" data-bs-target="#receive-tab-pane" type="button" role="tab" aria-controls="receive-tab-pane" aria-selected="true">Received Requests</button>
-    </li>
-    <li class="nav-item tab-font" role="presentation">
-      <button class="nav-link" id="sent-tab" data-bs-toggle="tab" data-bs-target="#sent-tab-pane" type="button" role="tab" aria-controls="sent-tab-pane" aria-selected="false">Sent Requests</button>
-    </li>
-  </ul>
-  <br>
+<div class="container">
 
   <div class="tab-pane fade show active" id="receive-tab-pane" role="tabpanel" aria-labelledby="receive-tab" tabindex="0">
-    <% if @requests.none? { |request| request.location == current_user.location  } && current_user.role != "manager" %>
+    <% if @requests.none? { |request| request.location == current_user.location } && current_user.role != "manager" %>
       <h2>No request is made to <%= current_user.location.name %></h2>
     <% elsif current_user.role != "manager" %>
-      <h2>Received requests to <%= current_user.location.name  %></h2>
+      <h2>Received requests to <%= current_user.location.name %></h2>
     <% elsif current_user.role == "manager" %>
       <h2>Requests made between locations</h2>
-    <% end  %>
+    <% end %>
+
     <% @requests.each do |request| %>
 
       <% if (current_user.role == "manager") && request.item_requests.all?{ |item_request| item_request.eng_appr_status.nil? || item_request.eng_appr_status == "declined" } %>
 
       <% elsif (current_user.location == request.location || current_user.role == "manager") && request.item_requests.any?{|item_request| item_request.del_approv_status == "Pending"}%>
-      <%# raise %>
+
         <div class="table-responsive">
           <table class="table table-bordered table-striped table-hover">
             <thead>
               <tr>
                 <th>Request from</th>
                 <% if current_user.role == "manager"  %>
-                  <th>Request to</th>
+                <th>Request to</th>
                 <% end %>
                 <th>Image</th>
                 <th>Name</th>
@@ -100,6 +92,7 @@
             </tbody>
           </table>
         </div>
+
       <% end %>
     <% end %>
   </div>
