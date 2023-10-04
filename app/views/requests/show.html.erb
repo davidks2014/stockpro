@@ -3,10 +3,10 @@
   <table class="table table-bordered table-striped table-hover ">
     <thead>
       <tr>
-        <th>Request ID</th>
+        <th>Image</th>
         <th>Request to</th>
         <th>Request from</th>
-        <th>Type and ID</th>
+
         <th>Name</th>
         <th>Qty</th>
         <th>UOM</th>
@@ -16,10 +16,10 @@
     <tbody>
       <% @request.item_requests.each do |item_request| %>
         <tr>
-          <td><%= @request.id %></td>
+          <td><%= image_tag item_request.item.image_path %></td>
           <td><%= @request.location.name %></td>
           <td><%= Location.find(@request.original_location_id).name %></td>
-          <td><%= "#{item_request.item.class.to_s} #{item_request.item.id}" %></td>
+
           <td><%= item_request.item.name %></td>
           <td><%= item_request.item.qty %></td>
             <% if item_request.item.is_a? Material %>
@@ -28,7 +28,7 @@
               <td>N/A</td>
             <% end %>
             <% if item_request.item.is_a? Material %>
-              <td>$<%= item_request.item.unit_price %></td>
+              <td>$<%= number_with_delimiter(format("%.2f", item_request.item.unit_price.round(1))) %></td>
             <% else %>
               <td>N/A</td>
             <% end %>

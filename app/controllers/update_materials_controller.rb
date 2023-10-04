@@ -102,7 +102,7 @@ class UpdateMaterialsController < ApplicationController
           update_date: stock.update_date
         )
 
-      Material.find(stock.material_id).update(qty: stock.qty)
+      #Material.find(stock.material_id).update(qty: stock.qty)
     end
 
     redirect_to stockcount_report_path
@@ -112,8 +112,8 @@ class UpdateMaterialsController < ApplicationController
   def updatestock
 
     @location = Location.find(params[:location_id])
-    # @location.materials.each do |material|
-    # Material.find(material.id).update(qty: material.stockcounts.last.qty)
+    @location.materials.each do |material|
+      Material.find(material.id).update(qty: material.stockcounts.last.qty)
 
     #   MaterialMovement.create!(
     #       qty: material.stockcounts.last.diff,
@@ -123,7 +123,7 @@ class UpdateMaterialsController < ApplicationController
     #       material_id: material.stockcounts.last.material_id,
     #       update_date: material.stockcounts.last.update_date
     #     )
-    #   end
+    end
 
     redirect_to location_path(@location)
   end
@@ -147,6 +147,8 @@ class UpdateMaterialsController < ApplicationController
     redirect_to location_path(@location)
     # ...
   end
+
+
 
 end
 
