@@ -13,13 +13,13 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <strong class="nav-header">Item Request</strong>
+              <strong class="nav-header">Material Request</strong>
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="/requests/new">Make New Request</a></li>
               <li><a class="dropdown-item" href="/requests/">Approve Pending Requests</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="/locations/<%= current_user.location_id %>/item_requests_approval">Item Request Status</a></li>
+              <li><a class="dropdown-item" href="/locations/<%= current_user.location_id %>/item_requests_approval">Material Request Status</a></li>
               <%# raise %>
             </ul>
           </li>
