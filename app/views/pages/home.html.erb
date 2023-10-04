@@ -1,7 +1,7 @@
 <%# Welcome page after successful login %>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<div  class="banner" >
+<div class="banner" >
   <div class="title-container">
     <h1>Project Overview</h1>
     <% if current_user.role == "manager" %>
@@ -24,36 +24,32 @@
             <h1> <%= @item_request_manager_count %></h1>
           <% end %>
 
-          <%= link_to "List pending requests", requests_path, class: "btn btn-primary", id: "view-request-btn" %>
+          <%= link_to "List Pending Requests", requests_path, class: "btn btn-primary", id: "view-request-btn" %>
         </div>
 
         <div class="card py-4">
           <% if current_user.role == "engineer" %>
-            <h4>Incoming Delivery  <i class="fa-solid fa-truck-fast fa-bounce" style="color: #3a98b9;"></i></h4>
+            <h4>Incoming Delivery  <i class="fa-solid fa-truck-fast fa-bounce" style="color: #acac50;"></i></h4>
           <% elsif current_user.role == "manager" %>
             <h4>Items in Delivery <i class="fa-solid fa-truck-fast fa-bounce" style="color: #3a98b9;"></i></h4>
           <% end %>
 
           <h1><%= @item_delivery_count %></h1>
           <% if current_user.role == "engineer" %>
-            <%= link_to "List incoming delivery", delivery_orders_path, class: "btn btn-info", id: "transit-delivery-btn" %>
+            <%= link_to "List Incoming Deliveries", delivery_orders_path, class: "btn btn-info", id: "transit-delivery-btn" %>
           <% elsif current_user.role == "manager" %>
             <%= link_to "List items in delivery", delivery_orders_path, class: "btn btn-info", id: "transit-delivery-btn" %>
           <% end %>
         </div>
 
         <div class="card py-4">
-          <h4>Low Stock Alert  <i class="fa-solid fa-bell fa-bounce" style="color: #de1721;"></i>
-          </h4>
-
+          <h4>Low Stock Alert  <i class="fa-solid fa-bell fa-bounce" style="color: #de1721;"></i></h4>
           <% if current_user.role == "engineer" %>
             <h1><%= @low_stock_count %></h1>
           <% elsif current_user.role == "manager" %>
             <h1><%= @low_stock_count %></h1>
-          <% end %></p>
-
-
-          <%= link_to "List low stock items", show_low_stock_path(current_user.location), class: "btn btn-danger", id: "stock-alert-btn" %>
+          <% end %>
+            <%= link_to "List Low Stock Items", show_low_stock_path(current_user.location), class: "btn btn-danger", id: "stock-alert-btn" %>
         </div>
 
         <%# <div class="card py-4">
@@ -74,10 +70,8 @@
       </div>
 
       <%# Map showing project locations. Occupy 46% of total layout on right of screen%>
-      <div class="map-card">
-        <p style="color: green"><%= notice %></p>
-        <h3>Project Site Locations</h3>
-
+      <div class="map-card"><br>
+        <h3>Project Sites</h3>
         <div data-controller="map"
           id='map'
           data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
@@ -89,4 +83,3 @@
     </div>
   </div>
 </div>
-
