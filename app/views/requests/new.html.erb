@@ -1,5 +1,5 @@
 <%# <div class="bulldozer-img"> %>
-<div class="container" data-controller="selectlocation">
+<div class="container" data-controller="selectlocation" style="padding-top: 20px;">
   <div data-controller="submitrequest">
     <div class="mb-4 d-flex justify-content-between align-items-center">
       <h1>Make a New Request</h1>
@@ -12,7 +12,7 @@
             <% end %>
           </select>
           <div class="input-group-append">
-            <%= submit_tag "Select", class: "btn btn-primary" %>
+            <%= submit_tag "Select", class: "btn btn-primary", id: "view-request-btn" %>
           </div>
         </div>
       <% end %>
@@ -42,7 +42,7 @@
           </table>
         </div>
         <div class="text-center mt-4">
-          <%= submit_tag "Submit Request", name: "", class: "btn btn-primary" %>
+          <%= submit_tag "Submit Request", name: "", class: "btn btn-primary", id: "view-request-btn" %>
         </div>
       <% end %>
     </div>

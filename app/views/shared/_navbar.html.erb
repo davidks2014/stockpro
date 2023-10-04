@@ -13,30 +13,30 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <strong class="nav-header">Item Request</strong>
+              <strong class="nav-header">Material Request</strong>
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="/requests/new">Make new request</a></li>
-              <li><a class="dropdown-item" href="/requests/">Approve pending requests</a></li>
+              <li><a class="dropdown-item" href="/requests/new">Make New Request</a></li>
+              <li><a class="dropdown-item" href="/requests/">Approve Pending Requests</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="/locations/<%= current_user.location_id %>/item_requests_approval">Item request status</a></li>
+              <li><a class="dropdown-item" href="/locations/<%= current_user.location_id %>/item_requests_approval">Material Request Status</a></li>
               <%# raise %>
             </ul>
           </li>
 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <strong class="nav-header">Item Deliveries</strong>
+              <strong class="nav-header">Material Deliveries</strong>
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="/item_requests/status/Approved">Group Items For Delivery</a></li>
+              <li><a class="dropdown-item" href="/item_requests/status/Approved">Group Materials For Delivery</a></li>
               <li><a class="dropdown-item" href="/delivery_orders">Delivery Order Status</a></li>
             </ul>
           </li>
 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <strong class="nav-header">Locations</strong>
+              <strong class="nav-header">Site Locations</strong>
             </a>
             <ul class="dropdown-menu">
               <% @locations.each do |location| %>
@@ -55,11 +55,11 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto">
           <% if user_signed_in? %>
-            <p class="greeting">Hi there, <strong> <%= current_user.name %>
+            <p class="greeting">Hi there, <strong> <%= current_user.name %> <i class="fa-solid fa-screwdriver-wrench"></i>
             <br>
             <span id="avatar-role">(<%= current_user.role.capitalize %></span>
 
-            <span id="avatar-role">@<%= current_user.location.name.capitalize %>)</span></strong></p>
+            <span id="avatar-role">@ <%= current_user.location.name.capitalize %>)</span></strong></p>
 
             <%# display right avatar image according to current user %>
             <li class="nav-item dropdown avatar-menu">
