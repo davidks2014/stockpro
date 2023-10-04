@@ -4,3 +4,4 @@ class Material < ApplicationRecord
   has_many :stockcounts
   has_many :material_movements
 end
+git 
