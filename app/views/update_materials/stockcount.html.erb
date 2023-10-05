@@ -1,8 +1,8 @@
-<div class="container">
+<div class="container container-top-padding2">
 
   <h1> Record Monthly Stockcount for <%= @location.name  %></h1>
 
-  <br>
+  <%# <br> %>
 
   <%= form_tag({controller: "update_materials", action: "stockcount_update"}, class: "form") do %>
     <table class="table table-bordered table-striped table-hover">
