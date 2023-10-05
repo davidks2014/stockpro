@@ -1,11 +1,11 @@
-<div class="container style=" id="container-top-padding2">
+<div class="container container-top-padding2">
   <% if current_user.location != Location.find(1) && current_user.role != "manager"%>
     <ul class="nav nav-tabs nav-pills" id="myTab" role="tablist">
       <li class="nav-item tab-font" role="presentation">
-        <button class="nav-link" id="out-tab" data-bs-toggle="tab" data-bs-target="#out-tab-pane" type="button" role="tab" aria-controls="out-tab-pane" aria-selected="false">Outgoing items</button>
+        <button class="nav-link" id="out-tab" data-bs-toggle="tab" data-bs-target="#out-tab-pane" type="button" role="tab" aria-controls="out-tab-pane" aria-selected="false">Outgoing material</button>
       </li>
       <li class="nav-item tab-font" role="presentation">
-        <button class="nav-link active" id="in-tab" data-bs-toggle="tab" data-bs-target="#in-tab-pane" type="button" role="tab" aria-controls="in-tab-pane" aria-selected="true">Incoming items</button>
+        <button class="nav-link active" id="in-tab" data-bs-toggle="tab" data-bs-target="#in-tab-pane" type="button" role="tab" aria-controls="in-tab-pane" aria-selected="true">Incoming material</button>
       </li>
     </ul>
 
@@ -56,8 +56,8 @@
       </div>
 
       <div class="tab-pane fade show active" id="in-tab-pane" role="tabpanel" aria-labelledby="in-tab" tabindex="0">
-        <h1>Incoming Material</h1>
-        <hr>
+        <h1 class="line-top-margin3">Incoming Material</h1>
+        <%# <hr> %>
         <% @delivery_orders.each do |delivery_order| %>
           <% if current_user.location == delivery_order.location %>
             <div>
@@ -104,7 +104,7 @@
   <% elsif current_user.location == Location.find(1)%>
       <ul class="nav nav-tabs nav-pills" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="out-tab" data-bs-toggle="tab" data-bs-target="#out-tab-pane" type="button" role="tab" aria-controls="out-tab-pane" aria-selected="false">Outgoing items</button>
+        <button class="nav-link active" id="out-tab" data-bs-toggle="tab" data-bs-target="#out-tab-pane" type="button" role="tab" aria-controls="out-tab-pane" aria-selected="false">Outgoing material</button>
       </li>
       <li class="nav-item" role="presentation">
         <button class="nav-link" id="in-tab" data-bs-toggle="tab" data-bs-target="#in-tab-pane" type="button" role="tab" aria-controls="in-tab-pane" aria-selected="true">Incoming items</button>

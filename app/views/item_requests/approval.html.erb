@@ -1,4 +1,4 @@
-<div class="container" id="container-top-padding2";>
+<div class="container container-top-padding2";>
 
   <% if current_user.location != Location.find(1) && current_user.role != "manager" %>
     <ul class="nav nav-tabs nav-pills" id="myTab" role="tablist">
@@ -58,7 +58,7 @@
       </div>
 
       <div class="tab-pane fade show active" id="in-tab-pane" role="tabpanel" aria-labelledby="in-tab" tabindex="0">
-        <h1>Requests made to others</h1>
+        <h1 class="line-bottom-margin3">Requests made to others</h1>
         <table class="table table-bordered table-striped table-hover">
           <thead>
             <tr>

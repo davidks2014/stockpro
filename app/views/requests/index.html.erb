@@ -1,10 +1,10 @@
-<div class="container" id="container-top-padding2">
+<div class="container container-top-padding2">
 
   <div class="tab-pane fade show active" id="receive-tab-pane" role="tabpanel" aria-labelledby="receive-tab" tabindex="0">
     <% if @requests.none? { |request| request.location == current_user.location } && current_user.role != "manager" %>
       <h1>No request is made to <%= current_user.location.name %></h1>
     <% elsif current_user.role != "manager" %>
-      <h2>Received requests to <%= current_user.location.name %></h2>
+      <h1>Received requests to <%= current_user.location.name %></h1>
     <% elsif current_user.role == "manager" %>
       <h2>Requests made between locations</h2>
     <% end %>

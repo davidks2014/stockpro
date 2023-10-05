@@ -4,7 +4,6 @@
   <% elsif @remarks == "Import New Materials" %>
     <h1>Record Import Materials Qty for <%= @location.name  %></h1>
   <% end %>
-  <br>
 
   <%= form_tag(update_materials_path, class: "form") do %>
     <table class="table table-bordered table-striped table-hover">
@@ -54,6 +53,6 @@
         <% end %>
       </tbody>
     </table>
-    <%= submit_tag "Create Material Movements", class: "btn btn-primary" %>
+    <%= submit_tag "Create Material Movements", class:"btn btn-primary" %>
   <% end %>
 </div>

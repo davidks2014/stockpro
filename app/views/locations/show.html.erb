@@ -1,11 +1,15 @@
 <!-- show.html.erb -->
-<div class="container font-size2" id="container-top-padding2">
+<div class="container font-size2 container-top-padding2">
   <div class="card2">
-  <p class="font-size5 background-gray"><strong><%= @location.name %></strong></p>
-  <p class="line-bottom-margin1"><strong>Location Address: </strong><%= @location.address %></p>
-  <p class="line-bottom-margin" ><strong>Assigned Engineer/s: </strong><% @location.users.each do |user| %><%= user.name %> </p>
-     <% end %>
+    <p class="font-size5 background-gray"><strong><%= @location.name %></strong></p>
+    <p class="line-bottom-margin1"><strong>Location Address: </strong><%= @location.address %></p>
+    <p class="line-bottom-margin" ><strong>Assigned Engineer/s: </strong>
+      <% @location.users.each do |user| %>
+        <%= user.name %>
+      <% end %>
+     </p>
   </div>
+
   <h1 class="container-customize1">Existing Materials Qty</h1>
   <table class="table table-bordered table-striped table-hover">
     <thead>
@@ -55,18 +59,19 @@
     </tbody>
   </table>
 
-<br>
 
-<% if current_user.location == @location || current_user.role == "manager" %>
+  <div class="button-container">
+    <% if current_user.location == @location || current_user.role == "manager" %>
 
-  <%= link_to "Record Monthly Materials Usage", location_material_usage_path(@location, remarks: "Project Usage"), method: :get, class: "btn btn-primary", id: "view-request-btn" %>
+      <%= link_to "Record Monthly Materials Usage", location_material_usage_path(@location, remarks: "Project Usage"), method: :get, class: "btn btn-primary", id: "view-request-btn" %>
 
-  <%= link_to "Monthly Stockcount", location_stockcount_path(@location, remarks: "Stockcount"), method: :get, class: "btn btn-primary", id: "view-request-btn" %>
+      <%= link_to "Monthly Stockcount", location_stockcount_path(@location, remarks: "Stockcount"), method: :get, class: "btn btn-primary", id: "view-request-btn" %>
 
-  <%= link_to "Log Month End Material Qty", location_update_materials_path(@location), method: :post, data: { turbo_method: :post }, class: "btn btn-primary", id: "view-request-btn" %>
+      <%= link_to "Log Month End Material Qty", location_update_materials_path(@location), method: :post, data: { turbo_method: :post }, class: "btn btn-primary", id: "view-request-btn" %>
 
-  <%= link_to "Show Material Movement History", location_updatematerials_path(@location), class: "btn btn-primary", id: "view-request-btn" %>
+      <%= link_to "Show Material Movement History", location_updatematerials_path(@location), class: "btn btn-primary", id: "view-request-btn" %>
 
-  <%= link_to "Set Low Stock Level", location_stockalert_path(@location), class: "btn btn-primary", id: "view-request-btn" %>
-<% end %>
-<br><br><br><br>
+      <%= link_to "Set Low Stock Level", location_stockalert_path(@location), class: "btn btn-primary", id: "view-request-btn" %>
+    <% end %>
+  </div>
+</div>
