@@ -1,4 +1,49 @@
+// ****** Font Attributes ******
 .tab-font {
   font-size: 20px;
   font-weight: 400;
+}
+
+.font-size2 {
+  font-size: 18px;
+}
+
+.font-size3 {
+  font-size: 20px;
+}
+
+.font-size3 {
+  font-size: 21px;
+}
+
+.font-size4 {
+  font-size: 22px;
+}
+
+.font-size5 {
+  font-size: 24px;
+}
+
+.font-bold {
+  font-weight: bold;
+}
+
+
+// ****** Background Attributes ******
+.background-gray {
+  background-color: gray;
+  color: white;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+
+// ****** Line Attributes ******
+.line-bottom-margin1 {
+  margin-bottom: 2px;
+}
+.line-bottom-margin2 {
+  margin-bottom: 10px;
 }

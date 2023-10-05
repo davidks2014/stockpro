@@ -13,10 +13,22 @@
   text-align: center;
   width: auto;
   border-radius: 50px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  background-color: rgba(245,245,220,1);
+}
+
+.card-container2 {
+  text-align: center;
+  width: auto;
+  border-radius: 20px;
+  margin-top: 30px;
+  margin-bottom: 30px;
   background-color: rgba(245,245,220,0.3);
 }
 
 .title-container {
+  margin-top: 10px;
   text-align: center;
   width: auto;
   color: white;
@@ -70,6 +82,21 @@
   height: auto;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
   align-items: center;
+}
+
+.card2 {
+  background-color: white;
+  // border: 2px solid white;
+  border-radius: 30px;
+  margin-top: 80px;
+  margin-bottom: 20px;
+  padding: 0px 0px 10px 0px;
+  width: auto;
+  // max-width: 320px; /* Adjust the maximum width as needed */
+  height: auto;
+  margin: 10px 300px 0px 300px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  justify-items: center;
 }
 
 .grid-header1 {
@@ -140,4 +167,54 @@
   .map-card {
     max-width: 100%; /* Cards and headers take full width */
   }
+}
+
+.container-customize1 {
+  padding-top: 30px;
+  padding-bottom: 20px;
+}
+
+#container-top-padding1 {
+  padding-top: 30px;
+}
+
+#container-top-padding2 {
+  padding-top: 40px;
+}
+
+#container-top-padding3 {
+  padding-top: 50px;
+}
+
+#container-top-margin1 {
+  margin-top: 50px;
+}
+
+#container-top-margin1 {
+  margin-top: 20px;
+}
+
+#container-top-margin2 {
+  margin-top: 30px;
+}
+
+#container-top-margin3 {
+  margin-top: 40px;
+}
+
+#container-bottom1 {
+  padding-bottom: 30px;
+  padding-top: 80px;
+}
+
+#container-bottom-padding1 {
+  padding-top: 20px;
+}
+
+#container-bottom-padding2 {
+  padding-top: 30px;
+}
+
+#container-bottom-padding3 {
+  padding-top: 40px;
 }

@@ -1,11 +1,12 @@
 <!-- show.html.erb -->
-<br><div class="container">
-  <p>Location Name: <%= @location.name %></p>
-  <p>Location Address: <%= @location.address %></p>
-  <p>Assigned Engineer/s: <% @location.users.each do |user| %><%= user.name %> </p>
+<div class="container font-size2" id="container-top-padding2">
+  <div class="card2">
+  <p class="font-size5 background-gray"><strong><%= @location.name %></strong></p>
+  <p class="line-bottom-margin1"><strong>Location Address: </strong><%= @location.address %></p>
+  <p class="line-bottom-margin" ><strong>Assigned Engineer/s: </strong><% @location.users.each do |user| %><%= user.name %> </p>
      <% end %>
-  <br><br><h1>Existing Materials Qty</h1>
-  <br>
+  </div>
+  <h1 class="container-customize1">Existing Materials Qty</h1>
   <table class="table table-bordered table-striped table-hover">
     <thead>
       <tr>

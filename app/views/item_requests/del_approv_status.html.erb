@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" id="container-top-padding2">
   <% if @item_requests.any? %>
     <% if @item_requests.first.del_approv_status == "Declined" %>
       <h1>Declined Item requests</h1>
@@ -65,7 +65,7 @@
                   <% if item_requests.first.del_approv_status == "Declined" %>
 
                   <% else %>
-                    <%= f.submit "confirm delivery", class: "btn btn-primary", id: "view-request-btn" %>
+                    <%= f.submit "Confirm delivery", class: "btn btn-primary", id: "view-request-btn" %>
                   <% end %>
 
                 <% end %>
