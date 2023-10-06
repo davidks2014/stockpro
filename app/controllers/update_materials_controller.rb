@@ -50,7 +50,8 @@ class UpdateMaterialsController < ApplicationController
     material_movements = MaterialMovement.create(material_movement_params)
 
     material_movements.each do |movement|
-      movement.update(amount: movement.unit_rate * movement.qty)
+      round_amt = (movement.unit_rate * movement.qty).round(2)
+      movement.update(amount: round_amt)
     end
 
     # Handle success or failure
