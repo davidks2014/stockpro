@@ -4,6 +4,7 @@
   width: auto;
   box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.2);
   color: white;
+  margin-bottom: 30px;
 }
 
 #transit-delivery-btn {
@@ -52,6 +53,13 @@
   background-color: darkred;
   color: white;
   font-weight: 400;
+}
+
+.btn-standardize {
+  justify-content: center;
+  width: auto;
+  box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.2);
+  color: white;
 }
 
 .btn-top-margin1 {
