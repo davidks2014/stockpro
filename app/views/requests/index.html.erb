@@ -6,7 +6,7 @@
     <% elsif current_user.role != "manager" %>
       <h1>Received requests to <%= current_user.location.name %></h1>
     <% elsif current_user.role == "manager" %>
-      <h2>Requests made between locations</h2>
+      <h2 class="line-bottom-margin3">Requests made between locations</h2>
     <% end %>
 
     <% @requests.each do |request| %>

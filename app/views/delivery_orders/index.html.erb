@@ -49,7 +49,7 @@
                   <% end %>
                 </tbody>
               </table>
-              <hr>
+              <%# <hr> %>
              </div>
           <% end %>
         <% end %>
@@ -204,7 +204,7 @@
     </div>
   <% elsif current_user.role == "manager" %>
     <h1 class="line-bottom-margin3">Outgoing Material</h1>
-    <hr>
+    <%# <hr> %>
     <% @delivery_orders.each do |delivery_order| %>
           <% if current_user.location == delivery_order.item_requests.last.request.location || current_user.role == "manager" %>
             <div>

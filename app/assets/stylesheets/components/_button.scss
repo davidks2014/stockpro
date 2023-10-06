@@ -5,24 +5,52 @@
   box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.2);
   color: white;
   margin-bottom: 30px;
+
+  &:hover {
+    font-weight: bold;
+    color: black;
+    box-shadow: 3px 4px 20px rgba(0, 0, 0, 0.4);
+    border: 2px solide white;
+  }
 }
 
 #transit-delivery-btn {
   width: auto;
   box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.2);
   color: white;
+
+  &:hover {
+    font-weight: bold;
+    color: black;
+    box-shadow: 3px 4px 20px rgba(0, 0, 0, 0.4);
+    border: 2px solide white;
+  }
 }
 
 #stock-alert-btn{
   width: auto;
   box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.2);
   color: white;
+
+  &:hover {
+    font-weight: bold;
+    color: black;
+    box-shadow: 3px 4px 20px rgba(0, 0, 0, 0.4);
+    border: 2px solide white;
+  }
 }
 
 #total-cost-btn {
   width: auto;
   box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.2);
   color: white;
+
+  &:hover {
+    font-weight: bold;
+    color: black;
+    box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.4);
+    border: 2px solide white;
+  }
 }
 
 .btn-green {
@@ -60,6 +88,14 @@
   width: auto;
   box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.2);
   color: white;
+  margin-bottom: 30px;
+
+  &:hover {
+    font-weight: bold;
+    color: black;
+    box-shadow: 3px 4px 20px rgba(0, 0, 0, 0.4);
+    border: 2px solide white;
+  }
 }
 
 .btn-top-margin1 {
