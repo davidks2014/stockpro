@@ -31,15 +31,16 @@ class PagesController < ApplicationController
     @low_stock_count = 0
     @materials.each do |material|
       if current_user.role == "engineer"
-        if (material.qty < material.alertlevel && material.location == current_user.location)
-        @low_stock_count += 1
+        if material.alertlevel && material.qty && material.qty < material.alertlevel && material.location == current_user.location
+          @low_stock_count += 1
         end
       elsif current_user.role == "manager"
-        if (material.qty < material.alertlevel)
-        @low_stock_count += 1
+        if material.alertlevel && material.qty && material.qty < material.alertlevel
+          @low_stock_count += 1
         end
       end
     end
+
 
     # @sites = Site.all
     # The `geocoded` scope filters only sites with coordinates
