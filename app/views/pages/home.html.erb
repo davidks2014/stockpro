@@ -104,7 +104,7 @@
       <%# display pie chart %>
 
       <div class="map-card">
-        <h3>Project Usage Amount(S$) </h3>
+        <h3>Project Usage Amount (S$) </h3>
         <div class="pie-chart">
           <% materials_by_location = MaterialMovement.joins(:material).where(location_id: current_user.location).group('materials.name').sum(:amount) %>
           <% formatted_materials_by_location = materials_by_location.transform_values { |value| number_to_currency(value, unit: "$") } %>
@@ -116,14 +116,12 @@
 
       <%# Map showing project locations. Occupy 46% of total layout on right of screen%>
       <div class="map-card">
-        <p style="color: green"><%= notice %></p>
-        <h3>Project Site Locations</h3>
-
-        <div data-controller="map"
+        <h3>Project Site Locations <i class="fa-solid fa-map-pin"></i></h3>
+        <span><div data-controller="map"
           id='map'
           data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
           data-map-markers-value="<%= @markers.to_json %>"
-          style='width: auto; height: 370px;'>
+          style='width: auto; height: 400px;'>
         </div>
       </div>
 
