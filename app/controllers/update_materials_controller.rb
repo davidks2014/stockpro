@@ -99,12 +99,13 @@ class UpdateMaterialsController < ApplicationController
       # end
 
       MaterialMovement.create!(
-          qty: stock.diff.abs,
+          qty: stock.diff,
           remarks: (stock.diff > 0) ? "Stockcount(excess)" : (stock.diff < 0) ? "Stockcount(shortfall)" : "Stockcount(even)",
           unit_rate: stock.unit_rate,
           location_id: stock.location_id,
           material_id: stock.material_id,
-          update_date: stock.update_date
+          update_date: stock.update_date,
+          amount: stock.diff * stock.unit_rate
         )
 
       #Material.find(stock.material_id).update(qty: stock.qty)
