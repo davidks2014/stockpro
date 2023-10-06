@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container line-top-margin5" id="container-top-padding2">
   <% if @item_requests.any? %>
     <% if @item_requests.first.del_approv_status == "Declined" %>
       <h1>Declined Item requests</h1>
@@ -8,7 +8,7 @@
         <i class="fa-solid fa-truck-fast fa-bounce fa-2xl"></i>
       </div> %>
 
-      <h1>Arrange Delivery</h1>
+      <h1>Arrange Deliveries</h1>
       <br>
     <% end %>
 
@@ -23,7 +23,7 @@
             <% if item_requests.any? { |item_request| item_request.delivery_order.nil? } %>
               <div>
                 <%= simple_form_for @delivery_order, url: delivery_orders_path do |f|%>
-                  <h2>Deliver to <%= loc %></h2>
+                  <h2>Destination: <%= loc %></h2>
                   <table class="table table-bordered table-striped table-hover">
                     <thead>
                       <tr>
@@ -65,7 +65,7 @@
                   <% if item_requests.first.del_approv_status == "Declined" %>
 
                   <% else %>
-                    <%= f.submit "confirm delivery", class: "btn btn-primary", id: "view-request-btn" %>
+                    <%= f.submit "Confirm delivery", class: "btn btn-primary btn-top-margin2", id: "view-request-btn" %>
                   <% end %>
 
                 <% end %>

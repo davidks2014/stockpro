@@ -1,10 +1,9 @@
-<div class="container">
+<div class="container container-top-padding2">
   <% if @remarks == "Project Usage" %>
-    <h1>Record Project Usage Materials Qty for <%= @location.name %></h1>
+    <h1 class="line-bottom-margin3">Record Project Usage Materials Qty for <%= @location.name %></h1>
   <% elsif @remarks == "Import New Materials" %>
     <h1>Record Import Materials Qty for <%= @location.name  %></h1>
   <% end %>
-  <br>
 
   <%= form_tag(update_materials_path, class: "form") do %>
     <table class="table table-bordered table-striped table-hover">
@@ -54,6 +53,6 @@
         <% end %>
       </tbody>
     </table>
-    <%= submit_tag "Create Material Movements", class: "btn btn-primary" %>
+    <%= submit_tag "Create Material Movements", class:"btn btn-primary btn-top-margin5 btn-standardize" %>
   <% end %>
 </div>

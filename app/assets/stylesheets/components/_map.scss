@@ -18,9 +18,11 @@
 
 #map {
   border-radius: 20px;
+  border: 1px solid #AFAEAE;
   margin: 10px;
-  width: 100%; /* Added */
+  width: auto; /* Added */
   height: 400px; /* Modify the height as needed */
+  box-shadow: 5px 5px 20px rgba(0,0,0,0.5);
 }
 
 .badge {
@@ -34,10 +36,5 @@
   .robo-img {
     height: 25px;
     width: 25px;
-  }
-
-  #map {
-    border-radius: 10px;
-    margin: 5px;
   }
 }

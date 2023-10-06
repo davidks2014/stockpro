@@ -1,0 +1,27 @@
+.card {
+  background-color: white;
+  border: 2px solid white;
+  border-radius: 30px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  width: auto;
+  // max-width: 320px; /* Adjust the maximum width as needed */
+  height: auto;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  align-items: center;
+}
+
+.card2 {
+  background-color: white;
+  // border: 2px solid white;
+  border-radius: 30px;
+  margin-top: 80px;
+  margin-bottom: 20px;
+  padding: 0px 0px 10px 0px;
+  width: auto;
+  // max-width: 320px; /* Adjust the maximum width as needed */
+  height: auto;
+  margin: 10px 200px 0px 200px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  justify-items: center;
+}
