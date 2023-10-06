@@ -47,18 +47,22 @@ class UpdateMaterialsController < ApplicationController
 
   # In your controller action for form submission
   def create
-    @material_movements = MaterialMovement.create(material_movement_params)
+    material_movements = MaterialMovement.create(material_movement_params)
+
+    material_movements.each do |movement|
+      movement.update(amount: movement.unit_rate * movement.qty)
+    end
+
     # Handle success or failure
     # Redirect or render appropriate view
 
-    record_movement
+    record_movement(material_movements)
 
-    @material_movements
-    redirect_to location_path(@material_movements.last.location_id)
+    redirect_to location_path(material_movements.last.location_id)
   end
 
-  def record_movement
-    @material_movements.each do |movement|
+  def record_movement (material_movements)
+    material_movements.each do |movement|
       material = Material.find(movement.material_id)
       if movement.remarks == "Project Usage"
         material.update(unit_price: movement.unit_rate)
