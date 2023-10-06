@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container container-top-padding2">
 
   <h1>Set Low Stock Alert Level for <%= @location.name %></h1>
 
@@ -35,6 +35,6 @@
       </tbody>
     </table>
     <%= hidden_field_tag :location_id, @location.id %>
-    <%= submit_tag "Create Material Movements", class: "btn btn-primary" %>
+    <%= submit_tag "Create Material Movements", class: "btn btn-primary btn-top-margin5 btn-standardize" %>
   <% end %>
 </div>

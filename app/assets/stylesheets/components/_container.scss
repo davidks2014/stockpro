@@ -13,10 +13,23 @@
   text-align: center;
   width: auto;
   border-radius: 50px;
+  margin-top: 30px;
+  margin-bottom: 50px;
+  padding-bottom: 20px;
+  background-color: rgba(245,245,220,0.3);
+}
+
+.card-container2 {
+  text-align: center;
+  width: auto;
+  border-radius: 20px;
+  margin-top: 30px;
+  margin-bottom: 30px;
   background-color: rgba(245,245,220,0.3);
 }
 
 .title-container {
+  margin-top: 10px;
   text-align: center;
   width: auto;
   color: white;
@@ -59,19 +72,6 @@
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
 }
 
-.card {
-  background-color: white;
-  border: 2px solid white;
-  border-radius: 30px;
-  margin-top: 30px;
-  margin-bottom: 20px;
-  width: auto;
-  // max-width: 320px; /* Adjust the maximum width as needed */
-  height: auto;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
-  align-items: center;
-}
-
 .grid-header1 {
   align-items: center;
   margin: 10px;
@@ -108,7 +108,6 @@
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
 }
 
-
 .map-card {
   flex: 1; /* Each map-card takes up an equal amount of space */
   border-radius: 25px;
@@ -141,4 +140,82 @@
   .map-card {
     max-width: 100%; /* Cards and headers take full width */
   }
+}
+
+.container-customize1 {
+  padding-top: 40px;
+  padding-bottom: 20px;
+}
+
+.container-top-padding1 {
+  padding-top: 30px;
+}
+
+.container-top-padding2 {
+  padding-top: 40px;
+}
+
+.container-top-padding3 {
+  padding-top: 50px;
+}
+
+.container-top-margin1 {
+  margin-top: 50px;
+}
+
+.container-top-margin1 {
+  margin-top: 20px;
+}
+
+.container-top-margin2 {
+  margin-top: 30px;
+}
+
+.container-top-margin3 {
+  margin-top: 40px;
+}
+
+.container-bottom1 {
+  padding-bottom: 30px;
+  padding-top: 80px;
+}
+
+.container-top-padding1 {
+  padding-top: 20px;
+}
+
+.container-top-padding2 {
+  padding-top: 30px;
+}
+
+.container-top-padding3 {
+  padding-top: 40px;
+}
+
+#container-bottom-padding1 {
+  padding-bottom: 10px;
+}
+
+// #container-bottom-padding2 {
+//   padding-bottom: 20px;
+// }
+
+#project-usage {
+  margin-top: 40px;
+}
+
+// ****** Table Attributes ******
+.table-bottom-padding1 {
+  margin-bottom: 100px;}
+
+
+// ****** Group Button Attributes ******
+.button-container {
+  margin-top: 60px;
+}
+
+
+// ****** Form Attributes ******
+.form-select {
+  margin: 0px 0px 25px 10px;
 }
