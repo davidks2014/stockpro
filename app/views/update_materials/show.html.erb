@@ -6,9 +6,10 @@
       <tr>
         <th>Image</th>
         <th>Name</th>
-        <th>Existing Unit Rate</th>
+        <th>Applied Unit Rate</th>
         <th>Movement Qty</th>
         <th>UOM</th>
+        <th>Amount</th>
         <th>Movement Type</th>
         <th>Update Date</th>
       </tr>
@@ -20,15 +21,16 @@
             <% Time.zone = 'Singapore' %>
             <td><%= image_tag Material.find(movement.material_id).image_path %></td>
             <td><%= Material.find(movement.material_id).name %></td>
-            <td>$<%= movement.unit_rate %></td>
+            <td>$<%= number_with_delimiter(format("%.2f", movement.unit_rate.round(1))) %></td>
             <% if movement.remarks == "Incoming Request Items" || movement.remarks == "Import New Materials" || movement.remarks == "Stockcount(excess)" %>
               <td><%= movement.qty %></td>
             <% elsif movement.remarks == "Outgoing Request Items" || movement.remarks == "Project Usage" || movement.remarks == "Stockcount(shortfall)" %>
-              <td>-<%= movement.qty %></td>
+              <td><%= movement.qty %></td>
             <% elsif movement.remarks == "Outgoing Request Items" || movement.remarks == "Project Usage" || movement.remarks == "Stockcount(even)" %>
               <td><%= movement.qty %></td>
             <% end %>
               <td><%= Material.find(movement.material_id).uom %></td>
+              <td>$<%= number_with_delimiter(format("%.2f", movement.amount.round(1)))  %></td>
               <td><%= movement.remarks %></td>
               <td><%= movement.update_date.strftime('%Y/%m/%d -- %H:%M') %></td>
           </tr>
