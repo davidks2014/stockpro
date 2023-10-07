@@ -32,7 +32,7 @@
           <td>$<%= number_with_delimiter(format("%.2f", material.unit_price.round(1))) %></td>
 
           <% if material.alertlevel? && material.alertlevel> material.qty %>
-            <td style = "color: red;" ><%= material.qty %></td>
+            <td style = "background: red; color: white;" ><%= material.qty %></td>
           <% else  %>
             <td><%= material.qty %></td>
           <% end %>
