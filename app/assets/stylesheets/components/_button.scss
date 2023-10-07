@@ -10,7 +10,7 @@
     font-weight: bold;
     color: black;
     box-shadow: 3px 4px 20px rgba(0, 0, 0, 0.4);
-    border: 2px solide white;
+    border: 2px solid white;
   }
 }
 
@@ -23,7 +23,7 @@
     font-weight: bold;
     color: black;
     box-shadow: 3px 4px 20px rgba(0, 0, 0, 0.4);
-    border: 2px solide white;
+    border: 2px solid white;
   }
 }
 
@@ -36,7 +36,7 @@
     font-weight: bold;
     color: black;
     box-shadow: 3px 4px 20px rgba(0, 0, 0, 0.4);
-    border: 2px solide white;
+    border: 2px solid white;
   }
 }
 
@@ -48,40 +48,59 @@
   &:hover {
     font-weight: bold;
     color: black;
-    box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.4);
-    border: 2px solide white;
+    box-shadow: 3px 4px 20px rgba(0, 0, 0, 0.4);
+    border: 2px solid white;
   }
 }
 
 .btn-green {
   display: inline-block;
   margin-bottom: 5px;
-  padding: 2px 10px;
-  color: black;
-  border: 1px solid white;
-  box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.2);
+  padding: 3px 12px;
+  color: white;
+  // border: 1px solid white;
+  box-shadow: 3px 4px 8px rgba(0, 0, 0, 0.2);
+
+  &:hover {
+    font-weight: bold;
+    color: black;
+    box-shadow: 3px 4px 20px rgba(0, 0, 0, 0.4);
+    border: 2px solid white;
+  }
 }
 
-.btn-green:hover {
-  background-color: darkgreen;
+.btn-green-clicked {
   color: white;
-  font-weight: 400;
+  background-color: #3a98b9;
+  box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.4);
+  // font-weight: bold;
+  border: 1px solid white;
+
+  &:hover {
+    color: white;
+    box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.4);
+    border: 1px solid white;
+    background-color: #3a98b9;
+    cursor: default;
+  }
 }
 
 .btn-red {
   display: inline-block;
-  margin-bottom: 3px;
-  padding: 2px 12px;
-  color: black;
-  border: 1px solid white;
-  box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.2);
+  margin-bottom: 5px;
+  padding: 3px 12px;
+  color: white;
+  // border: 1px solid white;
+  box-shadow: 3px 4px 8px rgba(0, 0, 0, 0.2);
+
+  &:hover {
+    font-weight: bold;
+    color: black;
+    box-shadow: 3px 4px 20px rgba(0, 0, 0, 0.4);
+    border: 2px solid white;
+  }
 }
 
-.btn-red:hover {
-  background-color: darkred;
-  color: white;
-  font-weight: 400;
-}
 
 .btn-standardize {
   justify-content: center;
@@ -96,6 +115,26 @@
     box-shadow: 3px 4px 20px rgba(0, 0, 0, 0.4);
     border: 2px solide white;
   }
+}
+
+#confirm-delivery-btn {
+  justify-content: center;
+  width: auto;
+  box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.2);
+  color: white;
+  margin-bottom: 10px;
+
+  &:hover {
+    font-weight: bold;
+    color: black;
+    box-shadow: 3px 4px 20px rgba(0, 0, 0, 0.4);
+    border: 2px solid white;
+  }
+}
+
+.chkbox {
+  height: 10px;
+  width: 10px;
 }
 
 .btn-top-margin1 {

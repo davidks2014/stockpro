@@ -1,6 +1,6 @@
 <div class="container font-size2 container-top-padding2">
   <div class="card2">
-    <p class="font-size6 background-gray"><strong><%= @location.name %></strong></p>
+    <p class="font-size6 background-primary"><strong><%= @location.name %></strong></p>
     <p class="line-bottom-margin1"><strong>Location Address: </strong><%= @location.address %></p>
     <p class="line-bottom-margin" ><strong>Assigned Engineer/s: </strong>
       <% @location.users.each do |user| %>
@@ -24,7 +24,7 @@
     </thead>
     <tbody>
       <% @location.materials.each do |material| %>
-        <tr>
+        <tr class="td-align-middle">
           <td data-bs-toggle="modal" data-bs-target="#exampleModal-<%= material.id %>"><%= image_tag material.image_path %></td>
           <td><%= material.name %></td>
           <td><%= material.category %></td>
@@ -32,7 +32,7 @@
           <td>$<%= number_with_delimiter(format("%.2f", material.unit_price.round(1))) %></td>
 
           <% if material.alertlevel? && material.alertlevel> material.qty %>
-            <td style = "color: red;" ><%= material.qty %></td>
+            <td style = "background: red; color: white;" ><%= material.qty %></td>
           <% else  %>
             <td><%= material.qty %></td>
           <% end %>
@@ -67,4 +67,5 @@
       <%= link_to "Set Low Stock Level", location_stockalert_path(@location), class: "btn btn-primary", id: "view-request-btn" %>
     <% end %>
   </div>
+  <br><br><br>
 </div>

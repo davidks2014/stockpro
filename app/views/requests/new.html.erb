@@ -1,7 +1,7 @@
 
 <div class="container container-top-padding2" data-controller="selectlocation">
   <div data-controller="submitrequest">
-    <div class="mb-4 d-flex justify-content-between align-items-center">
+    <div class="mb-2 d-flex justify-content-between align-items-center">
       <h1>Make a New Request</h1>
       <%= form_with url: new_request_path, method: :get, html: { class: "form-inline", data: { selectlocation_target: "form" } } do %>
         <div class="input-group">
@@ -41,7 +41,7 @@
             </tbody>
           </table>
         </div>
-        <div class="text-center mt-4 container-bottom1">
+        <div class="text-center container-bottom1">
           <%= submit_tag "Submit Request", name: "", class: "btn btn-primary", id: "view-request-btn" %>
         </div>
       <% end %>

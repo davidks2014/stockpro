@@ -1,8 +1,6 @@
 <div class="container container-top-padding2">
 
-  <h1>Set Low Stock Alert Level for <%= @location.name %></h1>
-
-  <br>
+  <h1 class="line-bottom-margin3">Set Low Stock Alert Level for <%= @location.name %></h1>
 
   <%= form_tag({controller: "update_materials", action: "stockalert_update"}, class: "form") do %>
     <table class="table table-bordered">
@@ -18,7 +16,7 @@
       </thead>
       <tbody>
         <% @location.materials.each do |material| %>
-          <tr>
+          <tr class="td-align-middle">
             <td><%= image_tag material.image_path %></td>
             <td><%= material.name %></td>
             <td>$<%= number_with_delimiter(format("%.2f", material.unit_price.round(1))) %></td>

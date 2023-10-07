@@ -3,23 +3,25 @@
   <% if current_user.location != Location.find(1) && current_user.role != "manager" %>
     <ul class="nav nav-tabs nav-pills" id="myTab" role="tablist">
       <li class="nav-item tab-font" role="presentation">
-        <button class="nav-link" id="out-tab" data-bs-toggle="tab" data-bs-target="#out-tab-pane" type="button" role="tab" aria-controls="out-tab-pane" aria-selected="false">Request from others</button>
+        <button class="nav-link" id="out-tab" data-bs-toggle="tab" data-bs-target="#out-tab-pane" type="button" role="tab" aria-controls="out-tab-pane" aria-selected="false">Received requests</button>
 
       </li>
       <li class="nav-item tab-font" role="presentation">
-        <button class="nav-link active" id="in-tab" data-bs-toggle="tab" data-bs-target="#in-tab-pane" type="button" role="tab" aria-controls="in-tab-pane" aria-selected="true">Request to others</button>
+        <button class="nav-link active" id="in-tab" data-bs-toggle="tab" data-bs-target="#in-tab-pane" type="button" role="tab" aria-controls="in-tab-pane" aria-selected="true">Sent requests</button>
 
       </li>
     </ul>
 
     <div class="tab-content line-top-margin3" id="myTabContent";>
       <div class="tab-pane fade" id="out-tab-pane" role="tabpanel" aria-labelledby="out-tab" tabindex="0">
-        <h1 class="line-bottom-margin3">Requests made from others</h1>
+        <%# <h1 class="line-bottom-margin3">Requests made from others</h1> %>
+        <h1 class="line-bottom-margin3">Requests From Other Locations</h1>
         <%# <br> %>
         <table class="table table-bordered table-striped table-hover">
         <thead>
           <tr>
-            <th>Request from</th>
+            <%# <th>Request from</th> %>
+            <th>Requester</th>
             <th>Image</th>
             <th>Name</th>
             <th>Request Qty</th>
@@ -30,7 +32,7 @@
         </thead>
         <tbody>
           <% @requests_made_from_others.each do |item_request| %>
-            <tr>
+            <tr class="td-align-middle">
               <td><%= Location.find(item_request.request.original_location_id).name %></td>
               <td><%= image_tag item_request.item.image_path %></td>
               <td><%= item_request.item.name %></td>
@@ -61,7 +63,7 @@
       </div>
 
       <div class="tab-pane fade show active line-top-margin3" id="in-tab-pane" role="tabpanel" aria-labelledby="in-tab" tabindex="0">
-        <h1 class="line-bottom-margin3">Requests made to others</h1>
+        <h1 class="line-bottom-margin3">Requests Made To Other Locations</h1>
 
         <table class="table table-bordered table-striped table-hover">
           <thead>
@@ -77,7 +79,7 @@
           </thead>
           <tbody>
             <% @requests_made_to_others.each do |item_request| %>
-              <tr>
+              <tr class="td-align-middle">
                 <td><%= item_request.request.location.name %></td>
                 <td><%= image_tag item_request.item.image_path %></td>
                 <td><%= item_request.item.name %></td>
@@ -109,18 +111,19 @@
     </div>
 
   <% elsif current_user.location == Location.find(1) %>
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-      <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="out-tab" data-bs-toggle="tab" data-bs-target="#out-tab-pane" type="button" role="tab" aria-controls="out-tab-pane" aria-selected="false">Request from others</button>
+    <ul class="nav nav-tabs nav-pills" id="myTab" role="tablist">
+      <li class="nav-item tab-font" role="presentation">
+        <button class="nav-link active" id="out-tab" data-bs-toggle="tab" data-bs-target="#out-tab-pane" type="button" role="tab" aria-controls="out-tab-pane" aria-selected="false">Received requests</button>
       </li>
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" id="in-tab" data-bs-toggle="tab" data-bs-target="#in-tab-pane" type="button" role="tab" aria-controls="in-tab-pane" aria-selected="true">Request to others</button>
+      <li class="nav-item tab-font" role="presentation">
+        <button class="nav-link" id="in-tab" data-bs-toggle="tab" data-bs-target="#in-tab-pane" type="button" role="tab" aria-controls="in-tab-pane" aria-selected="true">Sent requests</button>
       </li>
     </ul>
 
     <div class="tab-content line-top-margin3" id="myTabContent">
       <div class="tab-pane fade show active" id="out-tab-pane" role="tabpanel" aria-labelledby="out-tab" tabindex="0">
-        <h1 class="line-bottom-margin3">Requests made from others</h1>
+        <%# <h1 class="line-bottom-margin3">Requests made from others</h1> %>
+        <h1 class="line-bottom-margin3">Requests From Other Locations</h1>
         <table class="table table-bordered table-striped table-hover">
         <thead>
           <tr>
@@ -135,7 +138,7 @@
         </thead>
         <tbody>
           <% @requests_made_from_others.each do |item_request| %>
-            <tr>
+            <tr class="td-align-middle">
               <td><%= Location.find(item_request.request.original_location_id).name %></td>
               <td><%= image_tag item_request.item.image_path %></td>
               <td><%= item_request.item.name %></td>
@@ -166,7 +169,7 @@
       </div>
 
       <div class="tab-pane fade line-top-margin3" id="in-tab-pane" role="tabpanel" aria-labelledby="in-tab" tabindex="0">
-        <h1 class="line-bottom-margin3">Requests made to others</h1>
+        <h1 class="line-bottom-margin3">Requests Made To Other Locations</h1>
         <table class="table table-bordered table-striped table-hover">
           <thead>
             <tr>
@@ -181,7 +184,7 @@
           </thead>
           <tbody>
             <% @requests_made_to_others.each do |item_request| %>
-              <tr>
+              <tr class="td-align-middle">
                 <td><%= item_request.request.location.name %></td>
                 <td><%= image_tag item_request.item.image_path %></td>
                 <td><%= item_request.item.name %></td>
@@ -230,7 +233,7 @@
         <tbody>
           <% @item_requests = @item_requests.to_a.sort_by {|item_request| item_request.request.original_location_id} %>
           <% @item_requests.each do |item_request| %>
-            <tr>
+            <tr class="td-align-middle">
               <td><%= Location.find(item_request.request.original_location_id).name %></td>
               <td><%= image_tag item_request.item.image_path %></td>
               <td><%= item_request.item.name %></td>

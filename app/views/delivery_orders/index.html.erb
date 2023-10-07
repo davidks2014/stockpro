@@ -103,10 +103,10 @@
 
   <% elsif current_user.location == Location.find(1)%>
       <ul class="nav nav-tabs nav-pills" id="myTab" role="tablist">
-      <li class="nav-item" role="presentation">
+      <li class="nav-item tab-font" role="presentation">
         <button class="nav-link active" id="out-tab" data-bs-toggle="tab" data-bs-target="#out-tab-pane" type="button" role="tab" aria-controls="out-tab-pane" aria-selected="false">Outgoing materials</button>
       </li>
-      <li class="nav-item" role="presentation">
+      <li class="nav-item tab-font" role="presentation">
         <button class="nav-link" id="in-tab" data-bs-toggle="tab" data-bs-target="#in-tab-pane" type="button" role="tab" aria-controls="in-tab-pane" aria-selected="true">Incoming items</button>
       </li>
     </ul>
@@ -114,7 +114,7 @@
     <div class="tab-content line-top-margin3" id="myTabContent">
       <div class="tab-pane fade show active" id="out-tab-pane" role="tabpanel" aria-labelledby="out-tab" tabindex="0">
         <h1 class="line-bottom-margin3">Outgoing Materials</h1>
-        <hr>
+        <%# <hr> %>
         <% @delivery_orders.each do |delivery_order| %>
           <% if current_user.location == delivery_order.item_requests.last.request.location || current_user.role == "manager" %>
             <div>
@@ -159,7 +159,7 @@
 
       <div class="tab-pane fade line-top-margin3" id="in-tab-pane" role="tabpanel" aria-labelledby="in-tab" tabindex="0">
         <h1 class="line-bottom-margin3">Incoming Materials</h1>
-        <hr>
+        <%# <hr> %>
         <% @delivery_orders.each do |delivery_order| %>
           <% if current_user.location == delivery_order.location %>
             <div>

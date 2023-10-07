@@ -34,8 +34,8 @@
 
 
 // ****** Background Attributes ******
-.background-gray {
-  background-color: #3A98B9;
+.background-primary {
+  background-color: #3a98b9;
   color: white;
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
@@ -79,10 +79,6 @@
 
 
 // ****** Paragraph Attributes ******
-// .text-center {
-//   place-text: center;
-// }
-
-.form-select {
-  margin: 0px 0px 25px 10px;
+.destination-padding {
+  padding: 10px 0px;
 }
