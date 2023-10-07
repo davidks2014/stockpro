@@ -4,7 +4,7 @@
     <% if @requests.none? { |request| request.location == current_user.location } && current_user.role != "manager" %>
       <h1>No request is made to <%= current_user.location.name %></h1>
     <% elsif current_user.role != "manager" %>
-      <h1>Received requests to <%= current_user.location.name %></h1>
+      <h1 class="line-bottom-margin3">Received requests to <%= current_user.location.name %></h1>
     <% elsif current_user.role == "manager" %>
       <h2 class="line-bottom-margin3">Requests made between locations</h2>
     <% end %>
@@ -69,22 +69,19 @@
                         <% if current_user.role == "manager" %>
                           <td>
                           <%= link_to "Approve", item_request_man_approve_path(item_request), method: :post, data: { turbo_method: :post }, class: "btn btn-primary btn-green" %>
-                          <%= link_to "Decline", item_request_man_decline_path(item_request), method: :post, data: { turbo_method: :post, turbo_confirm: "Are you sure?"}, class: "btn btn-danger btn-red " %>
+                          <%= link_to "Decline", item_request_man_decline_path(item_request), method: :post, data: { turbo_method: :post, turbo_confirm: "Are you sure?"}, class: "btn btn-danger btn-red" %>
                           </td>
                         <% elsif current_user.role = "engineer" %>
-                          <td><button type="button" class="btn btn-success">Pending manager review</button></td>
+                          <td><button type="button" class="btn btn-green-clicked">Pending manager review</button></td>
 
                         <% end %>
 
                     <% else %>
                         <td>
-                          <%= link_to "Approve", item_request_eng_approve_path(item_request), method: :post, data: { turbo_method: :post }, class: "btn btn-primary  btn-green" %>
+                          <%= link_to "Approve", item_request_eng_approve_path(item_request), method: :post, data: { turbo_method: :post }, class: "btn btn-primary btn-green" %>
                           <%= link_to "Decline", item_request_eng_decline_path(item_request), method: :post, data: { turbo_method: :post, turbo_confirm: "Are you sure?"}, class: "btn btn-danger btn-red" %>
                         </td>
                     <% end %>
-
-
-
 
                   </tr>
                 <% end %>

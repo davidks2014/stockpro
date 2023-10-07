@@ -3,12 +3,12 @@
   font-size: 1.8em;
   color: black;
   position: absolute;
-  top: 21%; /* Initial vertical position */
+  top: 12%; /* Initial vertical position */
   // left: -50px; /* Initial horizontal position (off-screen) */
-  left: 100px;
+  left: 1000px;
   background-size: cover; /* Adjust the image size as needed */
   animation-name: speed;
-  animation-duration: 5s; /* Animation duration in seconds */
+  animation-duration: 3s; /* Animation duration in seconds */
   animation-timing-function: linear; /* Linear timing for constant speed */
   // animation-iteration-count: infinite; /* Loop the animation infinitely */
   animation-iteration-count: 1;
@@ -17,7 +17,7 @@
 
 @keyframes speed {
   0% {
-      left: 5%; /* Starting position */
+      left: 58%; /* Starting position */
   }
   100% {
       left: 105%; /* Ending position (move off-screen to the right) */

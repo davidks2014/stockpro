@@ -1,7 +1,7 @@
 <!-- show.html.erb -->
 <div class="container font-size2 container-top-padding2">
   <div class="card2">
-    <p class="font-size6 background-gray"><strong><%= @location.name %></strong></p>
+    <p class="font-size6 background-primary"><strong><%= @location.name %></strong></p>
     <p class="line-bottom-margin1"><strong>Location Address: </strong><%= @location.address %></p>
     <p class="line-bottom-margin" ><strong>Assigned Engineer/s: </strong>
       <% @location.users.each do |user| %>
