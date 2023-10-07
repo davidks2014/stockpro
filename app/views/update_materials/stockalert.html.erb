@@ -16,7 +16,7 @@
       </thead>
       <tbody>
         <% @location.materials.each do |material| %>
-          <tr>
+          <tr class="td-align-middle">
             <td><%= image_tag material.image_path %></td>
             <td><%= material.name %></td>
             <td>$<%= number_with_delimiter(format("%.2f", material.unit_price.round(1))) %></td>

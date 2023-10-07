@@ -17,7 +17,7 @@
     <tbody>
       <% @location.material_movements.each do |movement| %>
         <% if movement.remarks != "Stockcount(even)" && movement.qty != 0 %>
-          <tr>
+          <tr class="td-align-middle">
             <% Time.zone = 'Singapore' %>
             <td><%= image_tag Material.find(movement.material_id).image_path %></td>
             <td><%= Material.find(movement.material_id).name %></td>

@@ -32,7 +32,7 @@
         </thead>
         <tbody>
           <% @requests_made_from_others.each do |item_request| %>
-            <tr>
+            <tr class="td-align-middle">
               <td><%= Location.find(item_request.request.original_location_id).name %></td>
               <td><%= image_tag item_request.item.image_path %></td>
               <td><%= item_request.item.name %></td>
@@ -79,7 +79,7 @@
           </thead>
           <tbody>
             <% @requests_made_to_others.each do |item_request| %>
-              <tr>
+              <tr class="td-align-middle">
                 <td><%= item_request.request.location.name %></td>
                 <td><%= image_tag item_request.item.image_path %></td>
                 <td><%= item_request.item.name %></td>
@@ -138,7 +138,7 @@
         </thead>
         <tbody>
           <% @requests_made_from_others.each do |item_request| %>
-            <tr>
+            <tr class="td-align-middle">
               <td><%= Location.find(item_request.request.original_location_id).name %></td>
               <td><%= image_tag item_request.item.image_path %></td>
               <td><%= item_request.item.name %></td>
@@ -184,7 +184,7 @@
           </thead>
           <tbody>
             <% @requests_made_to_others.each do |item_request| %>
-              <tr>
+              <tr class="td-align-middle">
                 <td><%= item_request.request.location.name %></td>
                 <td><%= image_tag item_request.item.image_path %></td>
                 <td><%= item_request.item.name %></td>
@@ -233,7 +233,7 @@
         <tbody>
           <% @item_requests = @item_requests.to_a.sort_by {|item_request| item_request.request.original_location_id} %>
           <% @item_requests.each do |item_request| %>
-            <tr>
+            <tr class="td-align-middle">
               <td><%= Location.find(item_request.request.original_location_id).name %></td>
               <td><%= image_tag item_request.item.image_path %></td>
               <td><%= item_request.item.name %></td>
