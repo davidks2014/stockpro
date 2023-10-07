@@ -21,7 +21,7 @@
         <% @low_stock_materials.sort_by! { |material| material.location.id.to_i } %>
         <% @low_stock_materials.each do |material| %>
         <%# @low_stock_materials.sort_by! { |material| material.location.id.to_i } %>
-          <tr>
+          <tr class="td-align-middle">
             <% if current_user.role == "manager" %>
               <td><%= material.location.name  %></td>
             <% end %>

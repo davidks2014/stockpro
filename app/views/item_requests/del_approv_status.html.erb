@@ -41,7 +41,7 @@
                     <tbody>
                       <% filtered_item_requests.each do |item_request| %>
                         <% if Location.find(item_request.request.original_location_id).name == loc && item_request.delivery_order == nil %>
-                          <tr class="tablerow" id=<%= item_request.id %>>
+                          <tr class="tablerow td-align-middle" id=<%= item_request.id %>>
                             <td><%= image_tag item_request.item.image_path %></td>
                             <td><%= item_request.item.name %></td>
                             <% if item_request.item.is_a? Material %>

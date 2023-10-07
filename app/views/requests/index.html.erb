@@ -44,7 +44,7 @@
                 <% elsif current_user.role == "manager" && (item_request.eng_appr_status == nil) %>
 
                 <% else %>
-                  <tr>
+                  <tr class="td-align-middle">
                     <td><%= Location.find(request.original_location_id).name %></td>
                     <% if current_user.role == "manager"  %>
                       <td><%= request.location.name %></td>
