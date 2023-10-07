@@ -10,6 +10,9 @@ application.register("chart", ChartController)
 import DissapearFooterController from "./dissapear_footer_controller"
 application.register("dissapear-footer", DissapearFooterController)
 
+import DropdownController from "./dropdown_controller"
+application.register("dropdown", DropdownController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
