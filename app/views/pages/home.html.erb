@@ -106,8 +106,13 @@
       <div class="map-card">
         <h3>Project Usage Amount (S$) </h3>
         <div class="pie-chart">
-          <% materials_by_location = MaterialMovement.joins(:material).where(location_id: current_user.location).group('materials.name').sum(:amount) %>
-          <% formatted_materials_by_location = materials_by_location.transform_values { |value| number_to_currency(value, unit: "$") } %>
+          <% if current_user.role != "manager" %>
+            <% materials_by_location = MaterialMovement.joins(:material).where(location_id: current_user.location, remarks: "Project Usage").group('materials.name').sum(:amount) %>
+          <% elsif current_user.role == "manager" %>
+             <%# materials_by_location = MaterialMovement.joins(:material).where(remarks: "Project Usage").group('materials.name').sum(:amount) %>
+             <% materials_by_location = MaterialMovement.joins(:material).where(remarks: "Project Usage").group('materials.name').sum(:amount) %>
+          <% end %>
+          <%# formatted_materials_by_location = materials_by_location.transform_values { |value| number_to_currency(value, unit: "$") } %>
 
 
           <%= pie_chart materials_by_location, legend: "bottom", height: "400px" %>
