@@ -1,4 +1,3 @@
-<!-- show.html.erb -->
 <div class="container font-size2 container-top-padding2">
   <div class="card2">
     <p class="font-size6 background-primary"><strong><%= @location.name %></strong></p>
@@ -14,35 +13,19 @@
   <table class="table table-bordered table-striped table-hover">
     <thead>
       <tr>
-        <th>Image</th>
-        <th>Name</th>
-        <th>Category</th>
-        <th>Cost Code</th>
-        <th>Existing Unit Rate</th>
-        <th>Existing Qty</th>
-        <th>UOM</th>
+        <th class="text-center">Image</th>
+        <th class="text-center">Name</th>
+        <th class="text-center">Category</th>
+        <th class="text-center">Cost Code</th>
+        <th class="text-center">Existing Unit Rate</th>
+        <th class="text-center">Existing Qty</th>
+        <th class="text-center">UOM</th>
       </tr>
     </thead>
     <tbody>
       <% @location.materials.each do |material| %>
         <tr>
           <td data-bs-toggle="modal" data-bs-target="#exampleModal-<%= material.id %>"><%= image_tag material.image_path %></td>
-            <div class="modal fade" id="exampleModal-<%= material.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel"><strong><%= material.name %></strong></h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                    <div class="modal-body">
-                      <%= image_tag material.image_path, class: "modal-image"  %>
-                    </div>
-                  <div class="modal-footer">
-
-                  </div>
-                </div>
-              </div>
-            </div>
           <td><%= material.name %></td>
           <td><%= material.category %></td>
           <td><%= material.cost_code %></td>
@@ -55,22 +38,32 @@
           <% end %>
           <td><%= material.uom %></td>
         </tr>
-        <% end %>
+        <div class="modal fade" id="exampleModal-<%= material.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel"><strong><%= material.name %></strong></h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+                <div class="modal-body">
+                  <%= image_tag material.image_path, class: "modal-image"  %>
+                </div>
+              <div class="modal-footer">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
     </tbody>
   </table>
 
-
   <div class="button-container">
     <% if current_user.location == @location || current_user.role == "manager" %>
-
       <%= link_to "Record Monthly Materials Usage", location_material_usage_path(@location, remarks: "Project Usage"), method: :get, class: "btn btn-primary", id: "view-request-btn" %>
-
       <%= link_to "Monthly Stockcount", location_stockcount_path(@location, remarks: "Stockcount"), method: :get, class: "btn btn-primary", id: "view-request-btn" %>
-
       <%= link_to "Log Month End Material Qty", location_update_materials_path(@location), method: :post, data: { turbo_method: :post }, class: "btn btn-primary", id: "view-request-btn" %>
-
       <%= link_to "Show Material Movement History", location_updatematerials_path(@location), class: "btn btn-primary", id: "view-request-btn" %>
-
       <%= link_to "Set Low Stock Level", location_stockalert_path(@location), class: "btn btn-primary", id: "view-request-btn" %>
     <% end %>
   </div>

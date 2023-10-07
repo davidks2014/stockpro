@@ -17,6 +17,7 @@
 .navbar-logo .navbar-brand img {
   width: 135px;
   border: 4px;
+  padding-right: 5px;
   margin-left: 40px;
   margin-right: 200px;
   background-color: #ffd900;
@@ -48,6 +49,14 @@
   font-size: 22px;
   color: black !important;
   padding-left: 15px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 1s ease;
+}
+
+
+.dropdown-menu.active {
+  max-height: 500px;
 }
 
 .nav-link {
