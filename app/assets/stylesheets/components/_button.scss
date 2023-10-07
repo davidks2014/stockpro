@@ -160,3 +160,16 @@
 .btn-top-margin6 {
   margin-top: 60px;
 }
+
+#list-button {
+  width: auto;
+  box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.2);
+  color: white;
+
+  &:hover {
+    font-weight: bold;
+    color: black;
+    box-shadow: 3px 4px 20px rgba(0, 0, 0, 0.4);
+    border: 2px solid white;
+  }
+}
