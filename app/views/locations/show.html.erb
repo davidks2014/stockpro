@@ -26,34 +26,34 @@
       <% @location.materials.each do |material| %>
         <tr>
           <td data-bs-toggle="modal" data-bs-target="#exampleModal-<%= material.id %>"><%= image_tag material.image_path %></td>
-          <td class="text-center" valign="middle"><%= material.name %></td>
-          <td class="text-center" valign="middle"><%= material.category %></td>
-          <td class="text-center" valign="middle"><%= material.cost_code %></td>
-          <td class="text-center" valign="middle">$<%= number_with_delimiter(format("%.2f", material.unit_price.round(1))) %></td>
+          <td><%= material.name %></td>
+          <td><%= material.category %></td>
+          <td><%= material.cost_code %></td>
+          <td>$<%= number_with_delimiter(format("%.2f", material.unit_price.round(1))) %></td>
 
-          <% if material.alertlevel? && material.alertlevel > material.qty %>
-            <td style="background-color: red; color: white; font-weight: bold" class="text-center" valign="middle"><%= material.qty %></td>
+          <% if material.alertlevel? && material.alertlevel> material.qty %>
+            <td style = "color: red;" ><%= material.qty %></td>
           <% else  %>
-            <td class="text-center" valign="middle"><%= material.qty %></td>
+            <td><%= material.qty %></td>
           <% end %>
-          <td class="text-center" valign="middle"><%= material.uom %></td>
+          <td><%= material.uom %></td>
         </tr>
         <div class="modal fade" id="exampleModal-<%= material.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel"><strong><%= material.name %></strong></h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                    <div class="modal-body">
-                      <%= image_tag material.image_path, class: "modal-image"  %>
-                    </div>
-                  <div class="modal-footer">
-
-                  </div>
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel"><strong><%= material.name %></strong></h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+                <div class="modal-body">
+                  <%= image_tag material.image_path, class: "modal-image"  %>
                 </div>
+              <div class="modal-footer">
+
               </div>
             </div>
+          </div>
+        </div>
       <% end %>
     </tbody>
   </table>
