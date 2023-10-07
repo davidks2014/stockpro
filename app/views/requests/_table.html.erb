@@ -30,7 +30,11 @@
       </td>
       <td><%= item.name %></td>
       <td><%= item.category %></td>
-      <td><%= number_with_delimiter(item.qty) %></td>
+      <% if item.alertlevel? && item.alertlevel> item.qty %>
+        <td style = "background: red; color: white;" ><%= item.qty %></td>
+      <% else  %>
+        <td><%= item.qty %></td>
+      <% end %>
       <td><%= item.cost_code if item.is_a?(Material) %></td>
       <td>$<%= number_with_delimiter(format("%.2f", item.unit_price.round(1))) if item.is_a?(Material) %></td>
       <td><%= item.uom if item.is_a?(Material) %></td>
