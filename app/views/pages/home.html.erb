@@ -48,6 +48,31 @@
 
         <div class="card py-4 d-flex align-items-center justify-content-center">
           <% if current_user.role == "engineer" %>
+            <% if @item_request_approved_count > 0 %>
+              <h4>Arrange Delivery  <i class="fa-solid fa-truck-fast fa-bounce" style="color: #acac50;"></i></h4>
+            <% else %>
+              <h4>Arrange Delivery  <i class="fa-solid fa-truck-fast" style="color: #acac50;"></i></h4>
+            <% end %>
+
+          <% elsif current_user.role == "manager" %>
+            <% if  @item_request_approved_count > 0 %>
+              <h4>Arrange Delivery <i class="fa-solid fa-truck-fast fa-bounce" style="color: #acac50;"></i></h4>
+            <% else %>
+              <h4>Arrange Delivery <i class="fa-solid fa-truck-fast" style="color: #acac50;"></i></h4>
+            <% end %>
+
+          <% end %>
+
+          <h1><%= @item_request_approved_count %></h1>
+          <% if current_user.role == "engineer" %>
+            <%= link_to "List Materials For Delivery", del_approv_status_item_requests_path(del_approv_status: 'Approved'), class: "btn btn-info", id: "transit-delivery-btn" %>
+          <% elsif current_user.role == "manager" %>
+            <%= link_to "List Materials For Delivery", del_approv_status_item_requests_path(del_approv_status: 'Approved'), class: "btn btn-info", id: "transit-delivery-btn" %>
+          <% end %>
+        </div>
+
+        <div class="card py-4">
+          <% if current_user.role == "engineer" %>
             <% if @item_delivery_count > 0 %>
               <h4>Incoming Delivery  <i class="fa-solid fa-truck-fast fa-bounce" style="color: #acac50;"></i></h4>
             <%  else %>

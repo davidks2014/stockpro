@@ -34,7 +34,7 @@ Rails.application.routes.draw do
     post 'man_approve', to: 'item_requests#man_approve'
     post 'man_decline', to: 'item_requests#man_decline'
     collection do
-      get 'status/:del_approv_status', to: 'item_requests#del_approv_status'
+      get 'status/:del_approv_status', to: 'item_requests#del_approv_status', as: 'del_approv_status'
     end
   end
 
