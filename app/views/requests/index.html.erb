@@ -51,7 +51,11 @@
                     <% end %>
                     <td><%= image_tag item_request.item.image_path  %></td>
                     <td><%= item_request.item.name %></td>
-                    <td><%= item_request.item.qty %></td>
+                    <% if item_request.item.alertlevel? && item_request.item.alertlevel > item_request.item.qty %>
+                      <td style = "background: red; color: white;" ><%= item_request.item.qty %></td>
+                    <% else  %>
+                      <td><%= item_request.item.qty %></td>
+                    <% end %>
                     <td><%= item_request.qty %></td>
                     <% if item_request.item.is_a? Material %>
                       <td><%= item_request.item.uom %></td>

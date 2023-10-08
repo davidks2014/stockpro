@@ -16,7 +16,7 @@
   <div class="container" id="card-container">
     <div class="wrapper-container">
       <div class="grid-container">
-        <div class="card py-4">
+        <div class="card py-4 d-flex align-items-center justify-content-center">
           <h4>Pending Approvals
 
           <% if current_user.role == "engineer" %>
@@ -43,10 +43,10 @@
             <h1> <%= @item_request_manager_count %></h1>
           <% end %>
 
-          <%= link_to "List Pending Requests", requests_path, class: "btn btn-primary", id: "view-request-btn" %>
+          <%= link_to "List Pending Requests", requests_path, class: "btn btn-primary", id: "list-button" %>
         </div>
 
-        <div class="card py-4">
+        <div class="card py-4 d-flex align-items-center justify-content-center">
           <% if current_user.role == "engineer" %>
             <% if @item_request_approved_count > 0 %>
               <h4>Arrange Delivery  <i class="fa-solid fa-truck-fast fa-bounce" style="color: #acac50;"></i></h4>
@@ -96,7 +96,7 @@
           <% end %>
         </div>
 
-        <div class="card py-4">
+        <div class="card py-4 d-flex align-items-center justify-content-center">
           <h4>Low Stock Alert
           <% if @low_stock_count > 0 %>
             <i class="fa-solid fa-bell fa-bounce" style="color: #de1721;"></i>
