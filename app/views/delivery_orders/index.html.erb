@@ -59,10 +59,18 @@
         <h1 class="line-bottom-margin3">Incoming Materials</h1>
         <%# <hr> %>
         <% @delivery_orders.each do |delivery_order| %>
+
           <% if current_user.location == delivery_order.location %>
-            <div>
+
+
               <br>
               <h2>Deliver from: <%= delivery_order.item_requests.last.request.location.name %> (DO: <%= delivery_order.id %>)</h2>
+              <% if delivery_order.photos.attached? %>
+                <% delivery_order.photos.each do |photo| %>
+                  <%= cl_image_tag photo.key, height: 200, width: 200, crop: :fill %>
+                <% end %>
+              <% end %>
+            <div>
               <table class="table table-bordered table-striped table-hover">
                 <thead>
                   <tr>
@@ -88,7 +96,8 @@
                       </td>
                     </tr>
                   <% end %>
-                </tbody>
+
+                  </tbody>
               </table>
 
               <% if delivery_order.delivery_status != "Received" %>
@@ -165,6 +174,11 @@
             <div>
               <br>
               <h2>Deliver from: <%= delivery_order.item_requests.last.request.location.name %> (DO: <%= delivery_order.id %>)</h2>
+              <% if delivery_order.photos.attached? %>
+                  <% delivery_order.photos.each do |photo| %>
+                    <%= cl_image_tag photo.key, height: 200, width: 200, crop: :fill %>
+                  <% end %>
+              <% end %>
               <table class="table table-bordered table-striped table-hover">
                 <thead>
                   <tr>
@@ -190,7 +204,7 @@
                       </td>
                     </tr>
                   <% end %>
-                </tbody>
+                  </tbody>
               </table>
 
               <% if delivery_order.delivery_status != "Received" %>
