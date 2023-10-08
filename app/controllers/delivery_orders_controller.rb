@@ -16,8 +16,10 @@ class DeliveryOrdersController < ApplicationController
     location_id = Location.find(item_requests.first.request.original_location_id).id
     delivery_order = DeliveryOrder.create(
         delivery_status: "Delivering",
-        location_id: location_id
+        location_id: location_id,
+        photos: delivery_order_params[:photos]
       )
+      
     item_requests.each do |item_request|
       item_request.update(delivery_order_id: delivery_order.id)
     end
@@ -100,6 +102,10 @@ class DeliveryOrdersController < ApplicationController
 
     end
 
+  end
+
+  def delivery_order_params
+    params.require(:delivery_order).permit(:delivery_status, :location_id, photos: [])
   end
 
 end

@@ -49,6 +49,28 @@
                   <% end %>
                 </tbody>
               </table>
+              <button data-bs-toggle="modal" data-bs-target="#exampleModal-<%= delivery_order.id %>">See photos</button>
+              <div class="modal fade" id="exampleModal-<%= delivery_order.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-xl">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel"><strong>Delivery Photos</strong></h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                      <div class="modal-body" style="max-height: 600px; overflow-y: auto;">
+                        <% if delivery_order.photos.attached? %>
+                          <% delivery_order.photos.each do |photo| %>
+                            <%= cl_image_tag photo.key, width: 800, style: "margin-bottom: 20px;" %>
+                            <br>
+                          <% end %>
+                       <% end %>
+                      </div>
+                    <div class="modal-footer">
+
+                    </div>
+                  </div>
+                </div>
+              </div>
               <%# <hr> %>
              </div>
           <% end %>
@@ -59,10 +81,13 @@
         <h1 class="line-bottom-margin3">Incoming Materials</h1>
         <%# <hr> %>
         <% @delivery_orders.each do |delivery_order| %>
+
           <% if current_user.location == delivery_order.location %>
-            <div>
+
+
               <br>
               <h2>Deliver from: <%= delivery_order.item_requests.last.request.location.name %> (DO: <%= delivery_order.id %>)</h2>
+            <div>
               <table class="table table-bordered table-striped table-hover">
                 <thead>
                   <tr>
@@ -88,9 +113,31 @@
                       </td>
                     </tr>
                   <% end %>
-                </tbody>
-              </table>
 
+                  </tbody>
+              </table>
+              <button data-bs-toggle="modal" data-bs-target="#exampleModal-<%= delivery_order.id %>">See photos</button>
+              <div class="modal fade" id="exampleModal-<%= delivery_order.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-xl">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel"><strong>Delivery Photos</strong></h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                      <div class="modal-body" style="max-height: 600px; overflow-y: auto;">
+                        <% if delivery_order.photos.attached? %>
+                          <% delivery_order.photos.each do |photo| %>
+                            <%= cl_image_tag photo.key, width: 800, style: "margin-bottom: 20px;" %>
+                            <br>
+                          <% end %>
+                       <% end %>
+                      </div>
+                    <div class="modal-footer">
+
+                    </div>
+                  </div>
+                </div>
+              </div>
               <% if delivery_order.delivery_status != "Received" %>
                 <%= link_to "Confirm receive", delivery_order_receive_path(delivery_order), method: :post, data: { turbo_method: :post }, class: "btn btn-success" %>
               <% end %>
@@ -151,6 +198,28 @@
                   <% end %>
                 </tbody>
               </table>
+              <button data-bs-toggle="modal" data-bs-target="#exampleModal-<%= delivery_order.id %>">See photos</button>
+              <div class="modal fade" id="exampleModal-<%= delivery_order.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-xl">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel"><strong>Delivery Photos</strong></h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                      <div class="modal-body" style="max-height: 600px; overflow-y: auto;">
+                        <% if delivery_order.photos.attached? %>
+                          <% delivery_order.photos.each do |photo| %>
+                            <%= cl_image_tag photo.key, width: 800, style: "margin-bottom: 20px;" %>
+                            <br>
+                          <% end %>
+                       <% end %>
+                      </div>
+                    <div class="modal-footer">
+
+                    </div>
+                  </div>
+                </div>
+              </div>
               <hr>
              </div>
           <% end %>
@@ -165,6 +234,11 @@
             <div>
               <br>
               <h2>Deliver from: <%= delivery_order.item_requests.last.request.location.name %> (DO: <%= delivery_order.id %>)</h2>
+              <% if delivery_order.photos.attached? %>
+                  <% delivery_order.photos.each do |photo| %>
+                    <%= cl_image_tag photo.key, height: 200, width: 200, crop: :fill %>
+                  <% end %>
+              <% end %>
               <table class="table table-bordered table-striped table-hover">
                 <thead>
                   <tr>
@@ -190,7 +264,7 @@
                       </td>
                     </tr>
                   <% end %>
-                </tbody>
+                  </tbody>
               </table>
 
               <% if delivery_order.delivery_status != "Received" %>
@@ -244,6 +318,28 @@
                   <% end %>
                 </tbody>
               </table>
+              <button data-bs-toggle="modal" data-bs-target="#exampleModal-<%= delivery_order.id %>">See photos</button>
+              <div class="modal fade" id="exampleModal-<%= delivery_order.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-xl">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel"><strong>Delivery Photos</strong></h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                      <div class="modal-body" style="max-height: 600px; overflow-y: auto;">
+                        <% if delivery_order.photos.attached? %>
+                          <% delivery_order.photos.each do |photo| %>
+                            <%= cl_image_tag photo.key, width: 800, style: "margin-bottom: 20px;" %>
+                            <br>
+                          <% end %>
+                       <% end %>
+                      </div>
+                    <div class="modal-footer">
+
+                    </div>
+                  </div>
+                </div>
+              </div>
               <hr>
             </div>
           <% end %>
