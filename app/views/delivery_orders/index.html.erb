@@ -49,6 +49,28 @@
                   <% end %>
                 </tbody>
               </table>
+              <button data-bs-toggle="modal" data-bs-target="#exampleModal-<%= delivery_order.id %>">See photos</button>
+              <div class="modal fade" id="exampleModal-<%= delivery_order.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-xl">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel"><strong>Delivery Photos</strong></h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                      <div class="modal-body" style="max-height: 600px; overflow-y: auto;">
+                        <% if delivery_order.photos.attached? %>
+                          <% delivery_order.photos.each do |photo| %>
+                            <%= cl_image_tag photo.key, width: 800, style: "margin-bottom: 20px;" %>
+                            <br>
+                          <% end %>
+                       <% end %>
+                      </div>
+                    <div class="modal-footer">
+
+                    </div>
+                  </div>
+                </div>
+              </div>
               <%# <hr> %>
              </div>
           <% end %>
@@ -176,6 +198,28 @@
                   <% end %>
                 </tbody>
               </table>
+              <button data-bs-toggle="modal" data-bs-target="#exampleModal-<%= delivery_order.id %>">See photos</button>
+              <div class="modal fade" id="exampleModal-<%= delivery_order.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-xl">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel"><strong>Delivery Photos</strong></h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                      <div class="modal-body" style="max-height: 600px; overflow-y: auto;">
+                        <% if delivery_order.photos.attached? %>
+                          <% delivery_order.photos.each do |photo| %>
+                            <%= cl_image_tag photo.key, width: 800, style: "margin-bottom: 20px;" %>
+                            <br>
+                          <% end %>
+                       <% end %>
+                      </div>
+                    <div class="modal-footer">
+
+                    </div>
+                  </div>
+                </div>
+              </div>
               <hr>
              </div>
           <% end %>
@@ -274,6 +318,28 @@
                   <% end %>
                 </tbody>
               </table>
+              <button data-bs-toggle="modal" data-bs-target="#exampleModal-<%= delivery_order.id %>">See photos</button>
+              <div class="modal fade" id="exampleModal-<%= delivery_order.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-xl">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel"><strong>Delivery Photos</strong></h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                      <div class="modal-body" style="max-height: 600px; overflow-y: auto;">
+                        <% if delivery_order.photos.attached? %>
+                          <% delivery_order.photos.each do |photo| %>
+                            <%= cl_image_tag photo.key, width: 800, style: "margin-bottom: 20px;" %>
+                            <br>
+                          <% end %>
+                       <% end %>
+                      </div>
+                    <div class="modal-footer">
+
+                    </div>
+                  </div>
+                </div>
+              </div>
               <hr>
             </div>
           <% end %>
