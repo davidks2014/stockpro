@@ -56,7 +56,7 @@
 
 .grid-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 2rem;
   width: auto;
 }
@@ -66,8 +66,8 @@
   flex-wrap: wrap;
   grid-template-columns: 1fr 1fr;
   justify-content:space-between;
-  gap: 1rem;
-  margin: 5px;
+  // gap: 1rem;
+  // margin: 5px;
   width: auto;
 }
 
@@ -124,7 +124,7 @@
   border: 1px solid #ccc;
   background-color: #fff;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
-  padding: 10px 0px;
+  padding: 10px;
 }
 
 /* Media queries for smaller screens */
