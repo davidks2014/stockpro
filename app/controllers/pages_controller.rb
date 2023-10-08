@@ -14,6 +14,21 @@ class PagesController < ApplicationController
     end
 
     @item_requests = ItemRequest.all
+
+    @item_request_approved_count = 0
+    @item_requests  = @item_requests.each do |item|
+      if current_user.role == "engineer"
+        if item.del_approv_status == "Approved" && item.delivery_order_id.nil? && item.request.location_id == current_user.location.id
+          @item_request_approved_count += 1
+        end
+      elsif current_user.role == "manager"
+        if item.del_approv_status == "Approved" && item.delivery_order_id.nil?
+          @item_request_approved_count += 1
+        end
+      end
+
+    end
+
     @item_delivery_count = 0
     @item_requests  = @item_requests.each do |item|
       if !item.delivery_order.nil? && current_user.role == "engineer"
