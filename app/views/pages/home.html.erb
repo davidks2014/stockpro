@@ -74,25 +74,25 @@
         <div class="card py-4">
           <% if current_user.role == "engineer" %>
             <% if @item_delivery_count > 0 %>
-              <h4>Incoming Delivery  <i class="fa-solid fa-truck-fast fa-bounce" style="color: #acac50;"></i></h4>
+              <h4>Incoming Delivery  <i class="fa-solid fa-truck-fast fa-bounce" style="color: grey;"></i></h4>
             <%  else %>
-              <h4>Incoming Delivery  <i class="fa-solid fa-truck-fast" style="color: #acac50;"></i></h4>
+              <h4>Incoming Delivery  <i class="fa-solid fa-truck-fast" style="color: grey;"></i></h4>
             <% end %>
 
           <% elsif current_user.role == "manager" %>
             <% if  @item_delivery_count > 0 %>
-              <h4>Items in Delivery <i class="fa-solid fa-truck-fast fa-bounce" style="color: #acac50;"></i></h4>
+              <h4>Items in Delivery <i class="fa-solid fa-truck-fast fa-bounce" style="color: grey;"></i></h4>
             <%  else %>
-              <h4>Items in Delivery <i class="fa-solid fa-truck-fast" style="color: #acac50;"></i></h4>
+              <h4>Items in Delivery <i class="fa-solid fa-truck-fast" style="color: grey;"></i></h4>
             <% end %>
 
           <% end %>
 
           <h1><%= @item_delivery_count %></h1>
           <% if current_user.role == "engineer" %>
-            <%= link_to "List Incoming Deliveries", delivery_orders_path, class: "btn btn-info", id: "transit-delivery-btn" %>
+            <%= link_to "List Incoming Deliveries", delivery_orders_path, class: "btn", id: "incoming-delivery-btn" %>
           <% elsif current_user.role == "manager" %>
-            <%= link_to "List items in delivery", delivery_orders_path, class: "btn btn-info", id: "transit-delivery-btn" %>
+            <%= link_to "List items in delivery", delivery_orders_path, class: "btn", id: "incoming-delivery-btn" %>
           <% end %>
         </div>
 

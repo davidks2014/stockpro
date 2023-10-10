@@ -19,7 +19,7 @@ class DeliveryOrdersController < ApplicationController
         location_id: location_id,
         photos: delivery_order_params[:photos]
       )
-      
+
     item_requests.each do |item_request|
       item_request.update(delivery_order_id: delivery_order.id)
     end
