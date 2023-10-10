@@ -62,16 +62,20 @@
                       <% end %>
                     </tbody>
                   </table>
+
+
                   <% if item_requests.first.del_approv_status == "Declined" %>
 
                   <% else %>
-                    <%= f.input :photos, as: :file, input_html: { multiple: true } %>
-                    <%= f.submit "Confirm delivery", class: "btn btn-primary", id: "confirm-delivery-btn" %>
+                    <%= f.input :photos, as: :file, input_html: { multiple: true, :id => 'test'} %>
+                    <%= f.submit "Confirm delivery", class: "btn btn-primary btn-confirm-delivery" %>
+
                   <% end %>
 
                 <% end %>
               </div>
-              <br>
+
+              <br><br><br>
             <% end %>
           <% end %>
       <% end %>

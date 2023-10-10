@@ -30,11 +30,15 @@
 #card-container3 {
   text-align: center;
   width: auto;
-  border-radius: 50px;
+  border-radius: 90px;
   // margin-top: 30px;
   margin-bottom: 20px;
-  // padding-bottom: 10px;
   background-color: lightgrey;
+}
+
+#test {
+  text-align: center !important;
+  font: yellow;
 }
 
 .title-container {
@@ -125,6 +129,11 @@
   background-color: #fff;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
   padding: 10px;
+}
+
+.curved-border {
+  border-radius-bottom-left: 20px;
+  border-radius-bottom-right: 20px;
 }
 
 /* Media queries for smaller screens */
