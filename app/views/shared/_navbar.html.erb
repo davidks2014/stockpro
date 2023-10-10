@@ -58,9 +58,11 @@
             <p class="greeting">Hi there, <strong> <%= current_user.name %> <i class="fa-solid fa-screwdriver-wrench"></i>
             <br>
             <span id="avatar-role">(<%= current_user.role.capitalize %></span>
-
-            <span id="avatar-role">@ <%= current_user.location.name.capitalize %>)</span></strong></p>
-
+            <% if current_user.location.name!="HQ" %>
+              <span id="avatar-role">@ <%= current_user.location.name.titleize %>)</span></strong></p>
+            <% else %>
+              <span id="avatar-role">@ <%= current_user.location.name.upcase %>)</span></strong></p>
+            <% end %>
             <%# display right avatar image according to current user %>
             <li class="nav-item dropdown avatar-menu">
               <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
