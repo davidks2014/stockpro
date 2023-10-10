@@ -35,7 +35,11 @@
             <td><%= image_tag material.image_path %></td>
             <td><%= material.name %></td>
             <td>$<%= number_with_delimiter(format("%.2f", material.unit_price.round(1))) %></td>
-            <td><%= number_with_delimiter(material.qty) %></td>
+            <% if material.alertlevel? && material.alertlevel> material.qty %>
+              <td style = "background: red; color: white;"><%= number_with_delimiter(format("%.2f", material.qty.round(1))) %></td>
+            <% else %>
+              <td><%= number_with_delimiter(format("%.2f", material.qty.round(1))) %></td>
+            <% end %>
             <% if @remarks == "Project Usage" %>
               <td>$<%= number_with_delimiter(format("%.2f", material.unit_price.round(1))) %></td>
             <% elsif @remarks == "Import New Materials" %>

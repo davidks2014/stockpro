@@ -38,7 +38,8 @@
               </tr>
             </thead>
             <tbody>
-              <% request.item_requests.each do |item_request| %>
+              <% request.item_requests.sort_by { |item_request| item_request.item.id }.each do |item_request| %>
+              <%# request.item_requests.each do |item_request| %>
                 <% if item_request.man_appr_status == "approved" || item_request.man_appr_status == "declined" || item_request.eng_appr_status == "declined" %>
 
                 <% elsif current_user.role == "manager" && (item_request.eng_appr_status == nil) %>
