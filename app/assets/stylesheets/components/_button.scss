@@ -146,6 +146,21 @@
   }
 }
 
+.btn-confirm-delivery {
+  justify-content: center;
+  width: auto;
+  box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.2);
+  color: white;
+  margin-bottom: 10px;
+
+  &:hover {
+    font-weight: bold;
+    color: black;
+    box-shadow: 3px 4px 20px rgba(0, 0, 0, 0.4);
+    border: 2px solid white;
+  }
+}
+
 .chkbox {
   height: 10px;
   width: 10px;
