@@ -31,7 +31,17 @@
             <% end %>
               <td><%= Material.find(movement.material_id).uom %></td>
               <td>$<%= number_with_delimiter(format("%.2f", movement.amount.round(1)))  %></td>
-              <td><%= movement.remarks %></td>
+               <% if movement.remarks == "Project Usage" %>
+                <td style = "color: grey;"><%= movement.remarks %></td>
+              <% elsif movement.remarks == "Incoming Request Items" %>
+                <td style = "color: purple;"><%= movement.remarks %></td>
+              <% elsif movement.remarks == "Outgoing Request Items" %>
+                <td style = "color: brown;"><%= movement.remarks %></td>
+              <% elsif movement.remarks == "Stockcount(excess)" %>
+                <td style = "color: blue;"><%= movement.remarks %></td>
+              <% elsif movement.remarks == "Stockcount(shortfall)" %>
+                <td style = "color: red;"><%= movement.remarks %></td>
+              <% end %>
               <td><%= movement.update_date.strftime('%Y/%m/%d -- %H:%M') %></td>
           </tr>
         <% end %>

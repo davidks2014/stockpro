@@ -21,7 +21,11 @@
           <td><%= number_with_delimiter(format("%.2f", material.unit_price.round(1))) %></td>
           <td><%= material.qty %></td>
           <td><%= material.stockcounts.last.qty %></td>
-          <td><%= material.stockcounts.last.diff %></td>
+          <% if material.stockcounts.last.diff < 0  %>
+            <td style = "color: red;" ><%= material.stockcounts.last.diff %></td>
+          <% else %>
+            <td><%= material.stockcounts.last.diff %></td>
+          <% end %>
           <td><%= number_with_delimiter(format("%.2f", (material.stockcounts.last.diff * material.unit_price).round(1))) %></td>
       <% end %>
     </tbody>
