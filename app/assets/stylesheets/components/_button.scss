@@ -99,6 +99,24 @@
   }
 }
 
+.btn-confirm-received {
+  display: inline-block;
+  margin-bottom: 15px;
+  padding: 5px 15px 8px 15px;
+  color: white;
+  border-radius: 15px;
+  // border: 1px solid white;
+  box-shadow: 3px 4px 8px rgba(0, 0, 0, 0.2);
+
+  &:hover {
+    font-weight: bold;
+    color: black;
+    box-shadow: 3px 4px 20px rgba(0, 0, 0, 0.4);
+    border: 2px solid white;
+  }
+}
+
+
 .btn-green-clicked {
   color: white;
   background-color: #3a98b9;
@@ -182,7 +200,7 @@
 
 .btn-see-photos {
   display: inline-block;
-  margin-bottom: 5px;
+  // margin-bottom: 5px;
   padding: 8px 25px 10px 25px;
   justify-content: center;
   width: auto;
