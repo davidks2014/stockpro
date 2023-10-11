@@ -5,6 +5,7 @@
   box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.2);
   color: white;
   margin-bottom: 20px;
+  border-radius: 15px;
 
   &:hover {
     font-weight: bold;
@@ -84,8 +85,9 @@
 .btn-green {
   display: inline-block;
   margin-bottom: 5px;
-  padding: 3px 12px;
+  padding: 5px 15px 8px 15px;
   color: white;
+  border-radius: 15px;
   // border: 1px solid white;
   box-shadow: 3px 4px 8px rgba(0, 0, 0, 0.2);
 
@@ -116,8 +118,9 @@
 .btn-red {
   display: inline-block;
   margin-bottom: 5px;
-  padding: 3px 12px;
+  padding: 5px 15px 8px 15px;
   color: white;
+  border-radius: 15px;
   // border: 1px solid white;
   box-shadow: 3px 4px 8px rgba(0, 0, 0, 0.2);
 
@@ -166,6 +169,8 @@
   box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.2);
   color: white;
   margin-bottom: 15px;
+  border-radius: 15px;
+  padding: 8px 25px 10px 25px;
 
   &:hover {
     font-weight: bold;
@@ -174,6 +179,28 @@
     border: 2px solid white;
   }
 }
+
+.btn-see-photos {
+  display: inline-block;
+  margin-bottom: 5px;
+  padding: 8px 25px 10px 25px;
+  justify-content: center;
+  width: auto;
+  box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.2);
+  color: white;
+  margin-bottom: 15px;
+  background-color: $primary;
+  border: none;
+  border-radius: 15px;
+
+  &:hover {
+    font-weight: bold;
+    color: black;
+    box-shadow: 3px 4px 20px rgba(0, 0, 0, 0.4);
+    border: 2px solid white;
+  }
+}
+
 
 .chkbox {
   height: 10px;

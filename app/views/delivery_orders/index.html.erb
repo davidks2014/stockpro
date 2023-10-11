@@ -9,15 +9,15 @@
       </li>
     </ul>
 
-    <div class="tab-content line-top-margin3" id="myTabContent">
+    <div class="tab-content" id="myTabContent">
       <div class="tab-pane fade" id="out-tab-pane" role="tabpanel" aria-labelledby="out-tab" tabindex="0">
         <h1 class="line-bottom-margin3">Outgoing Materials</h1>
         <%# <hr> %>
         <% @delivery_orders.each do |delivery_order| %>
           <% if current_user.location == delivery_order.item_requests.last.request.location || current_user.role == "manager" %>
-            <div>
-            <br>
-            <h2>Deliver To: <%= delivery_order.location.name %> (DO: <%= delivery_order.id %>)</h2>
+            <div class="card-container4">
+            <%# <br> %>
+            <h2 class="dest-spacing">Destination: <%= delivery_order.location.name %> (DO: <%= delivery_order.id %>)</h2>
               <table class="table table-bordered table-striped table-hover">
                 <thead>
                   <tr>
@@ -49,7 +49,7 @@
                   <% end %>
                 </tbody>
               </table>
-              <button data-bs-toggle="modal" data-bs-target="#exampleModal-<%= delivery_order.id %>">See photos</button>
+              <button class="btn btn-primary btn-see-photos" data-bs-toggle="modal" data-bs-target="#exampleModal-<%= delivery_order.id %>">See photos</button>
               <div class="modal fade" id="exampleModal-<%= delivery_order.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-xl">
                   <div class="modal-content">
@@ -86,8 +86,8 @@
 
 
               <br>
-              <h2>Deliver from: <%= delivery_order.item_requests.last.request.location.name %> (DO: <%= delivery_order.id %>)</h2>
-            <div>
+              <h2 class="dest-spacing">Deliver from: <%= delivery_order.item_requests.last.request.location.name %> (DO: <%= delivery_order.id %>)</h2>
+            <div class="card-container4">
               <table class="table table-bordered table-striped table-hover">
                 <thead>
                   <tr>
@@ -116,7 +116,7 @@
 
                   </tbody>
               </table>
-              <button data-bs-toggle="modal" data-bs-target="#exampleModal-<%= delivery_order.id %>">See photos</button>
+              <button class="btn btn-primary btn-see-photos" data-bs-toggle="modal" data-bs-target="#exampleModal-<%= delivery_order.id %>">See photos</button>
               <div class="modal fade" id="exampleModal-<%= delivery_order.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-xl">
                   <div class="modal-content">
@@ -141,7 +141,7 @@
               <% if delivery_order.delivery_status != "Received" %>
                 <%= link_to "Confirm receive", delivery_order_receive_path(delivery_order), method: :post, data: { turbo_method: :post }, class: "btn btn-success" %>
               <% end %>
-              <hr>
+              <%# <hr> %>
             </div>
           <% end %>
         <% end %>
@@ -158,15 +158,15 @@
       </li>
     </ul>
 
-    <div class="tab-content line-top-margin3" id="myTabContent">
+    <div class="tab-content" id="myTabContent">
       <div class="tab-pane fade show active" id="out-tab-pane" role="tabpanel" aria-labelledby="out-tab" tabindex="0">
         <h1 class="line-bottom-margin3">Outgoing Materials</h1>
         <%# <hr> %>
         <% @delivery_orders.each do |delivery_order| %>
           <% if current_user.location == delivery_order.item_requests.last.request.location || current_user.role == "manager" %>
-            <div>
-            <br>
-            <h2>Deliver To: <%= delivery_order.location.name %> (DO: <%= delivery_order.id %>)</h2>
+            <div class="card-container4">
+            <%# <br> %>
+            <h2 class="dest-spacing">Destination: <%= delivery_order.location.name %> (DO: <%= delivery_order.id %>)</h2>
               <table class="table table-bordered table-striped table-hover">
                 <thead>
                   <tr>
@@ -198,7 +198,9 @@
                   <% end %>
                 </tbody>
               </table>
-              <button data-bs-toggle="modal" data-bs-target="#exampleModal-<%= delivery_order.id %>">See photos</button>
+              <button class="btn-see-photos" data-bs-toggle="modal" data-bs-target="#exampleModal-<%= delivery_order.id %>">See photos</button>
+              <br>
+
               <div class="modal fade" id="exampleModal-<%= delivery_order.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-xl">
                   <div class="modal-content">
@@ -220,8 +222,9 @@
                   </div>
                 </div>
               </div>
-              <hr>
+              <%# <hr> %>
              </div>
+             <br><br>
           <% end %>
         <% end %>
       </div>
@@ -231,9 +234,9 @@
         <%# <hr> %>
         <% @delivery_orders.each do |delivery_order| %>
           <% if current_user.location == delivery_order.location %>
-            <div>
+            <div class="card-container4">
               <br>
-              <h2>Deliver from: <%= delivery_order.item_requests.last.request.location.name %> (DO: <%= delivery_order.id %>)</h2>
+              <h2 class="dest-spacing">Deliver from: <%= delivery_order.item_requests.last.request.location.name %> (DO: <%= delivery_order.id %>)</h2>
               <% if delivery_order.photos.attached? %>
                   <% delivery_order.photos.each do |photo| %>
                     <%= cl_image_tag photo.key, height: 200, width: 200, crop: :fill %>
@@ -270,7 +273,7 @@
               <% if delivery_order.delivery_status != "Received" %>
                 <%= link_to "Confirm receive", delivery_order_receive_path(delivery_order), method: :post, data: { turbo_method: :post }, class: "btn btn-success" %>
               <% end %>
-              <hr>
+              <%# <hr> %>
             </div>
           <% end %>
         <% end %>
@@ -281,9 +284,9 @@
     <%# <hr> %>
     <% @delivery_orders.each do |delivery_order| %>
           <% if current_user.location == delivery_order.item_requests.last.request.location || current_user.role == "manager" %>
-            <div>
-            <br>
-            <h2>Deliver To: <%= delivery_order.location.name %> (DO: <%= delivery_order.id %>)</h2>
+            <div class="card-container4">
+            <%# <br> %>
+            <h2 class="dest-spacing">Destination: <%= delivery_order.location.name %> (DO: <%= delivery_order.id %>)</h2>
               <table class="table table-bordered table-striped table-hover">
                 <thead>
                   <tr>
@@ -318,7 +321,7 @@
                   <% end %>
                 </tbody>
               </table>
-              <button data-bs-toggle="modal" data-bs-target="#exampleModal-<%= delivery_order.id %>">See photos</button>
+              <button class="btn btn-primary btn-see-photos" data-bs-toggle="modal" data-bs-target="#exampleModal-<%= delivery_order.id %>">See photos</button>
               <div class="modal fade" id="exampleModal-<%= delivery_order.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-xl">
                   <div class="modal-content">
