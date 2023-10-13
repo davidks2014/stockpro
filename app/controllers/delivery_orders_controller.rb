@@ -12,13 +12,12 @@ class DeliveryOrdersController < ApplicationController
       item_requests << item_request
     end
 
-
     location_id = Location.find(item_requests.first.request.original_location_id).id
     delivery_order = DeliveryOrder.create(
-        delivery_status: "Delivering",
-        location_id: location_id,
-        photos: delivery_order_params[:photos]
-      )
+      delivery_status: "Delivering",
+      location_id:,
+      photos: delivery_order_params[:photos]
+    )
 
     item_requests.each do |item_request|
       item_request.update(delivery_order_id: delivery_order.id)
@@ -36,20 +35,6 @@ class DeliveryOrdersController < ApplicationController
     @delivery_order = DeliveryOrder.find(params[:delivery_order_id])
     @delivery_order.update(delivery_status: 'Received')
 
-    redirect_to delivery_orders_path, notice: "Delivery order received"
-
-    #now we need to update the qty in location
-
-    sent_location = @delivery_order.item_requests.first.request.location
-    #sent location
-    received_location =Location.find(@delivery_order.item_requests.first.request.original_location_id)
-    #received location
-
-    outgoing_material_movements = []
-    @delivery_order.item_requests.each do |material|
-      outgoing_material_movements << MaterialMovement.new
-    end
-
     @delivery_order.item_requests.each do |item_request|
       outgoing_material_movement = MaterialMovement.create(
         qty: item_request.qty,
@@ -64,23 +49,13 @@ class DeliveryOrdersController < ApplicationController
       item_request_qty = item_request.qty
       existing_qty = item_request.item.qty
 
-       Material.find(item_request.item.id).update(
-        unit_price: (item_request.item.unit_price * existing_qty - item_request.item.unit_price * item_request_qty) / (existing_qty - item_request_qty),
+      Material.find(item_request.item.id).update(
+        unit_price: ((item_request.item.unit_price * existing_qty) - (item_request.item.unit_price * item_request_qty)) / (existing_qty - item_request_qty),
         qty: existing_qty - item_request_qty,
-        amount:(existing_qty - item_request_qty) * item_request.item.unit_price,
-        update_date: MaterialMovement.find(item_request.item.id).update_date
-        )
+        amount: (existing_qty - item_request_qty) * item_request.item.unit_price,
+        update_date: outgoing_material_movement.update_date
+      )
 
-    end
-
-    incoming_material_movements = []
-    @delivery_order.item_requests.each do |material|
-      incoming_material_movements << MaterialMovement.new
-    end
-
-
-    @delivery_order.item_requests.each do |item_request|
-      item_request_qty = item_request.qty
       received_material_location = Location.find(item_request.request.original_location_id)
       received_material = Material.where(location: received_material_location, name: item_request.item.name).first
 
@@ -88,25 +63,23 @@ class DeliveryOrdersController < ApplicationController
         qty: item_request.qty,
         location_id: item_request.request.original_location_id,
         material_id: received_material.id,
-        unit_rate: item_request.item.unit_price, #using the same unit rate as outgoing materials"
+        unit_rate: item_request.item.unit_price, # using the same unit rate as outgoing materials"
         update_date: Time.now,
         remarks: "Incoming Request Items",
         amount: (item_request.qty * item_request.item.unit_price).round(1)
       )
 
-
       Material.where(location_id: item_request.request.original_location_id, name: item_request.item.name).first.update(
-        unit_price: (received_material.unit_price * received_material.qty + item_request.item.unit_price * item_request_qty)/(received_material.qty + item_request_qty),
-        qty:received_material.qty + item_request_qty,
-        amount:received_material.qty * received_material.unit_price + item_request_qty * item_request.item.unit_price,
-        update_date: MaterialMovement.where(material_id: received_material.id).last.update_date)
-      
+        unit_price: ((received_material.unit_price * received_material.qty) + (item_request.item.unit_price * item_request_qty)) / (received_material.qty + item_request_qty),
+        qty: received_material.qty + item_request_qty,
+        amount: (received_material.qty * received_material.unit_price) + (item_request_qty * item_request.item.unit_price),
+        update_date: incoming_material_movement.update_date
+      )
     end
-
+    redirect_to delivery_orders_path, notice: "Delivery order received"
   end
 
   def delivery_order_params
     params.require(:delivery_order).permit(:delivery_status, :location_id, photos: [])
   end
-
 end
