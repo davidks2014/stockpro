@@ -94,12 +94,13 @@ class DeliveryOrdersController < ApplicationController
         amount: (item_request.qty * item_request.item.unit_price).round(1)
       )
 
+
       Material.where(location_id: item_request.request.original_location_id, name: item_request.item.name).first.update(
         unit_price: (received_material.unit_price * received_material.qty + item_request.item.unit_price * item_request_qty)/(received_material.qty + item_request_qty),
         qty:received_material.qty + item_request_qty,
         amount:received_material.qty * received_material.unit_price + item_request_qty * item_request.item.unit_price,
         update_date: MaterialMovement.where(material_id: received_material.id).last.update_date)
-
+      
     end
 
   end
