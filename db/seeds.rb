@@ -94,7 +94,7 @@ end
 
   puts " #{warehouse[:name]} Creating user..."
     pingyu = User.create({name: "Pingyu", role: "engineer", email: "pingyu@gmail.com", password: "123456", location: Location.find_by(warehouse)})
-  puts "#{teckguan.name} created"
+  puts "#{pingyu.name} created"
 
   puts " #{projectA[:name]} Creating user..."
     david = User.create({name: "David", role: "engineer", email: "david@gmail.com", password: "123456", location: Location.find_by(projectA)})
@@ -102,11 +102,11 @@ end
 
   puts " #{projectB[:name]} Creating user..."
     teckguan= User.create({name: "Teckguan2", role: "engineer", email: "teckguan@gmail.com", password: "123456", location: Location.find_by(projectB)})
-  puts "#{pingyu.name} created"
+  puts "#{teckguan.name} created"
 
   puts " #{projectC[:name]} Creating user..."
     yaya = User.create({name: "Yaya", role: "engineer", email: "yaya@gmail.com", password: "123456", location: Location.find_by(projectC)})
-  puts "#{pingyu.name} created"
+  puts "#{yaya.name} created"
 
 puts " Creating user manager..."
 company = Location.create({name: "HQ", address: "Singapore"})
